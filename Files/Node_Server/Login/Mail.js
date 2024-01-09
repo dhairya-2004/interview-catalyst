@@ -1,9 +1,8 @@
-// mail.js
 const express = require('express');
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
 const User = require('../Database/Login_Schema'); 
-const router = express.Router();
+const router= express.Router();
 
 router.post('/mail', (req, resp) => {
 
