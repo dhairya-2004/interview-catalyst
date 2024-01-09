@@ -26,7 +26,7 @@ const Home = () => {
 
           </nav>
         </header>
-        <div className='container'>
+        <div className='container_home'>
           <div className='wrapper'><h1>Ask , Chat,<br/>Answer , Repeat.</h1></div>
           <div className='wrapper1'><h2> Ask questions and get real answers from real people.</h2></div>
           <button className='btn'><span>Start Reading</span></button>

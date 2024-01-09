@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../CSS/Login.css';
 import axios from 'axios';
 
 function Login() {
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const [home, setHome] = useState("Login");
+    const [rederror, setRedError] = useState("");
+   
     // const [singup, setSingup] = useState("");
     // -------------------************************---------------------********************-------------------*****************-----------------************
 
@@ -98,6 +100,27 @@ function Login() {
     }
 
 
+    // ******************************-----------------------------------********************************--------------------------**********************
+    // const { email, password, confirm_password } = registrationData;
+    // const showError = () => {
+    //     if ("" === email) {
+    //         setRedError("Please Enter Email");
+    //         return;
+    //     }
+    //     else if (password === "") {
+    //         setRedError("Please enter a password");
+    //         return;
+    //     }
+    //     else if (password.lenght < 7) {
+    //         setRedError("The password must be 8 characters or longer");
+    //         return;
+    //     }
+    //     else if (confirm_password.lenght < 7) {
+    //         setRedError("The password must be 8 characters or longer");
+    //         return;
+    //     }
+    // }
+
     return (
         <>
             <form onSubmit={home === "Login" ? handleLoginSubmit : handleRegistrationSubmit} autoComplete="off" >
@@ -134,6 +157,7 @@ function Login() {
                                 required
                             />
                         </div>
+                            <label className='error'>{rederror}</label>
 
                         <div className="input">
                             <input
@@ -146,6 +170,7 @@ function Login() {
                             />
                             <i className="fa-solid fa-lock"></i>
                         </div>
+                            <label className='error'>{rederror}</label>
 
                         {home === "Login" ? <div></div> :
 
@@ -187,7 +212,11 @@ function Login() {
                             className={home === "Sign Up" ? "submit next" : "submit"}
                             onClick={() => setHome("Login")}>
 
-                            <button onClick={() => navigate('')} className={home === "Login" ? "white" : "blue"}>Login</button>
+                            <button
+                                // onClick={showError}
+                                className={home === "Login" ? "white" : "blue"}>
+                                Login
+                            </button>
                         </div>
                     </div>
 

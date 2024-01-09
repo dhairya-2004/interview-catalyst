@@ -1,12 +1,12 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import {  useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 
 function Confirm() {
 
-    const { id , token } = useParams();
+    const { id, token } = useParams();
     const navigate = useNavigate()
     const [checkpassword, setCheckPassword] = useState({
         password: '',
@@ -28,18 +28,25 @@ function Confirm() {
         await axios.post(`http://localhost:8000/confirm/${id}/${token}`, checkpassword)
             .then(res => {
                 if (res.data.Status === "Success") {
-                    navigate('/login');  
+                    navigate('/login');
                 }
             })
             .catch(err => console.log(err));
+
+        setCheckPassword({
+            password: '',
+            confirm_password: '',
+        })
     }
-    
+
+
+
 
     return (
         <form onSubmit={onPasswordSubmit}>
             <div className="container">
                 <div className="header">
-                    <div className="text">Forgot Password</div>
+                    <div className="text">Confirm Password</div>
                     <div className="underline"></div>
                     {/* <h3>{msg}</h3> */}
                     {/* <div className="underline"></div> */}
@@ -80,8 +87,8 @@ function Confirm() {
                     </div>
 
                     <div className="submit next">
-                        
-                        <button>Change</button>
+
+                        <button  >Change</button>
                     </div>
 
 
