@@ -1,10 +1,10 @@
 // login.js
 const express = require('express');
 const bcrypt = require('bcrypt');
-const User = require('./user'); // Import the User model
+const User = require('../Database/Login_Schema');
 
 const router = express.Router();
-connectDB();
+
 router.post('/login', async (req, resp) => {
     try {
         const { email, password } = req.body;
@@ -30,5 +30,4 @@ router.post('/login', async (req, resp) => {
         resp.status(500).json({ message: 'login Error' });
     }
 });
-
 module.exports = router;
