@@ -4,9 +4,10 @@ const jwt = require('jsonwebtoken');
 const User = require('../Database/Login_Schema');
 const Mail = require('nodemailer/lib/mailer');
 const router = express.Router();
+
+
 router.post('/mail', async (req, resp) => {
     const { mail } = req.body; 
-
     try {
         const user = await User.findOne({ email: mail });
 
@@ -33,11 +34,12 @@ router.post('/mail', async (req, resp) => {
                     <p>You have a new request.</p>
                     <h3>Cofirm Password</h3>
                     <ul>
-                    <li>Confirm Password: <a href="http://localhost:3000/confirm/${user._id}/${token}">Click here</a></li>
+                    <li>Confirm Password: <a href="http://192.168.0.111:3000/confirm/${user._id}/${token}">Click here</a></li>
                     </ul>
-                </div>
-            `
-        };
+                    </div>
+                    `
+                };
+                // <li>Confirm Password: <a href="http://localhost:3000/confirm/${user._id}/${token}">Click here</a></li>
 
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {

@@ -39,7 +39,7 @@ function AllQuestion() {
           </div>
         </div>
       </div>
-    </div>
+     </div>
   );
 }
 

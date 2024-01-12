@@ -126,7 +126,7 @@ function Login() {
                 <div className='main_login'>
                     <div className="container1">
 
-                        <img src={img} alt="img"  />
+                        <img src={img} alt="img" />
 
                     </div>
                     <div className="container2">
@@ -153,7 +153,7 @@ function Login() {
                                         value={registrationData.username}
                                         onChange={handleRegistrationChange}
                                         required
-                                        
+
                                     />
 
                                 </div>
@@ -169,7 +169,7 @@ function Login() {
                                     value={home === "Login" ? loginData.email : registrationData.email}
                                     onChange={home === "Login" ? handleLoginChange : handleRegistrationChange}
                                     required
-                                    
+
                                 />
                             </div>
                             {/* <label className='error'>{rederror}</label> */}
@@ -183,7 +183,7 @@ function Login() {
                                     value={home === "Login" ? loginData.password : registrationData.password}
                                     onChange={home === "Login" ? handleLoginChange : handleRegistrationChange}
                                     required
-                                    
+
                                 />
                             </div>
                             {/* <label className='error'>{rederror}</label> */}
@@ -214,11 +214,14 @@ function Login() {
                                 className={home === "Sign Up" ? "submit next" : "submit"}
                                 onClick={() => setHome("Login")}>
 
-                                <button
-                                    // onClick={showError}
-                                    className={home === "Login" ? "white" : "blue"}>
-                                    Login
-                                </button>
+                                
+
+                                    <button
+                                        // onClick={showError}
+                                        className={home === "Login" ? "white" : "blue"}>
+                                        Login
+                                    </button>
+                                
                             </div>
                         </div>
 

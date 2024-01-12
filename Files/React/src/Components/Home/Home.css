@@ -3,6 +3,7 @@
     padding: 0;
   }
   
+  
   #root{
     display: flex;
     flex-direction: column;
@@ -14,9 +15,9 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    padding-bottom: 30px;
-    padding-top: 30px;
-    /* border-bottom: #fff solid 0.1px; */
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    border-bottom: #fff solid 0.1px;
   }
   
   #catalyst{
@@ -36,7 +37,7 @@
     font-size: 24px;
   }
   
-  .container_home{
+  .container-home{
     background-color: #00264d;
     padding-left: 40px;
     display: flex;
@@ -47,7 +48,7 @@
   }
   
   .wrapper{
-    font-size: 44px;
+    font-size: 5rem;
     color: #ffd700;
     display: flex;
     justify-content: left;
