@@ -82,15 +82,32 @@ color: #21415e;
 
 
 
-h2,
-h5 {
-    color: black;
-}
-
+/* teml */
 .btn-write {
     color: #fff
 }
+
+
 .btn-write-in {
-    margin-left: auto;
-    color: #fff
+    background-color: #6aa9f7;
+    color: #fff;
+    margin: 0.2rem;
+    width: 8rem;
+}
+
+.btn-write-in-cancel {
+    
+    color: #fff;
+    margin: 0.2rem;
+    width: 8rem;
+}
+
+
+.two-buttons {
+    
+    color: #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    
 }
