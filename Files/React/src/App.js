@@ -5,6 +5,7 @@ import Home from './Components/Home/Home';
 import Msg from './Components/Message/JSX/Msg';
 import AllQuestion from './Components/Message/JSX/AllQuestion';
 import Write from './Components/Write/Write';
+import Main from './Components/Main/JSX/Main';
 import Confirm from './Components/Forgot/Confirm';
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -20,6 +21,7 @@ function App() {
           <Route path="/message" element={<Msg />} />
           <Route path="/write" element={<Write />} />
           <Route path="/allquestion" element={<AllQuestion />} />
+          <Route path="/main" element={<Main />} />
           <Route path="/confirm/:id/:token" element={<Confirm />} />
         </Routes>
       </Router>

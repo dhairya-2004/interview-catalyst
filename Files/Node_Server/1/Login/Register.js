@@ -4,7 +4,7 @@ const User = require('../Database/Login_Schema');
 
 const router = express.Router();
 
-router.post('/register', async (req, resp) => {
+router.post('/register', async (req, res) => {
     
         try {
             const { username,email, password  } = req.body;
@@ -15,10 +15,10 @@ router.post('/register', async (req, resp) => {
     
             await user.save();
     
-            resp.status(201).json({ message: 'Registration successful' });
+            res.status(201).json({ message: 'Registration successful' });
         }
         catch (e) {
-            resp.status(500).json({ message: 'Internal Server Error' });
+            res.status(500).json({ message: 'Internal Server Error' });
             console.error('Registration Error:', e);
         }
     })

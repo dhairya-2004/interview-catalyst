@@ -1,10 +1,9 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
-const User = require('../Database/Login_Schema');
+const User = require('../../models/login.model');
 
-const router = express.Router();
+async function getUserData(req, res) {
 
-router.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
 
@@ -28,5 +27,6 @@ router.post('/login', async (req, res) => {
     catch (e) {
         res.status(500).json({ message: 'login Error' });
     }
-});
-module.exports = router;
+
+}
+module.exports = getUserData;

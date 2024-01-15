@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 
 
-const connectMailer = async (req,resp) => {
+const connectMailer = async (req,res) => {
 
     const transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -24,11 +24,11 @@ const connectMailer = async (req,resp) => {
     transporter.sendMail(mailOptions, function(error, info){
         if (error)
         {
-          resp.json({status: true, respMesg: 'Email Sent Successfully'})
+          res.json({status: true, resMesg: 'Email Sent Successfully'})
         } 
         else
         {
-          resp.json({status: true, respMesg: 'Email Sent Successfully'})
+          res.json({status: true, resMesg: 'Email Sent Successfully'})
         }
      
       });

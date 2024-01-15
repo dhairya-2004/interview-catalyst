@@ -21,7 +21,7 @@ app.use(cors())
 
 
 // Registration
-app.post('/register', async (req, resp) => {
+app.post('/register', async (req, res) => {
     try {
         const { username,email, password  } = req.body;
 
@@ -36,10 +36,10 @@ app.post('/register', async (req, resp) => {
 
         await user.save();
 
-        resp.status(201).json({ message: 'Registration successful' });
+        res.status(201).json({ message: 'Registration successful' });
     }
     catch (e) {
-        resp.status(500).json({ message: 'Internal Server Error' });
+        res.status(500).json({ message: 'Internal Server Error' });
         console.error('Registration Error:', e);
     }
 })
@@ -47,35 +47,35 @@ app.post('/register', async (req, resp) => {
 
 // Login
 // app.use(loginRouter);
-app.post('/login', async (req, resp) => {
+app.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
 
         const user = await User.findOne({ email });
 
         if (!user) {
-            return resp.status(400).json({ message: 'Invalid Username or Password' });
+            return res.status(400).json({ message: 'Invalid Username or Password' });
 
         }
 
         const passwordMatch = await bcrypt.compare(password, user.password);
 
         if (!passwordMatch) {
-            return resp.status(400).json({ message: 'Invalid Username or Password' });
+            return res.status(400).json({ message: 'Invalid Username or Password' });
 
         }
 
 
-        resp.status(200).json({ message: 'Login successful' });
+        res.status(200).json({ message: 'Login successful' });
     }
     catch (e) {
-        resp.status(500).json({ message: 'login Error' });
+        res.status(500).json({ message: 'login Error' });
     }
 })
 
 
 // confirm
-app.post('/confirm/:_id/:token', async (req, resp) => {
+app.post('/confirm/:_id/:token', async (req, res) => {
     const { _id, token } = req.params;
     const { password, confirm_password } = req.body;
 
@@ -86,14 +86,14 @@ app.post('/confirm/:_id/:token', async (req, resp) => {
 
         jwt.verify(token, "jwt_secret_key", async (err, decoded) => {
             if (err) {
-                return resp.json({ Status: "Error with token" });
+                return res.json({ Status: "Error with token" });
             }
 
             try {
                 
                 const user = await User.findById(_id);
                 if (!user) {
-                    return resp.json({ Status: "User not found" });
+                    return res.json({ Status: "User not found" });
                 }
 
                 
@@ -103,13 +103,13 @@ app.post('/confirm/:_id/:token', async (req, resp) => {
                 
                 await user.save();
 
-                resp.json({ Status: "Success" });
+                res.json({ Status: "Success" });
             } catch (error) {
-                resp.status(500).send({ Status: error.toString() });
+                res.status(500).send({ Status: error.toString() });
             }
         });
     } catch (err) {
-        resp.status(500).send({ Status: err.toString() });
+        res.status(500).send({ Status: err.toString() });
     }
 });
 
@@ -117,7 +117,7 @@ connectDB();
 
 // ------------------------------------------------
 
-app.post('/mail', (req, resp) => {
+app.post('/mail', (req, res) => {
 
 
     const { email } = req.body;
@@ -125,7 +125,7 @@ app.post('/mail', (req, resp) => {
     User.findOne({ email: email })
         .then(user => {
             if (!user) {
-                return resp.send({ Status: "User not existed" })
+                return res.send({ Status: "User not existed" })
             }
 
             const token = jwt.sign({ id: user._id }, "jwt_secret_key", { expiresIn: "1d" })
@@ -150,10 +150,10 @@ app.post('/mail', (req, resp) => {
 
             transporter.sendMail(mailOptions, function (error, info) {
                 if (!error) {
-                    resp.json({ status: false, message: 'Email Sent  Successfully' })
+                    res.json({ status: false, message: 'Email Sent  Successfully' })
                 }
                 else {
-                    resp.json({ status: true, message: 'Email Sent Not Successfully' })
+                    res.json({ status: true, message: 'Email Sent Not Successfully' })
                 }
 
             });

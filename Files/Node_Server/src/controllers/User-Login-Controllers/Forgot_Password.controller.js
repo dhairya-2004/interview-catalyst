@@ -2,12 +2,10 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
 const Mail = require('nodemailer/lib/mailer');
-const User = require('../Database/Login_Schema');
-const router = express.Router();
+const User = require('../../models/login.model');
 
-
-router.post('/mail', async (req, res) => {
-    const { mail } = req.body; 
+async function getForgotPassword(req, res) {
+    const { mail } = req.body;
     try {
         const user = await User.findOne({ email: mail });
 
@@ -38,8 +36,8 @@ router.post('/mail', async (req, res) => {
                     </ul>
                     </div>
                     `
-                };
-                // <li>Confirm Password: <a href="http://localhost:3000/confirm/${user._id}/${token}">Click here</a></li>
+        };
+        // <li>Confirm Password: <a href="http://localhost:3000/confirm/${user._id}/${token}">Click here</a></li>
 
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
@@ -51,9 +49,6 @@ router.post('/mail', async (req, res) => {
     } catch (err) {
         res.status(500).json({ status: true, resMesg: 'Internal Server Error' });
     }
-});
 
-
-
-
-module.exports = router;
+}
+module.exports = getForgotPassword;
