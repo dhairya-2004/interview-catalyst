@@ -6,12 +6,17 @@ import img from './img.jpg'
 
 function Login() {
 
-    // const navigate = useNavigate();
+
 
     const [home, setHome] = useState("Login");
-    // const [rederror, setRedError] = useState("");
+    const [response, setResponse] = useState("");
+
 
     // -------------------************************---------------------********************-------------------*****************-----------------************
+
+    const clearData=()=>{
+        setResponse("");
+    }
 
     const [loginData, setLoginData] = useState({
         email: '',
@@ -33,19 +38,19 @@ function Login() {
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
 
-        try {
-            const response = await axios.post('http://localhost:8000/login', loginData);
-            const { success, message } = response.data;
+        setResponse("");
 
-            if (success) {
-                console.log('Login Successfully')
-            }
-            else {
-                console.log(message);
-            }
-        }
-        catch (error) {
+        try {
+
+            const res = await axios.post('http://localhost:8000/user/login', loginData);
+            console.log(res.data.message)
+            setResponse(res.data.message);
+
+        } catch (error) {
+
+            setResponse('Login failed. Please check your credentials.');
             console.error('Login error', error)
+
         }
         setLoginData({
             email: '',
@@ -78,13 +83,18 @@ function Login() {
 
         e.preventDefault();
 
+        setResponse("");
 
         try {
-            const response = await axios.post('http://localhost:8000/register', registrationData);
-            console.log(response.data);
-        }
-        catch (error) {
-            console.log(error)
+            const res = await axios.post('http://localhost:8000/user/register', registrationData);
+            console.log(res.data.message);
+            setResponse(res.data.message);
+
+        } catch (error) {
+
+            console.error('Sign Up error', error)
+            setResponse('Sign Up failed. /n Please check your credentials.');
+
         }
 
         setRegistrationData({
@@ -95,30 +105,6 @@ function Login() {
 
 
     }
-
-
-    // ******************************-----------------------------------********************************--------------------------**********************
-    // const { email, password, confirm_password } = registrationData;
-    // const showError = () => {
-    //     if ("" === email) {
-    //         setRedError("Please Enter Email");
-    //         return;
-    //     }
-    //     else if (password === "") {
-    //         setRedError("Please enter a password");
-    //         return;
-    //     }
-    //     else if (password.lenght < 7) {
-    //         setRedError("The password must be 8 characters or longer");
-    //         return;
-    //     }
-    //     else if (confirm_password.lenght < 7) {
-    //         setRedError("The password must be 8 characters or longer");
-    //         return;
-    //     }
-    // }
-
-
 
     return (
         <>
@@ -135,12 +121,18 @@ function Login() {
                             <div className="text">
                                 {home} to your Account
                             </div>
-                            {/* <div className="underline"></div> */}
                             {home === "Login" ? <label className='subtitle'>Welcome back, {home} your account </label> :
                                 <label className='subtitle'>{home} your account </label>}
                         </div>
 
+
+
+
                         <div className="inputs">
+
+                        {home === "Login" ? <label className='subtitle-response'> {response}  </label> :
+                            <label className='subtitle-response'>{response} </label>}
+
 
                             {home === "Login" ? <div></div> :
 
@@ -205,7 +197,10 @@ function Login() {
                                 className={home === "Login" ? "submit next" : "submit"}
                                 onClick={() => setHome("Sign Up")}>
 
-                                <button className={home === "Sign Up" ? "white" : "blue"}>Sign Up</button>
+                                <button
+                                    className={home === "Sign Up" ? "white" : "blue"}
+                                    onClick={clearData}>
+                                        Sign Up</button>
 
                             </div>
 
@@ -214,14 +209,15 @@ function Login() {
                                 className={home === "Sign Up" ? "submit next" : "submit"}
                                 onClick={() => setHome("Login")}>
 
-                                
 
-                                    <button
-                                        // onClick={showError}
-                                        className={home === "Login" ? "white" : "blue"}>
-                                        Login
-                                    </button>
-                                
+
+                                <button
+                                    // onClick={showError}
+                                    className={home === "Login" ? "white" : "blue"}
+                                    onClick={clearData}>
+                                    Login
+                                </button>
+
                             </div>
                         </div>
 

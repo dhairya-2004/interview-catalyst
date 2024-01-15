@@ -13,7 +13,7 @@ async function getRegisterData(req, res) {
 
         await user.save();
 
-        res.status(201).json({ message: 'Registration successful' });
+        res.status(201).json({ message: 'Sign Up Successful' });
     }
     catch (e) {
         res.status(500).json({ message: 'Internal Server Error' });

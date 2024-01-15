@@ -6,11 +6,13 @@ const User = require('../../models/login.model');
 
 async function getForgotPassword(req, res) {
     const { mail } = req.body;
+    console.log(mail)
     try {
         const user = await User.findOne({ email: mail });
-
+        
+        // console.log("ok")
         if (!user) {
-            return res.status(404).json({ status: true, resMesg: 'User Not Found' });
+            return res.status(404).json({ resMesg: 'User Not Found' });
         }
 
         const token = jwt.sign({ userId: user._id }, "qwertyuioplkjhgfddsazxcvbnmlkjhgfdaqwertyuuioplkjhg", { expiresIn: '1h' });
@@ -38,17 +40,17 @@ async function getForgotPassword(req, res) {
                     `
         };
         // <li>Confirm Password: <a href="http://localhost:3000/confirm/${user._id}/${token}">Click here</a></li>
-
+        
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
-                res.json({ status: true, resMesg: 'Email Not Sent Successfully' });
+                res.status(500).json({  message: 'Email Not Sent Successfully' });
             } else {
-                res.json({ status: false, resMesg: 'Email Sent Successfully' });
+                res.status(200).json({  message: 'Email Sent Successfully' });
             }
         });
     } catch (err) {
-        res.status(500).json({ status: true, resMesg: 'Internal Server Error' });
+        res.status(500).json({  message: 'Internal Server Error' });
     }
-
+    
 }
 module.exports = getForgotPassword;

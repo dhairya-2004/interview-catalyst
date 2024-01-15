@@ -9,6 +9,7 @@ const CustomModal = ({ closeModal }) => {
         answer: ''
     });
 
+
     const getquestion = (e) => {
 
         const { name, value } = e.target;
@@ -20,15 +21,17 @@ const CustomModal = ({ closeModal }) => {
     }
     console.log(questions)
 
+
+
     const callCloseModal = async (e) => {
 
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8000/question', questions)
+            const response = await axios.post('http://localhost:8000/user/question', questions)
 
             console.log(response.data);
 
-            
+
         }
         catch (error) {
             console.log(error)
@@ -77,6 +80,7 @@ const CustomModal = ({ closeModal }) => {
                     <button onClick={closeModal} className="btn-write-in-cancel">
                         Cancel
                     </button>
+
                     <button onClick={callCloseModal} className="btn-write-in">
                         Send
                     </button>

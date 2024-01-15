@@ -5,7 +5,8 @@ import './Forgot.css'
 import img from './forgot (2).png'
 function Forgot_pass() {
     const [mail, setMail] = useState("");
-    // const [msg, setMsg] = useState("");
+    const [responseMsg, setResponseMsg] = useState("");
+
 
 
 
@@ -16,16 +17,18 @@ function Forgot_pass() {
     const onPasswordSubmit = async (e) => {
         e.preventDefault();
         try {
-            console.log("hii")
-            const response = await axios.post('http://localhost:8000/mail', { mail })
-            // .then(response => setMsg(response.data.respMesg));
-            console.log(response.data.respMesg)
+            console.log("starting point in JSX")
+            const res = await axios.post('http://localhost:8000/user/forgot-password', { mail })
+            console.log("JSX  2")
+            console.log(res.data.message)
+            setResponseMsg(res.data.message)
+            console.log("JSX  3")
 
         }
         catch (error) {
+            setResponseMsg("Provide valid email address")
             console.log(error);
         }
-
 
         setMail("");
     }
@@ -35,18 +38,18 @@ function Forgot_pass() {
             <form onSubmit={onPasswordSubmit}>
                 <div className="container-forgot">
                     <div className="header-forgot">
-                    <img src={img} alt="" />
+                        <img src={img} alt="" />
                         <div className="text-forgot">Forgot Password?</div>
                         <div className="msg-forgot" >
-                        <label className="msg-forgot-center">Enter your email and we'll send you a link</label>
-                        <label className="msg-forgot-center">to reset your password.</label>
+                            <label className="msg-forgot-center">Enter your email and we'll send you a link</label>
+                            <label className="msg-forgot-center">to reset your password.</label>
 
                         </div>
                     </div>
 
 
                     <div className="inputs-forgot">
-
+                        <label className='subtitle-response-forgot'> {responseMsg}  </label>
 
                         <div className="input">
                             <i className="fa-solid fa-envelope"></i>
@@ -65,7 +68,7 @@ function Forgot_pass() {
                             <div className='back'>
                                 <Link to='/login' className='back-back'>
                                     {/* <i class="fa-solid fa-arrow-left "></i> */}
-                                Back to Login</Link>
+                                    Back to Login</Link>
                             </div>
                         </div>
                     </div>
