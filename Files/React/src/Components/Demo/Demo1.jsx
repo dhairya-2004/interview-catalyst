@@ -23,15 +23,16 @@ const Login = () => {
 
     return (
         <div className='main-1'>
-            <h2>Login</h2>
-            <div>
-                <label>Username:</label>
-                <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <h2 className='title-demo'>Login</h2>
+            <div className='i1'>
+                <label>Email:</label><br/>
+                <input  type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
             </div>
-            <div>
-                <label>Password:</label>
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <div className='i1'>
+                <label>Password:</label><br/>
+                <input  type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             </div>
+            
             <button onClick={handleLogin} className='b1'>Login</button>
             {error && <p style={{ color: 'red' }}>{error}</p>}
         </div>

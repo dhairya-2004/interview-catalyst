@@ -1,14 +1,16 @@
 import React, { useEffect, useState, useRef } from "react";
+
+import SearchIcon from '@mui/icons-material/Search';
 import "../CSS/Main.css";
-import search from "../PNG/search.png";
-import notification from "../PNG/notification-bell.png";
-import writing from "../PNG/writing.png";
-import account from "../PNG/account.png";
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
+import EditNoteIcon from '@mui/icons-material/EditNote';
+import Person2Icon from '@mui/icons-material/Person2';
 import AllQuestion from '../../Message/JSX/AllQuestion'
 import CustomModal from '../../Write/Input';
 import '../../Write/Write.css';
 import { Link } from 'react-router-dom';
 import axios from "axios";
+import logo from '../PNG/logo.png'
 
 function WritePage() {
 
@@ -96,18 +98,21 @@ function WritePage() {
 
   return (
     <div className="main-main">
-      <div className="top-main">
-        {/* Your existing code for header */}
-        <div className="logo-main"></div>
+      <nav className="top-main">
+        
+        <div className="logo-main"><img src={logo} alt="" /></div>
+        
         <div className="search-main">
-          <img src={search} className="image-main" alt="" />
+
+          <SearchIcon className="image-main" />
 
           <input
             type="search"
-            placeholder="Search.."
+            placeholder="Search question.."
             id="search"
             onChange={onSearch}
             required />
+
         </div>
 
 
@@ -116,23 +121,22 @@ function WritePage() {
             <Link
               className="btn-write"
               onClick={() => setmodel(true)}>
-              <img src={writing} alt="" />
-              Write
+              <EditNoteIcon style={{ fontSize: "2.2rem" }}/>
             </Link>
             {model && <CustomModal closeModal={changeModal} />}
           </div>
 
 
           <div className="notification-main">
-            <img src={notification} alt="" />
+            <NotificationsActiveIcon style={{ fontSize: "2rem" }}/>
           </div>
           <div className="account-main">
-            <img src={account} alt="" />
+            <Person2Icon style={{ fontSize: "2rem" }}/>
           </div>
         </div>
-      </div>
+      </nav>
 
-      <div className="tabs-main">
+      {/* <div className="tabs-main">
         <div className="tab-header">
           <div
             className={activeTab === "For You" ? "active" : ""}
@@ -152,7 +156,7 @@ function WritePage() {
           <div className={activeTab === "For You" ? "active" : ""}>
             <h3>New Arrivals...</h3>
 
-            {/* <p> */}
+          
 
 
 
@@ -168,7 +172,7 @@ function WritePage() {
             ):<div><h1>No Results Found...  </h1></div>}
 
 
-            {/* </p> */}
+           
           </div>
           <div className={activeTab === "Following" ? "active" : ""}>
             <h1>Following</h1>
@@ -176,6 +180,18 @@ function WritePage() {
 
           </div>
         </div>
+      </div> */}
+
+
+      <div>
+        {questionData.length > 0 ? (
+          <div>
+            {questionData.map((value, index) => (
+              <AllQuestion key={index} currentValue={value} />
+            ))}
+
+          </div>
+        ) : <div><h1>No Results Found...  </h1></div>}
       </div>
 
     </div>

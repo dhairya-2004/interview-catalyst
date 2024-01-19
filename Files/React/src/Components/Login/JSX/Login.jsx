@@ -45,8 +45,12 @@ function Login() {
 
             const res = await axios.post('http://localhost:8000/user/login', loginData);
             console.log(res.data.message);
+            console.log(res.data.token);
             setResponse(res.data.message);
-            navigate('/main');
+            localStorage.setItem("token",res.data.token)
+            // navigate('/main');
+
+            
 
         } catch (error) {
 
@@ -54,10 +58,10 @@ function Login() {
             console.error('Login error', error)
 
         }
-        setLoginData({
-            email: '',
-            password: ''
-        })
+        // setLoginData({
+        //     email: '',
+        //     password: ''
+        // })
 
 
 
@@ -102,11 +106,11 @@ function Login() {
 
         }
 
-        setRegistrationData({
-            username: '',
-            email: '',
-            password: '',
-        })
+        // setRegistrationData({
+        //     username: '',
+        //     email: '',
+        //     password: '',
+        // })
 
 
     }

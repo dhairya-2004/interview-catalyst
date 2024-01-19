@@ -19,18 +19,42 @@ const Home = () => {
           },
         }
       );
+      
       console.log("okay")
       console.log(response)
+      alert("Mail Sent that on your purchase")
     } catch (error) {
       console.log(error);
     }
   };
 
+  const handleReturn = async () => {
+    const token = localStorage.getItem("token")
+    try {
+      const response = await axios.post(
+        "http://localhost:3001/api/return",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      
+      console.log("okay")
+      console.log(response)
+      alert("Mail Sent that on your return item")
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
   return (
     <div>
 
-      <h1>Home</h1>
       <div>
+      <h1 className='t1'>Home</h1>
         <div className='container-1'>
           <div className='c1'>
             <h4>Item 1</h4>
@@ -44,18 +68,18 @@ const Home = () => {
           </div>
         </div>
 
-        {/* <div className='container-1'>
+        <div className='container-1'>
           <div className='c1'>
             <h4>Item 1</h4>
             <h6>Price : 50 $</h6>
             <h6>Do you want to return  product  </h6>
           </div>
           <div>
-            <button className='b1' onClick={handleBuy}>
+            <button className='b1' onClick={handleReturn}>
               Return
             </button>
           </div>
-        </div> */}
+        </div>
       </div>
     </div>
   );

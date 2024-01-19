@@ -1,16 +1,17 @@
-
-.top-title{
+.top-title {
   display: flex;
   flex-direction: row;
   /* border: #3944BC 0.1rem solid; */
   margin: 0 2rem;
+  margin-top: 5rem;
   justify-content: space-between;
 }
+
 .left-side {
   display: flex;
   flex-direction: row;
-  margin:0 1rem;
-  gap:6px;
+  margin: 0 1rem;
+  gap: 6px;
   align-items: center;
   height: 4rem;
 }
@@ -21,10 +22,10 @@
   font-size: 20px;
   display: flex;
   flex-direction: column;
-  color: black;
+  color: whitesmoke;
 }
 
-.avatar{
+.avatar {
   font-size: 18px;
   width: 2em;
   height: 2em;
@@ -33,58 +34,58 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Anton',sans-serif;
+  font-family: 'Anton', sans-serif;
 }
-.time-title{
+
+.time-title {
   font-size: 0.9rem;
   margin-left: 0.5rem;
 }
-.fa-regular{
-  font-size: 0.7rem;
-}
 
-.right-side{
+
+.right-side {
   display: flex;
   flex-direction: row;
   gap: 1rem;
   align-items: center;
   margin-right: 2rem;
-     
+
 }
 
-.answer-count{
+.answer-count {
   display: flex;
   justify-content: center;
-  color: black;
+  color: white;
 }
 
-.answer-title{
-  color: black;
-  font-size: 0.9rem;
+.answer-title {
+  color: white;
+  font-size: 1.2rem;
 }
-.votes-count{
+
+.votes-count {
   display: flex;
   justify-content: center;
-  color: black;
+  color: white;
 }
 
-.votes-title{
-  color: black;
-  font-size: 0.9rem;
+.votes-title {
+  color: white;
+  font-size: 1.2rem;
 }
 
-.favourite-count{
+.favourite-count {
   display: flex;
   justify-content: center;
-  color: black;
+  color: white;
 }
 
-.favourite-title{
-  color: black;
-  font-size: 0.9rem;
+.favourite-title {
+  color: white;
+  font-size: 1.2rem;
 }
 
-.avatar::after{
+.avatar::after {
   content: attr(data-label);
 }
 
@@ -93,9 +94,9 @@
 
 
 .main-addQuestion {
-  
-  background-color: #fff;
-  box-shadow: 5px 5px 20px #686565 ;
+
+  background-color: #001C30;
+  box-shadow: 5px 5px 20px #686565;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -104,7 +105,7 @@
   /* margin-top: 20px; */
   /* margin-right: 30px; */
   margin: 0 2rem;
-  margin-bottom: 3rem;
+  /* margin-bottom: 3rem; */
 }
 
 .question {
@@ -112,25 +113,66 @@
   font-size: 22px;
   font-weight: 600;
   margin: 1rem;
-  color: black;
-  
-}
-.question-hr {
-  margin:0 1rem;
+  gap: 1rem;
+  color: white;
+
 }
 
-.answer {
+.question-hr {
+  margin: 0 1rem;
+}
+
+.answer{
   font-family: "Arimo", sans-serif;
   font-size: 16px;
+  gap: 1rem;
   margin: 1rem;
-  color:rgb(98, 96, 96) ;
+  color: rgb(98, 96, 96);
 }
 
 .responses {
   display: flex;
   flex-direction: row;
   margin: 1rem;
-  gap:15px;
+  gap: 15px;
 }
 
-.load{color: black;}
+.main-comment {
+
+  background-color: #001C30;
+  box-shadow: 5px 5px 20px #686565;
+  display: flex;
+  flex-direction: column;
+  margin: 0 2rem;
+}
+
+.comment-title {
+
+  color: white;
+  margin: 1rem;
+  font-weight: 600;
+}
+
+.input-comment {
+  height: 2rem;
+  font-size: 1rem;
+  border: none;
+  margin: 0rem;
+  padding: 1rem;
+  color: white;
+  background-color: transparent;
+}
+
+.button-comment {
+
+  margin: 1rem;
+  background-color: #009578;
+  width: 5rem;
+  height: 2rem;
+}
+
+
+
+.load {
+  color: black;
+}

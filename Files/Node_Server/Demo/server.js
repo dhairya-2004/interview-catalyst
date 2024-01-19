@@ -12,8 +12,8 @@ app.use(cors());
 
 // Dummy user data (for demonstration purposes)
 const users = [
-    { email: 'nirjnasit8765@gmail.com', password: 'user1', id: 1 },
-    { email: 'user2', password: 'user2', id: 2 }
+    { email: 'asmanijash51@gmail.com', password: 'user1', id: 1 },
+    { email: 'asmanijash61@gmail.com', password: 'user2', id: 2 }
 ];
 
 const transporter = nodemailer.createTransport({
@@ -30,16 +30,16 @@ app.post('/api/login', (req, res) => {
     const user = users.find((u) => u.email === email && u.password === password);
 
     if (user) {
-        const token = jwt.sign({ id: user.id, email: user.email }, 'jashasmanijashmanijashasmani', { expiresIn: '1h' });
+        const token = jwt.sign({ id: user.id, email: user.email }, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789', { expiresIn: '1h' });
         res.json({ token });
     } else {
         res.status(401).json({ error: 'Invalid credentials' });
     }
 });
 
-app.post('/api/buy', verifyT, (req, res) => {
+app.post('/api/return', verifyT, (req, res) => {
 
-    jwt.verify(req.token, 'jashasmanijashmanijashasmani', async (err, authdata) => {
+    jwt.verify(req.token, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789', async (err, authdata) => {
 
         if (err) {
             res.status(401).send({ result: "invalid token" });
@@ -52,7 +52,7 @@ app.post('/api/buy', verifyT, (req, res) => {
                     from: 'interviewcatalystservice@gmail.com',
                     to: authdata.email,
                     subject: 'Purchase Notification',
-                    text: `User  has purchased.`,
+                    text: `User  has return item.`,
                     // text: `User ${userEmail} has purchased .`,
                 };
 
@@ -60,7 +60,39 @@ app.post('/api/buy', verifyT, (req, res) => {
                 res.status(200).send('Email sent successfully');
                 
             } catch (error) {
-                // console.error(error);
+                console.error(error);
+                res.status(500).send('Internal Server Error');
+            }
+            
+        }
+    })
+})
+
+
+app.post('/api/buy', verifyT, (req, res) => {
+
+    jwt.verify(req.token, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789', async (err, authdata) => {
+
+        if (err) {
+            res.status(401).send({ result: "invalid token" });
+        }
+
+        else {
+           
+            try {
+                const mailOptions = {
+                    from: 'interviewcatalystservice@gmail.com',
+                    to: authdata.email,
+                    subject: 'Purchase Notification',
+                    text: `User  has purchase item.`,
+                    // text: `User ${userEmail} has purchased .`,
+                };
+
+                 transporter.sendMail(mailOptions);
+                res.status(200).send('Email sent successfully');
+                
+            } catch (error) {
+                console.error(error);
                 res.status(500).send('Internal Server Error');
             }
             
@@ -82,7 +114,6 @@ function verifyT(req, resp, next) {
             result: "token is not valid"
         })
     }
-
 }
 
 

@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-// import { Link } from "react-router-dom";
-// import "../CSS/AddQuestion.css";
 import "../CSS/AllQuestion.css";
 import like from "../Image/like_empty.png";
 import likefilled from "../Image/like_filled.png";
 import comment from "../Image/comment.png";
+import QueryBuilderIcon from '@mui/icons-material/QueryBuilder';
+
 
 
 function AddQuestion({ currentValue }) {
 
 
   const [isLiked, setIsLiked] = useState(false);
+  const [addcomment, setAddComment] = useState(false);
 
   function fillLike(e) {
     console.log("img changed");
@@ -26,6 +27,14 @@ function AddQuestion({ currentValue }) {
 
   }
 
+  function addComment(e) {
+    e.preventDefault();
+    console.log("print")
+    setAddComment(true);
+
+  }
+
+
 
   return (
     <>
@@ -36,7 +45,7 @@ function AddQuestion({ currentValue }) {
           <div className="avatar" data-label="UN"></div>
           <div className="name">
             User Name
-            <div className="time-title"><i class="fa-regular fa-clock"></i> 3 min ago</div>
+            <div className="time-title"><QueryBuilderIcon style={{ fontSize: "12px" }}/> 3 min ago</div>
           </div>
         </div>
 
@@ -52,10 +61,10 @@ function AddQuestion({ currentValue }) {
       <div className="main-addQuestion">
         <div className="question">
           {currentValue.question}
-          
-          
+
+
         </div>
-          <hr className="question-hr"/>
+        <hr className="question-hr" />
         <div className="answer">
           {/* &#8594; */}
           {currentValue.answer}
@@ -67,11 +76,22 @@ function AddQuestion({ currentValue }) {
               onClick={fillLike}
               alt="" />
           </div>
-          <div className="comments">
-            <img src={comment} alt="" />
+          <div className="comments" onClick={addComment}>
+            <img src={comment} alt="Comment" />
           </div>
+
         </div>
       </div>
+      {addComment == false ? <div></div> : <div className="main-comment">
+        <label className="comment-title">Comment</label>
+        <input
+          className="input-comment"
+          type="text"
+          placeholder="Add Your Comment.." />
+        <button
+          className="button-comment"
+        >Add</button>
+      </div>}
     </>
   );
 }
