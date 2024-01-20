@@ -51,7 +51,7 @@ app.post('/api/return', verifyT, (req, res) => {
                 const mailOptions = {
                     from: 'interviewcatalystservice@gmail.com',
                     to: authdata.email,
-                    subject: 'Purchase Notification',
+                    subject: 'Return Notification',
                     text: `User  has return item.`,
                     // text: `User ${userEmail} has purchased .`,
                 };

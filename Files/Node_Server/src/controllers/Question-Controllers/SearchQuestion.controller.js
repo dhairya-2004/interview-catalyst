@@ -8,7 +8,7 @@ async function  searchQuestion(req,res){
         const search_question=await Question.find(
             {
                 '$or':[
-                    {'question': { $regex: req.params.key }}
+                    {'question': { $regex: req.params.key ,$options: 'i' }}
                 ]
             }
         )

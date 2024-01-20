@@ -4,6 +4,7 @@ import like from "../Image/like_empty.png";
 import likefilled from "../Image/like_filled.png";
 import comment from "../Image/comment.png";
 import QueryBuilderIcon from '@mui/icons-material/QueryBuilder';
+import VerifiedIcon from '@mui/icons-material/Verified';
 
 
 
@@ -59,6 +60,9 @@ function AddQuestion({ currentValue }) {
 
 
       <div className="main-addQuestion">
+        <div className="verified">
+          Verified <VerifiedIcon style={{ fontSize: "0.9rem" ,color:"rgb(17, 255, 4)"}}/>
+        </div>
         <div className="question">
           {currentValue.question}
 

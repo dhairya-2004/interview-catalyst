@@ -92,7 +92,6 @@
 
 
 
-
 .main-addQuestion {
 
   background-color: #001C30;
@@ -107,6 +106,15 @@
   margin: 0 2rem;
   /* margin-bottom: 3rem; */
 }
+
+.verified{
+  margin: 1rem;
+  margin-bottom: 0rem;
+  gap: 1rem;
+  color: rgb(65, 138, 255);
+  /* color: ; */
+}
+
 
 .question {
   font-family: "Manrope", sans-serif;
