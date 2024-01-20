@@ -21,11 +21,11 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: false
     },
-    tokens: [
-        {
-            type: String
+    tokens: {
+                type: String,
+                uniqe: true
         }
-    ]
+    
 })
 
 

@@ -10,6 +10,14 @@ const QuestionsSchema = new mongoose.Schema({
     answer: {
         type: String,
         require: true
+    },
+    username: {
+        type: String,
+        require: true
+    },
+    timestamp:{
+        type:Date,
+        required: true
     }
 })
 const Questions = mongoose.model('Questions', QuestionsSchema);

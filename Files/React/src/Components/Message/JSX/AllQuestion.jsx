@@ -13,6 +13,7 @@ function AddQuestion({ currentValue }) {
 
   const [isLiked, setIsLiked] = useState(false);
   const [addcomment, setAddComment] = useState(false);
+  const currentTime = Date.now();
 
   function fillLike(e) {
     console.log("img changed");
@@ -45,8 +46,8 @@ function AddQuestion({ currentValue }) {
         <div className="left-side">
           <div className="avatar" data-label="UN"></div>
           <div className="name">
-            User Name
-            <div className="time-title"><QueryBuilderIcon style={{ fontSize: "12px" }}/> 3 min ago</div>
+            {currentValue.username}
+            <div className="time-title"><QueryBuilderIcon style={{ fontSize: "12px" }}/>2 min</div>
           </div>
         </div>
 

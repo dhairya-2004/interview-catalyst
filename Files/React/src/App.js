@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from 'react';
+import React from 'react';
 import Forgot from './Components/Forgot/Forgot';
 import Login from './Components/Login/JSX/Login';
 import Home from './Components/Home/Home';
@@ -9,23 +9,13 @@ import Write from './Components/Write/Write';
 import Input from './Components/Write/Input';
 import Main from './Components/Main/JSX/Main';
 import Confirm from './Components/Forgot/Confirm';
-import { BrowserRouter as Router, Route, Routes ,Link} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Log1 from './Components/Demo/Demo1'
-import Buy from './Components/Demo/Demo3'
 import Home1 from './Components/Demo/Demo2';
 
 
 function App() {
-
-
-  const [token, setToken] = useState('');
-
-  const handleLogin = (userToken) => {
-    setToken(userToken);
-  };
-
-
 
   return (
     <>

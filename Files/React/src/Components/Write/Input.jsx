@@ -1,10 +1,10 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-// import ReactDOM from 'react-dom'
 
-const CustomModal = ({ closeModal }) => {
+const CustomModal = ({ closeModal,username }) => {
 
     const [questions, setQuestions] = useState({
+        // username:'',
         question: '',
         answer: ''
     });
@@ -28,7 +28,7 @@ const CustomModal = ({ closeModal }) => {
 
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8000/user/question', questions)
+            const response = await axios.post('http://localhost:8000/user/question', {questions,username})
 
             console.log(response.data);
 
@@ -52,6 +52,7 @@ const CustomModal = ({ closeModal }) => {
             <div className="modal-wrapper" onClick={closeModal}> </div>
 
             <div className="modal-container">
+                <div>{username}</div>
                 <div className='title-write'>
                     <label >Create Post</label>
                 </div>

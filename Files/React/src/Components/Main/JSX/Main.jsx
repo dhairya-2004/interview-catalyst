@@ -10,7 +10,6 @@ import CustomModal from '../../Write/Input';
 import '../../Write/Write.css';
 import { Link } from 'react-router-dom';
 import axios from "axios";
-import logo from '../PNG/logo.png'
 
 function WritePage() {
 
@@ -27,6 +26,7 @@ function WritePage() {
   // -------------------------------------------
 
   const [model, setmodel] = useState(false);
+  const [cusename, setCUsername] = useState("");
 
   const changeModal = () => setmodel(false);
 
@@ -40,8 +40,16 @@ function WritePage() {
       console.log('Fetching data...');
 
       try {
-        const res = await axios.get('http://localhost:8000/user/question');
-        const newData = res.data;
+        const res = await axios.get('http://localhost:8000/user/question',
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`,
+            }
+          });
+        const newData = res.data.question;
+        setCUsername(res.data.cusername)
+        // JSON.stringify(newData);
+        console.log(newData);
         setQuestionData(newData);
       }
       catch (error) {
@@ -69,13 +77,21 @@ function WritePage() {
     }
     else {
       try {
-        const res = await axios.get('http://localhost:8000/user/question');
-        const newData = res.data;
+        const res = await axios.get('http://localhost:8000/user/question',
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`,
+            }
+          });
+        const newData = res.data.question;
+        setCUsername(res.data.cusername);
         setQuestionData(newData);
       }
       catch (error) {
         console.log(error);
       }
+
+
     }
   }
 
@@ -98,10 +114,16 @@ function WritePage() {
 
   return (
     <div className="main-main">
+
+      <div className="sidebar"></div>
+
       <nav className="top-main">
-        
-        <div className="logo-main"><img src={logo} alt="" /></div>
-        
+
+        <div className="logo-main">
+          {/* <img src={logo} alt="" /> */}
+          {cusename}
+        </div>
+
         <div className="search-main">
 
           <SearchIcon className="image-main" />
@@ -121,17 +143,18 @@ function WritePage() {
             <Link
               className="btn-write"
               onClick={() => setmodel(true)}>
-              <EditNoteIcon style={{ fontSize: "2.2rem" }}/>
+              <EditNoteIcon style={{ fontSize: "2.2rem" }} />
             </Link>
-            {model && <CustomModal closeModal={changeModal} />}
+            {model && <CustomModal closeModal={changeModal} username={cusename} />}
           </div>
 
 
           <div className="notification-main">
-            <NotificationsActiveIcon style={{ fontSize: "2rem" }}/>
+            <NotificationsActiveIcon style={{ fontSize: "2rem" }} />
           </div>
           <div className="account-main">
-            <Person2Icon style={{ fontSize: "2rem" }}/>
+            <Person2Icon style={{ fontSize: "2rem" }} />
+
           </div>
         </div>
       </nav>
@@ -183,7 +206,7 @@ function WritePage() {
       </div> */}
 
 
-      <div>
+      <div style={{ whiteSpace: 'pre-line' }}>
         {questionData.length > 0 ? (
           <div>
             {questionData.map((value, index) => (

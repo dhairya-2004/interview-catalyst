@@ -48,7 +48,7 @@ function Login() {
             console.log(res.data.token);
             setResponse(res.data.message);
             localStorage.setItem("token",res.data.token)
-            // navigate('/main');
+            navigate('/main');
 
             
 
@@ -106,11 +106,11 @@ function Login() {
 
         }
 
-        // setRegistrationData({
-        //     username: '',
-        //     email: '',
-        //     password: '',
-        // })
+        setRegistrationData({
+            username: '',
+            email: '',
+            password: '',
+        })
 
 
     }

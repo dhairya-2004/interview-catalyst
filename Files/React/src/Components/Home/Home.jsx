@@ -27,10 +27,10 @@ const Home = () => {
         <h3 id='catalyst'>Interview Catalyst</h3>
         <nav >
           <div className='navigation'>
-            <a href='/demo/'>Demo</a>
+            {/* <a href='/demo/'>Demo</a> */}
           </div>
           <div className='navigation'>
-            <a href='/demo/'>Demo</a>
+            {/* <a href='/demo/'>Demo</a> */}
           </div>
 
 
@@ -57,7 +57,7 @@ const Home = () => {
       <div className='container-home'>
         <div className='wrapper'>Ask,Chat,<br />Answer,Repeat.</div>
         <div className='wrapper1'><h2> Ask questions and get real answers from real people.</h2></div>
-        <button className='btn' onClick={() => navigate('/login')}>Start Reading</button>
+        <button className='btn' onClick={() => navigate('/main')}>Start Reading</button>
 
 
         {/* <AllQuestion /> */}
