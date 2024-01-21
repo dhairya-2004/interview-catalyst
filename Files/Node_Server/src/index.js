@@ -8,7 +8,13 @@ const app = express();
 const port = 8000;
 
 app.use(express.json());
-app.use(cors())
+app.use(cors(
+    {
+        origin:[""]  ,
+        methods:["POST","GET"],
+        credentials:true
+    }
+))
 
 app.use('/user',loginRouter);
 app.use('/user',questionRouter);

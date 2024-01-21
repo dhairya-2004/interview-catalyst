@@ -48,7 +48,7 @@ const Home = () => {
 
 
           <div className='navigation'>
-            <Link to="/login" className='link'>Get Started</Link>
+            <Link to="/signin" className='link'>Get Started</Link>
           </div>
 
 

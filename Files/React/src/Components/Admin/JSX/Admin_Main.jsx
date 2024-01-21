@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-
 import SearchIcon from '@mui/icons-material/Search';
-import "../CSS/Main.css";
+import "../CSS/Admin_Main.css";
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import Person2Icon from '@mui/icons-material/Person2';

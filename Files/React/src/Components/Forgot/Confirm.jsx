@@ -29,7 +29,7 @@ function Confirm() {
         await axios.post(`http://localhost:8000/user/confirm/${id}/${token}`, checkpassword)
             .then(res => {
                 if (res.data.Status === "Success") {
-                    navigate('/login');
+                    navigate('/signin');
                 }
             })
             .catch(err => console.log(err));

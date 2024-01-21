@@ -31,7 +31,7 @@ async function findQuestion(req, res) {
                 // console.log('User found:', user);
                 // console.log("token");
                 
-                const question = await Question.find({});
+                const question = await Question.find({}).sort({ timestamp: -1 });;
                 console.log(question);
                 res.json({ question: question, cusername: user.username });
 

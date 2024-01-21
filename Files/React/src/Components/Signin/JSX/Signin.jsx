@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import '../CSS/Login.css';
+import '../CSS/Signin.css';
 import axios from 'axios';
 import img from './img.jpg'
 
-function Login() {
+function Signin() {
 
 
 
-    const [home, setHome] = useState("Login");
+    const [home, setHome] = useState("Sign In");
     const [response, setResponse] = useState("");
     const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ function Login() {
         setResponse("");
     }
 
-    const [loginData, setLoginData] = useState({
+    const [signinData, setSigninData] = useState({
         email: '',
         password: '',
     })
@@ -27,23 +27,23 @@ function Login() {
 
 
 
-    const handleLoginChange = (e) => {
+    const handleSigninChange = (e) => {
         const { name, value } = e.target;
-        setLoginData((prevData) => ({
+        setSigninData((prevData) => ({
             ...prevData,
             [name]: value
         }))
     }
 
     //submit function
-    const handleLoginSubmit = async (e) => {
+    const handlesigninSubmit = async (e) => {
         e.preventDefault();
 
         setResponse("");
 
         try {
 
-            const res = await axios.post('http://localhost:8000/user/login', loginData);
+            const res = await axios.post('http://localhost:8000/user/login', signinData);
             console.log(res.data.message);
             console.log(res.data.token);
             setResponse(res.data.message);
@@ -54,14 +54,14 @@ function Login() {
 
         } catch (error) {
 
-            setResponse('Login failed. \nPlease check your credentials.');
-            console.error('Login error', error)
+            setResponse('Sign In failed. ');
+            console.error('Sign In error', error)
 
         }
-        // setLoginData({
-        //     email: '',
-        //     password: ''
-        // })
+        setSigninData({
+            email: '',
+            password: ''
+        })
 
 
 
@@ -102,7 +102,7 @@ function Login() {
         } catch (error) {
 
             console.error('Sign Up error', error)
-            setResponse('Sign Up failed. \n Please check your credentials.');
+            setResponse('Sign Up failed.');
 
         }
 
@@ -117,8 +117,8 @@ function Login() {
 
     return (
         <>
-            <form onSubmit={home === "Login" ? handleLoginSubmit : handleRegistrationSubmit} autoComplete="off" >
-                <div className='main_login'>
+            <form onSubmit={home === "Sign In" ? handlesigninSubmit : handleRegistrationSubmit} autoComplete="off" >
+                <div className='main_signin'>
                     <div className="container1">
 
                         <img src={img} alt="img" />
@@ -130,7 +130,7 @@ function Login() {
                             <div className="text">
                                 {home} to your Account
                             </div>
-                            {home === "Login" ? <label className='subtitle'>Welcome back, {home} your account </label> :
+                            {home === "Sign In" ? <label className='subtitle'>Welcome back, {home} your account </label> :
                                 <label className='subtitle'>{home} your account </label>}
                         </div>
 
@@ -139,11 +139,11 @@ function Login() {
 
                         <div className="inputs">
 
-                            {home === "Login" ? <label className='subtitle-response'> {response}  </label> :
+                            {home === "Sign In" ? <label className='subtitle-response'> {response}  </label> :
                                 <label className='subtitle-response'>{response} </label>}
 
 
-                            {home === "Login" ? <div></div> :
+                            {home === "Sign In" ? <div></div> :
 
                                 <div className="input">
                                     <i class="fa-solid fa-user"></i>
@@ -164,11 +164,11 @@ function Login() {
                             <div className="input">
                                 <i className="fa-solid fa-envelope"></i>
                                 <input
-                                    type={home === "Login" ? "text" : "email"}
+                                    type={home === "Sign In" ? "text" : "email"}
                                     name='email'
-                                    placeholder={home === "Login" ? "Email or Username" : "Email"}
-                                    value={home === "Login" ? loginData.email : registrationData.email}
-                                    onChange={home === "Login" ? handleLoginChange : handleRegistrationChange}
+                                    placeholder={home === "Sign In" ? "Email or Username" : "Email"}
+                                    value={home === "Sign In" ? signinData.email : registrationData.email}
+                                    onChange={home === "Sign In" ? handleSigninChange : handleRegistrationChange}
                                     required
 
                                 />
@@ -181,8 +181,8 @@ function Login() {
                                     type='password'
                                     name='password'
                                     placeholder='Password'
-                                    value={home === "Login" ? loginData.password : registrationData.password}
-                                    onChange={home === "Login" ? handleLoginChange : handleRegistrationChange}
+                                    value={home === "Sign In" ? signinData.password : registrationData.password}
+                                    onChange={home === "Sign In" ? handleSigninChange : handleRegistrationChange}
                                     required
                                 />
                             </div>
@@ -202,7 +202,7 @@ function Login() {
 
                         <div className="submit-container">
                             <div
-                                className={home === "Login" ? "submit next" : "submit"}
+                                className={home === "Sign In" ? "submit next" : "submit"}
                                 onClick={() => setHome("Sign Up")}>
 
                                 <button
@@ -215,15 +215,15 @@ function Login() {
 
                             <div
                                 className={home === "Sign Up" ? "submit next" : "submit"}
-                                onClick={() => setHome("Login")}>
+                                onClick={() => setHome("Sign In")}>
 
 
 
                                 <button
                                     // onClick={showError}
-                                    className={home === "Login" ? "white" : "blue"}
+                                    className={home === "Sign In" ? "white" : "blue"}
                                     onClick={clearData}>
-                                    Login
+                                    Sign In
                                 </button>
 
                             </div>
@@ -238,4 +238,4 @@ function Login() {
 }
 
 
-export default Login;
+export default Signin;

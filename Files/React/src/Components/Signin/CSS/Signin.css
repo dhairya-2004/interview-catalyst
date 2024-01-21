@@ -3,7 +3,7 @@ body {
     color: aliceblue;
 }
 
-.main_login {
+.main_signin {
     background: radial-gradient(circle, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
     display: flex;
     justify-content: center;
