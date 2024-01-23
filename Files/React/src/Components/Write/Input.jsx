@@ -47,7 +47,6 @@ const CustomModal = ({ closeModal,username }) => {
     }
 
     return( 
-    // ReactDOM.createPortal(
         <>
             <div className="modal-wrapper" onClick={closeModal}> </div>
 
@@ -88,7 +87,7 @@ const CustomModal = ({ closeModal,username }) => {
             </div>
 
         </>
-        // ,document.querySelector(".selfParentNode")
+       
     );
 };
 

@@ -18,11 +18,7 @@ body {
   align-items: center;
 }
 
-.logo-main img {
-  width: 5rem;
-  height: 2rem;
-  margin: 0 4rem;
-}
+
 
 .image-main {
   color: #3559E0;
@@ -81,7 +77,11 @@ body {
   padding-left: 10px;
 }
 
-
+.not-found{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 
 ::-webkit-scrollbar {

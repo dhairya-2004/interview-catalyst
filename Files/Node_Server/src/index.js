@@ -2,6 +2,7 @@ const express = require('express');
 const connectDB = require('./DbConnection');
 const loginRouter = require('./routes/login.route');
 const questionRouter = require('./routes/question.route');
+const profileRouter = require('./routes/profile.route');
 const cors = require('cors');
 
 const app = express();
@@ -12,6 +13,7 @@ app.use(cors())
 
 app.use('/user',loginRouter);
 app.use('/user',questionRouter);
+app.use('/user',profileRouter);
 
 connectDB();
 

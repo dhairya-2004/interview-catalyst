@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import "../CSS/Admin_Main.css";
-import Admin_Question from './Admin_Question';
+import AdminQuestion from './Admin_Question';
 import "../../Write/Write";
 import axios from "axios";
 
@@ -10,10 +10,8 @@ function WritePage() {
 
   // -------------------------------------------
 
-  const [model, setmodel] = useState(false);
+  
   const [cusename, setCUsername] = useState("");
-
-  const changeModal = () => setmodel(false);
 
   // -------------------------------------------------
 
@@ -95,11 +93,11 @@ function WritePage() {
           {questionData.length > 0 ? (
             <div>
               {questionData.map((value, index) => (
-                <Admin_Question key={index} currentValue={value} />
+                <AdminQuestion key={index} currentValue={value} />
               ))}
             </div>
           ) : (
-            <div>
+            <div className="not-found">
               <h1>No Results Found... </h1>
             </div>
           )}

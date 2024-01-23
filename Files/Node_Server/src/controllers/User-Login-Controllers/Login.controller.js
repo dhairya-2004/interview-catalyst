@@ -23,7 +23,7 @@ async function getUserData(req, res) {
         const passwordMatch = await bcrypt.compare(password, user.password);
 
         if (passwordMatch) {
-            const token = jwt.sign({ id: user._id, email: user.email }, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789', { expiresIn: '1h' });
+            const token = jwt.sign({ id: user._id, email: user.email }, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789', { expiresIn: '10h' });
 
             
             user.tokens = token;

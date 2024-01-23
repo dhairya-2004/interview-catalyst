@@ -3,8 +3,8 @@ import "../CSS/Admin_Question.css";
 import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
 import VerifiedIcon from "@mui/icons-material/Verified";
 
-function Admin_Question({ currentValue }) {
-  const currentTime = Date.now();
+function AdminQuestion({ currentValue }) {
+  // const currentTime = Date.now();
 
   return (
     <>
@@ -40,7 +40,7 @@ function Admin_Question({ currentValue }) {
   );
 }
 
-export default Admin_Question;
+export default AdminQuestion;
 
 const avatars = document.querySelectorAll(".avatar");
 

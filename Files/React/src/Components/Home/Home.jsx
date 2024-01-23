@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './home.css';
-import AllQuestion from '../Message/JSX/AllQuestion'
+import Footer from '../Footer/JSX/Footer'
 import CustomModal from '../Write/Input';
 import '../Write/Write.css';
 import {  useState } from 'react';
@@ -62,6 +62,8 @@ const Home = () => {
 
         {/* <AllQuestion /> */}
       </div>
+
+      <Footer/>
     </>
   );
 };
