@@ -9,7 +9,6 @@ import CustomModal from "../../Write/Input";
 import "../../Write/Write.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import logo from './logo.png'
 
 function WritePage() {
   const [questionData, setQuestionData] = useState([]);
@@ -51,14 +50,13 @@ function WritePage() {
       console.log("Fetching data...");
 
       try {
-        const res = await axios.get("http://localhost:8000/user/question", {
+        const res = await axios.get("http://localhost:8080/user/question", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });
         const newData = res.data.question;
         setCUsername(res.data.cusername);
-        // JSON.stringify(newData);
         console.log(newData);
         setQuestionData(newData);
       } catch (error) {
@@ -70,10 +68,9 @@ function WritePage() {
 
   const onSearch = async (e) => {
     const searchData = e.target.value;
-
     if (searchData) {
       const res = await axios.get(
-        `http://localhost:8000/user/search/${searchData}`
+        `http://localhost:8080/user/search/${searchData}`
       );
       const newData = res.data;
 
@@ -82,7 +79,7 @@ function WritePage() {
       }
     } else {
       try {
-        const res = await axios.get("http://localhost:8000/user/question", {
+        const res = await axios.get("http://localhost:8080/user/question", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -269,15 +266,15 @@ function WritePage() {
               ))}
 
               <div className="semaple">
-                <div class="dot-spinner">
-                  <div class="dot-spinner__dot"></div>
-                  <div class="dot-spinner__dot"></div>
-                  <div class="dot-spinner__dot"></div>
-                  <div class="dot-spinner__dot"></div>
-                  <div class="dot-spinner__dot"></div>
-                  <div class="dot-spinner__dot"></div>
-                  <div class="dot-spinner__dot"></div>
-                  <div class="dot-spinner__dot"></div>
+                <div className="dot-spinner">
+                  <div className="dot-spinner__dot"></div>
+                  <div className="dot-spinner__dot"></div>
+                  <div className="dot-spinner__dot"></div>
+                  <div className="dot-spinner__dot"></div>
+                  <div className="dot-spinner__dot"></div>
+                  <div className="dot-spinner__dot"></div>
+                  <div className="dot-spinner__dot"></div>
+                  <div className="dot-spinner__dot"></div>
                 </div>
               </div>
             </div>

@@ -9,7 +9,6 @@ const UserProfile = new mongoose.Schema({
   },
   name: {
     type: String,
-    required: true,
   },
   college_name: {
     type: String,
@@ -17,6 +16,10 @@ const UserProfile = new mongoose.Schema({
   bio: {
     type: String,
   },
+  image: {
+    type: String,
+  },
+  
 });
 
 const Profile = mongoose.model("User_Profile", UserProfile);

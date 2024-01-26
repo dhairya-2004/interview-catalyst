@@ -16,7 +16,7 @@ const QuestionsSchema = new mongoose.Schema({
         require: true
     },
     timestamp:{
-        type:Date,
+        type:String,
         required: true
     }
 })

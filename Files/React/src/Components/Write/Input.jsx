@@ -4,10 +4,11 @@ import React, { useState } from 'react';
 const CustomModal = ({ closeModal,username }) => {
 
     const [questions, setQuestions] = useState({
-        // username:'',
         question: '',
         answer: ''
     });
+
+    
 
 
     const getquestion = (e) => {
@@ -18,9 +19,7 @@ const CustomModal = ({ closeModal,username }) => {
             [name]: value
 
         }))
-    }
-
-    console.log(questions)
+    };
 
 
 
@@ -28,7 +27,7 @@ const CustomModal = ({ closeModal,username }) => {
 
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8000/user/question', {questions,username})
+            const response = await axios.post('http://localhost:8080/user/question', {questions,username})
 
             console.log(response.data);
 

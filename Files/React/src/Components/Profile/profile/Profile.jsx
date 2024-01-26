@@ -6,7 +6,9 @@ import AssessmentIcon from "@mui/icons-material/Assessment";
 import EditProfile from "../EditProfile/EditProfile";
 import axios from "axios";
 import AddQuestion from "../../Message/JSX/AllQuestion";
-import Back from './back-image.jpg'
+import Back from "./back-image.jpg";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+
 
 const Profile = () => {
   const [isEditModalOpen, setEditModalOpen] = useState(false);
@@ -23,7 +25,7 @@ const Profile = () => {
       console.log("Fetching login...");
 
       try {
-        const res = await axios.get("http://localhost:8000/user/login", {
+        const res = await axios.get("http://localhost:8080/user/login", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -41,32 +43,31 @@ const Profile = () => {
       console.log("Fetching data...111");
 
       try {
-        const res = await axios.post(
-          'http://localhost:8000/user/getprofile',{cusername}
-        );
-        const newData = res.data;
-        console.log(newData);
-        setProfile(newData.profile);
+        const res = await axios.post("http://localhost:8080/user/getprofile", {
+          cusername,
+        });
+        const newData = res.data.profile;
+        setProfile(newData);
       } catch (error) {
         console.log(error);
       }
     };
+
+    
     fetchData();
-  }, [cusername]);
+  }, [cusername,isEditModalOpen]);
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log("Fetching question...");
+      // console.log("Fetching question...");
 
       try {
-        const res = await axios.get("http://localhost:8000/user/question", {
+        const res = await axios.get("http://localhost:8080/user/question", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });
         const newData = res.data.question;
-        console.log("hii");
-        console.log(newData);
         setQuestionData(newData);
       } catch (error) {
         console.log(error);
@@ -96,49 +97,34 @@ const Profile = () => {
         </div>
       </nav>
       <section className="profile-all">
-        {/* <div className="container-profile">
-          <div className="overlap-profile">
-            
-          </div>
-
-          <div className="top-profile">
-          <div className="user-profile">
-              <img
-                src="https://blogs.timesofindia.indiatimes.com/wp-content/uploads/2015/12/mark-zuckerberg.jpg"
-                alt=""
-              />
-            </div>
-            <div className="info-profile">
-              <h1 className="profile-name">{profile.name}</h1>
-              <div className="web">
-                <SchoolIcon className="profile-icon" />
-                <h4 className="profile-name">{profile.college_name}</h4>
-              </div>
-              <div className="location">
-                <AssessmentIcon className="profile-icon" />
-                <h4 className="profile-name">{profile.bio}</h4>
-              </div>
-            </div>
-          </div>
-        </div> */}
-
         <div className="profileRight">
           <div className="profileRightTop">
             <div className="profileCover">
-              <img
-                className="profileCoverImg"
-                src={Back}
-                alt=""
-              />
-              <img
+              <img className="profileCoverImg" src={Back} alt="" />
+              
+              {profile.image ? (
+                <img
                 className="profileUserImg"
-                src="https://blogs.timesofindia.indiatimes.com/wp-content/uploads/2015/12/mark-zuckerberg.jpg"
-                alt=""
+                src={profile.image}
+                alt="profile"
               />
+              ) : (
+                // <img
+                //   src="https://blogs.timesofindia.indiatimes.com/wp-content/uploads/2015/12/mark-zuckerberg.jpg"
+                //   alt="Profile"
+                // />
+                <AccountCircleIcon className="profileUserImg" style={{fontSize:'14rem'}}/>
+              )}
               <div className="profileInfo">
                 <h4 className="profileInfoName"> {profile.name}</h4>
-                <span className="profileInfoDesc">{profile.college_name}</span>
-                <span className="profileInfoDesc">{profile.bio}</span>
+                <span className="profileInfoDesc">
+                  <SchoolIcon className="profile-icon" />
+                  {profile.college_name}
+                </span>
+                <span className="profileInfoDesc">
+                  <AssessmentIcon className="profile-icon" />
+                  {profile.bio}
+                </span>
               </div>
             </div>
           </div>

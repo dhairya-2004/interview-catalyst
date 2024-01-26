@@ -3,13 +3,13 @@ const Profile = require("../../models/profile.model");
 
 async function getProfile(req, res) {
   const { cusername } = req.body;
+  // console.log("GetProfile");
   // console.log(req.body);
-  // console.log(cusername);
-  console.log("GetProfile");
+
   try {
     const profile = await Profile.findOne({ username: cusername });
 
-    console.log(profile);
+    // console.log(profile);
     if (!profile) {
       return res.status(404).json({ message: "Profile not found" });
     }
@@ -19,6 +19,8 @@ async function getProfile(req, res) {
     res.status(500).json({ message: "Internal Server Error" });
     console.error("Profile Get Error:", e);
   }
+
+  // console.log("GetProfile done");
 }
 
 module.exports = getProfile;

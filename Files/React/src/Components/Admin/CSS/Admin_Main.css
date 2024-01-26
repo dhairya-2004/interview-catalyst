@@ -10,7 +10,7 @@ body {
 
 
 
-.top-main {
+.top-main-admin {
   padding: 0.5rem;
   display: flex;
   justify-content: space-between;
@@ -20,16 +20,16 @@ body {
 
 
 
-.image-main {
+.image-main-admin {
   color: #3559E0;
   margin: 0 .5rem;
 }
 
-.image-side {
+.image-side-admin {
   font-size: 5rem;
 }
 
-.search-main {
+.search-main-admin {
   display: flex;
   align-items: center;
   /* justify-content: center;  */
@@ -38,6 +38,8 @@ body {
   background-color: white;
   box-shadow: 0 0 .5rem #ddd;
   border-radius: 0.5rem;
+  
+  margin-right: 5rem;
 }
 
 #search {
@@ -53,7 +55,7 @@ body {
 }
 
 
-.btn-main {
+.btn-main-admin {
   align-items: center;
   display: flex;
   gap: 5px;
@@ -61,26 +63,20 @@ body {
   font-size: 20px;
 }
 
-.side-main {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding-right: 4rem;
+.admin-name{
+  margin-right: 2rem;
 }
 
-.notification-main {
-  display: flex;
-}
-
-.account-main {
-  display: flex;
-  padding-left: 10px;
-}
 
 .not-found{
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.main-part-admin{
+  height: 100vh;
+  overflow-y: scroll;
 }
 
 

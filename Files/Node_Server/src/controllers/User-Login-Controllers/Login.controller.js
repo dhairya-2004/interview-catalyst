@@ -7,13 +7,14 @@ async function getUserData(req, res) {
 
     try {
         const { email, password } = req.body;
-
+        
         const user = await User.findOne({
             $or: [
                 { email: email },
                 { username: email }
             ]
         });
+        
 
 
         if (!user) {
@@ -29,7 +30,7 @@ async function getUserData(req, res) {
             user.tokens = token;
             await user.save();
 
-            res.json({ message: 'Login successful', token: token });
+            res.json({ message: 'Login successful', token: token,username:user.username });
         }
         else {
             res.status(401).json({ message: 'Invalid credentials' });

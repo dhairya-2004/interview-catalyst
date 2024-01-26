@@ -1,22 +1,27 @@
 const express = require("express");
 const Profile = require("../../models/profile.model");
 const User = require("../../models/login.model");
+const multer=require('multer')
 
 async function setProfile(req, res) {
-  const { cusername, name, collegename, bio } = req.body;
+  const { cusername, name, collegename, bio ,image} = req.body;
 
   console.log("SetProfile");
+  // console.log(req.body);
+
 
   try {
     const profile_check = await Profile.findOne({ username: cusername });
-    console.log(profile_check);
+    // console.log(profile_check);
     if (profile_check != null) {
       const profile1 = await Profile.findOne({ username: cusername });
-      if (name !== "") {
+      if (name !== "" || collegename !== "" || bio !== "" || image !=="") {
         profile1.name = name;
+
+        profile1.college_name = collegename;
+        profile1.bio = bio;
+        profile1.image = image;
       }
-      profile1.college_name = collegename;
-      profile1.bio = bio;
       await profile1.save();
       res.status(201).json({ message: "Profile Update Successful" });
     } else {
@@ -25,6 +30,8 @@ async function setProfile(req, res) {
         name: name,
         college_name: collegename,
         bio: bio,
+        image: image
+        
       });
       await profile.save();
       res.status(201).json({ message: "Profile Add Successful" });

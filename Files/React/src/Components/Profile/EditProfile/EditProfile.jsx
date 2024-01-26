@@ -2,39 +2,54 @@ import React, { useState, useRef, useEffect } from "react";
 import "./EditProfile.css";
 import axios from "axios";
 
-const EditProfile = ({ closeModal,cusername }) => {
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+
+const EditProfile = ({ closeModal, cusername }) => {
   const [name, setName] = useState("");
   const [collegename, setCollegeName] = useState("");
   const [bio, setBio] = useState("");
+  const [image, setImage] = useState("");
   const modalRef = useRef(null);
+  const inputRef = useRef(null);
 
   const capitalizeFirstLetter = (value) => {
     return value.charAt(0).toUpperCase() + value.slice(1);
   };
 
+  function capitalizeWords(inputString) {
+    return inputString.replace(/\b\w/g, function (match) {
+      return match.toUpperCase();
+    });
+  }
+
   const handleNameChange = (e) => {
-    setName(capitalizeFirstLetter(e.target.value));
+    setName(capitalizeWords(e.target.value));
   };
   const handleCollegeNameChange = (e) => {
-    setCollegeName(capitalizeFirstLetter(e.target.value));
+    setCollegeName(capitalizeWords(e.target.value));
   };
 
   const handleBioChange = (e) => {
     setBio(capitalizeFirstLetter(e.target.value));
   };
 
-
-  const sendProfile=async()=>{
-    try{
-
-      const res=await axios.post('http://localhost:8000/user/profile',{cusername,name,collegename,bio})
-      console.log(res)
-      closeModal();
-    }catch(e)
-    {
-      console.log("error",e);
-    }
-  }
+  const sendProfile = async () => {
+    // if (image) {
+      try {
+        const res = await axios.post("http://localhost:8080/user/profile", {
+          cusername,
+          name,
+          collegename,
+          bio,
+          image,
+        });
+        console.log(res);
+        closeModal();
+      } catch (e) {
+        console.log("error", e);
+      }
+    // }
+  };
 
   const handleClickOutside = (e) => {
     if (modalRef.current && !modalRef.current.contains(e.target)) {
@@ -49,9 +64,29 @@ const EditProfile = ({ closeModal,cusername }) => {
     };
   }, [closeModal]);
 
+  const convertToBase64 = async (file) => {
+    const reader = new FileReader();
+    await reader.readAsDataURL(file);
+    return new Promise((resolve, reject) => {
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
+  const handleImageChange = async (e) => {
+    const base64 = await convertToBase64(e.target.files[0]);
+    setImage(base64);
+  };
+
+  const handleImageClick = (e) => {
+    inputRef.current.click();
+  };
+
   return (
     <>
-    <div className="modal-wrapper2" onClick={closeModal}> </div>
+      <div className="modal-wrapper2" onClick={closeModal}>
+        {" "}
+      </div>
       <div className="edit-container" ref={modalRef}>
         <div className="edit-top">
           <h2 className="edit-color">PROFILE INFORMATION</h2>
@@ -62,16 +97,29 @@ const EditProfile = ({ closeModal,cusername }) => {
           </div>
           <div className="container-mng">
             <div className="profile-pic">
-              <img
-                src="https://blogs.timesofindia.indiatimes.com/wp-content/uploads/2015/12/mark-zuckerberg.jpg"
-                alt="Profile"
-              />
-              <div className="btn-row">
+              {/* src="https://blogs.timesofindia.indiatimes.com/wp-content/uploads/2015/12/mark-zuckerberg.jpg" */}
+              {image ? (
+                <img src={image} alt="Profile" />
+              ) : (
+                // <img
+                //   src="https://blogs.timesofindia.indiatimes.com/wp-content/uploads/2015/12/mark-zuckerberg.jpg"
+                //   alt="Profile"
+                // />
+                <AccountCircleIcon style={{fontSize:'10rem'}}/>
+              )}
+
+              <div className="btn-row" onClick={handleImageClick}>
                 <button className="btn-up">Change</button>
-                {/* <button className="btn-rm">Remove</button> */}
+
+                <input
+                  type="file"
+                  ref={inputRef}
+                  onChange={handleImageChange}
+                  style={{ display: "none" }}
+                />
               </div>
             </div>
-            <div className='edit-info-upper'>
+            <div className="edit-info-upper">
               <div className="edit-name">
                 <h4 className="edit-color-name">Name </h4>
                 <input
@@ -136,7 +184,9 @@ const EditProfile = ({ closeModal,cusername }) => {
 
           {/*  */}
           <div className="final-edit">
-            <button className="save" onClick={sendProfile}>Save</button>
+            <button className="save" onClick={sendProfile}>
+              Save
+            </button>
             <button className="cancel" onClick={closeModal}>
               Cancel
             </button>

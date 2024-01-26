@@ -16,7 +16,6 @@
   height: 4rem;
 }
 
-
 .name {
   font-family: "Poppins", sans-serif;
   font-size: 20px;
@@ -34,14 +33,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Anton', sans-serif;
+  font-family: "Anton", sans-serif;
 }
 
 .time-title {
-  font-size: 0.9rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 0.7rem;
+  margin-left: 0.5rem;
+  margin-top: 2px;
+}
+.name-title-question {
   margin-left: 0.5rem;
 }
-
 
 .right-side {
   display: flex;
@@ -49,7 +54,6 @@
   gap: 1rem;
   align-items: center;
   margin-right: 2rem;
-
 }
 
 .answer-count {
@@ -89,32 +93,24 @@
   content: attr(data-label);
 }
 
-
-
-
 .main-addQuestion {
-
-  background-color: #001C30;
-  box-shadow: 5px 5px 20px #686565;
+  background-color: #001c30;
+  border-radius: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* border-radius: 1rem; */
-  /* margin-left: 30px; */
-  /* margin-top: 20px; */
-  /* margin-right: 30px; */
   margin: 0 2rem;
-  /* margin-bottom: 3rem; */
+  box-shadow: 0 0 0.5rem #ddd;
+  margin-bottom: 10px;
 }
 
-.verified{
+.verified {
   margin: 1rem;
   margin-bottom: 0rem;
   gap: 1rem;
   color: rgb(65, 138, 255);
   /* color: ; */
 }
-
 
 .question {
   font-family: "Manrope", sans-serif;
@@ -123,14 +119,13 @@
   margin: 1rem;
   gap: 1rem;
   color: white;
-
 }
 
 .question-hr {
   margin: 0 1rem;
 }
 
-.answer{
+.answer {
   font-family: "Arimo", sans-serif;
   font-size: 16px;
   gap: 1rem;
@@ -141,45 +136,74 @@
 .responses {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  padding: 0 0.5rem;
   margin: 1rem;
   gap: 15px;
 }
 
+.icon-left {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
 .main-comment {
-
-  background-color: #001C30;
-  box-shadow: 5px 5px 20px #686565;
+  background-color: #001c30;
   display: flex;
   flex-direction: column;
   margin: 0 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 0.5rem #ddd;
+  margin-bottom: 5px;
 }
 
 .comment-title {
-
   color: white;
-  margin: 1rem;
+  font-size: 2rem;
+  margin: 2rem 2.5rem;
   font-weight: 600;
 }
 
 .input-comment {
-  height: 2rem;
-  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  margin: 0.5rem 2rem;
+  height: 3rem;
+  font-size: 1.5rem;
   border: none;
-  margin: 0rem;
   padding: 1rem;
+  padding-left: 2rem;
+  border-bottom: 2px solid white ;
   color: white;
+  resize: none;
   background-color: transparent;
 }
 
-.button-comment {
+.input-comment:focus {
+  border: none;
+  outline: none;
+  border-bottom: 2px solid white ;
+}
+.main-comment-in {
+  background-color: #001c30;
+  display: flex;
+  flex-direction: column;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+}
 
+.button-comment-div {
+  display: flex;
+  justify-content: end;
+}
+
+.button-comment {
   margin: 1rem;
+  margin-right: 2rem;
   background-color: #009578;
   width: 5rem;
   height: 2rem;
 }
-
-
 
 .load {
   color: black;

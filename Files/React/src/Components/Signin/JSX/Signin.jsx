@@ -14,7 +14,7 @@ function Signin() {
   // const capitalizeFirstLetter = (value) => {
   //   return value.charAt(0).toUpperCase() + value.slice(1);
   // };
-  
+
   const clearData = () => {
     setResponse("");
   };
@@ -40,13 +40,15 @@ function Signin() {
 
     try {
       const res = await axios.post(
-        "http://localhost:8000/user/login",
+        "http://localhost:8080/user/login",
         signinData
       );
       console.log(res.data.message);
       console.log(res.data.token);
+      console.log(res.data.username);
       setResponse(res.data.message);
       localStorage.setItem("token", res.data.token);
+
       navigate("/main");
     } catch (error) {
       setResponse("Sign In failed. ");
@@ -82,7 +84,7 @@ function Signin() {
 
     try {
       const res = await axios.post(
-        "http://localhost:8000/user/register",
+        "http://localhost:8080/user/register",
         registrationData
       );
       console.log(res.data.message);

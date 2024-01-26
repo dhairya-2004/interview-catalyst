@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import "../CSS/Admin_Main.css";
-import AdminQuestion from './Admin_Question';
+import AdminQuestion from "../../Message/JSX/AllQuestion";
 import "../../Write/Write";
 import axios from "axios";
 
@@ -10,7 +10,6 @@ function WritePage() {
 
   // -------------------------------------------
 
-  
   const [cusename, setCUsername] = useState("");
 
   // -------------------------------------------------
@@ -20,14 +19,13 @@ function WritePage() {
       console.log("Fetching data...");
 
       try {
-        const res = await axios.get("http://localhost:8000/user/question", {
+        const res = await axios.get("http://localhost:8080/user/question", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });
         const newData = res.data.question;
         setCUsername(res.data.cusername);
-        // JSON.stringify(newData);
         console.log(newData);
         setQuestionData(newData);
       } catch (error) {
@@ -42,7 +40,7 @@ function WritePage() {
 
     if (searchData) {
       const res = await axios.get(
-        `http://localhost:8000/user/search/${searchData}`
+        `http://localhost:8080/user/search/${searchData}`
       );
       const newData = res.data;
 
@@ -51,7 +49,7 @@ function WritePage() {
       }
     } else {
       try {
-        const res = await axios.get("http://localhost:8000/user/question", {
+        const res = await axios.get("http://localhost:8080/user/question", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -66,14 +64,13 @@ function WritePage() {
   };
 
   return (
-    <div className="main-main">
-      <nav className="top-main">
-        <div className="logo-main">
-          {/* <img src={logo} alt="" /> */}
-          {cusename}
+    <div className="main-main-admin">
+      <nav className="top-main-admin">
+        <div className="logo-main-admin">
+          <h3 className="logo-text">Interview Catalyst</h3>
         </div>
 
-        <div className="search-main">
+        <div className="search-main-admin">
           <SearchIcon className="image-main" />
 
           <input
@@ -84,17 +81,31 @@ function WritePage() {
             required
           />
         </div>
+        <div className="admin-name">
+          <h1>{cusename}</h1>
+        </div>
       </nav>
 
-      <div className="main-part">
-        <div className="sidebar"></div>
-
+      <div className="main-part-admin">
         <div style={{ whiteSpace: "pre-line" }}>
           {questionData.length > 0 ? (
             <div>
               {questionData.map((value, index) => (
                 <AdminQuestion key={index} currentValue={value} />
               ))}
+
+              <div className="semaple">
+                <div class="dot-spinner">
+                  <div class="dot-spinner__dot"></div>
+                  <div class="dot-spinner__dot"></div>
+                  <div class="dot-spinner__dot"></div>
+                  <div class="dot-spinner__dot"></div>
+                  <div class="dot-spinner__dot"></div>
+                  <div class="dot-spinner__dot"></div>
+                  <div class="dot-spinner__dot"></div>
+                  <div class="dot-spinner__dot"></div>
+                </div>
+              </div>
             </div>
           ) : (
             <div className="not-found">

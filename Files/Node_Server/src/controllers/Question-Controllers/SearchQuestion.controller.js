@@ -10,7 +10,7 @@ async function  searchQuestion(req,res){
                 '$or':[
                     {'question': { $regex: req.params.key ,$options: 'i' }}
                 ]
-            }.short({timestamp:-1})
+            }
         )
 
         console.log(search_question)
