@@ -116,8 +116,7 @@
   font-family: "Manrope", sans-serif;
   font-size: 22px;
   font-weight: 600;
-  margin: 1rem;
-  gap: 1rem;
+  margin: 1rem 2rem;
   color: white;
 }
 
@@ -128,7 +127,7 @@
 .answer {
   font-family: "Arimo", sans-serif;
   font-size: 16px;
-  margin: 1rem;
+  margin: 1rem 3rem;
   color: #cfc0c0;
 }
 
@@ -150,10 +149,7 @@
   background-color: #001c30;
   display: flex;
   flex-direction: column;
-  /* margin: 0 2rem; */
   border-radius: 1rem;
-  /* box-shadow: 0 0 0.5rem #ddd; */
-  margin-bottom: 5px;
 }
 
 .comment-title {
@@ -168,7 +164,7 @@
   display: flex;
   justify-content: center;
   margin: 0.5rem 2rem;
-  height: 3rem;
+  /* height: 3rem; */
   font-size: 1.5rem;
   border: none;
   padding: 1rem;
@@ -178,7 +174,9 @@
   color: white;
   resize: none;
   background-color: transparent;
-  width: 60vw;
+  width: 60rem;
+  box-sizing: border-box;
+  overflow-y: hidden;
 }
 
 .input-comment:focus {
@@ -191,7 +189,7 @@
   display: flex;
   flex-direction: column;
   border-radius: 1rem;
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
 }
 
 .button-comment-div {
@@ -209,6 +207,7 @@
 
 .comments-send {
   display: flex;
+  height: auto;
 }
 
 .load {
@@ -217,15 +216,22 @@
 
 .comment-botttom-list {
   margin: 2rem;
+  margin-bottom: 0rem;  
+
+  max-height: 14rem;
+  overflow-y: scroll;
+  
 }
 
 .comment-3 {
   display: flex;
   flex-direction: row;
+  gap: 0.3rem;
 }
 
 .comment-comment-2 {
   padding: 0.5rem 1rem;
+  padding-left: 0rem;
 }
 
 .comment-username {
@@ -236,7 +242,7 @@
 .comment-subcomment {
   margin-bottom: 0.5rem;
   font-size: 1rem;
-  width: 60rem;
+  /* width: 60rem; */
 }
 
 .comment-time {
@@ -246,6 +252,7 @@
 }
 .comment-username-time {
   font-size: 1rem;
+
   margin-left: 1rem;
   height: 1.5rem;
   
@@ -255,6 +262,5 @@
   display: flex;
   align-items: self-start;
   margin-top: 0.5rem;
-  /* padding-right: 1rem; */
-  /* width: 4rem */
+  min-width: 3rem;
 }

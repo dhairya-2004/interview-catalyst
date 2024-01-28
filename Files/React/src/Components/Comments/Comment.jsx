@@ -12,6 +12,7 @@ const Comment = ({ currentValue }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [addcomment, setAddComment] = useState(false);
   const [cusername, setCUsername] = useState(false);
+  const [getCommentusername, setGetCommentUsername] = useState([]);
 
   const fillLike = (e) => {
     if (!isLiked) {
@@ -31,6 +32,12 @@ const Comment = ({ currentValue }) => {
       );
       console.log(res.data);
       setNextCommentData(res.data.question_comment);
+
+      const usernames = res.data.question_comment.map(
+        (comment) => comment.username
+      );
+      // setCommentUsername(usernames[0]);
+      setProfileImage(usernames);
     } catch (error) {
       console.log(error);
     }
@@ -40,6 +47,7 @@ const Comment = ({ currentValue }) => {
     e.preventDefault();
     if (!addcomment) {
       showData();
+      setProfileImage();
       setAddComment(true);
     }
     if (addcomment) {
@@ -50,6 +58,7 @@ const Comment = ({ currentValue }) => {
   const handleCommentData = (e) => {
     e.preventDefault();
     setCommentData(e.target.value);
+    resizeTextarea();
   };
 
   const change = async () => {
@@ -61,7 +70,7 @@ const Comment = ({ currentValue }) => {
         like: isLiked,
       });
       setNextCommentData(res.data.question_comment);
-      setCommentData('')
+      setCommentData("");
     } catch (error) {
       console.log(error);
     }
@@ -87,7 +96,32 @@ const Comment = ({ currentValue }) => {
       }
     };
     fetchData();
-  }, [addcomment]);
+  }, [nextCommentData]);
+
+  function resizeTextarea() {
+    const textarea = document.getElementById("input-comment");
+    textarea.style.height = "auto";
+    textarea.style.height = textarea.scrollHeight + "px";
+  }
+  const setProfileImage = async (usernames) => {
+    try {
+      const profiles = [];
+      for (const username of usernames) {
+        const res = await axios.get(
+          `http://localhost:8080/user/getprofile?cusername=${username}`
+        );
+        const newData = res.data.profile;
+        profiles.push(newData);
+      }
+      setGetCommentUsername(profiles);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // useEffect(() => {
+  //   setProfileImage();
+  // }, []);
 
   return (
     <>
@@ -114,10 +148,12 @@ const Comment = ({ currentValue }) => {
             <div className="comments-send">
               <textarea
                 className="input-comment"
+                id="input-comment"
                 type="text"
                 value={commentData}
                 onChange={handleCommentData}
-                placeholder="Add Your Comment.."
+                placeholder="Comment here.."
+                wrap="soft"
               />
               <div className="button-comment-div">
                 <button
@@ -134,7 +170,17 @@ const Comment = ({ currentValue }) => {
                 <div key={index}>
                   <div className="comment-3">
                     <div className="comment-userimage">
-                      <AccountCircleIcon style={{ fontSize: "2.5rem" }} />
+                      <div className="avatar">
+                        {getCommentusername[index] &&
+                        getCommentusername[index].image !== null ? (
+                          <img
+                            src={getCommentusername[index].image}
+                            alt="profile"
+                          />
+                        ) : (
+                          <AccountCircleIcon style={{ fontSize: "3rem" }} />
+                        )}
+                      </div>
                     </div>
                     <div className="comment-comment-2">
                       <div className="comment-time">

@@ -112,7 +112,9 @@ function AddQuestion({ currentValue }) {
               <div className="favourite-count">89</div>Favourite
             </div>
             <div className="favourite-title">
-              <div className="favourite-count" onClick=''><MoreVertIcon style={{fontSize:'2rem'}}/></div>
+              <div className="favourite-count" 
+              // onClick=''
+              ><MoreVertIcon style={{fontSize:'2rem'}}/></div>
             </div>
           </div>
         </div>
@@ -137,6 +139,7 @@ function AddQuestion({ currentValue }) {
             // addcomment={addcomment}
             // isDown={isDown}
             currentValue={currentValue}
+            img={profileImage}
           />
         </div>
       </section>
