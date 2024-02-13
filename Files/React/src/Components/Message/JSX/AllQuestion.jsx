@@ -136,7 +136,7 @@ function AddQuestion({ currentValue }) {
               style={{ fontSize: "0.9rem", color: "rgb(17, 255, 4)" }}
             /> 
           </div>*/}
-          <div className="question">{currentValue.question}</div>
+          
           {/* <hr className="question-hr" /> */}
           {/* <div className="answer">{currentValue.answer}</div> */}
 
