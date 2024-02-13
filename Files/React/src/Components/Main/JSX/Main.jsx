@@ -9,9 +9,12 @@ import CustomModal from "../../Write/Input";
 import "../../Write/Write.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Alert from "@mui/material/Alert";
+import CheckIcon from "@mui/icons-material/Check";
 
 function WritePage() {
   const [questionData, setQuestionData] = useState([]);
+  const [showAlert, setShowAlert] = useState(false);
 
   const [dropdownStates, setDropdownStates] = useState({
     item1: false,
@@ -63,12 +66,7 @@ function WritePage() {
     };
 
     fetchQuestion();
-
-
-    
   }, [model]);
-
-
 
   const onSearch = async (e) => {
     const searchData = e.target.value;
@@ -137,6 +135,18 @@ function WritePage() {
           </div>
         </div>
       </nav>
+      {showAlert && (
+              <div >
+                <Alert
+                  icon={<CheckIcon fontSize="inherit" />}
+                  severity="success"
+                  onClose={() => setShowAlert(false)}
+                  className="success-message-container"
+                >
+                 Edit Request Successful
+                </Alert>
+              </div>
+            )}  
       <div className="container-question">
         <div className="sidebar">
           <div className="sidebar-item" onClick={() => toggleDropdown("item1")}>
@@ -265,7 +275,11 @@ function WritePage() {
           {questionData.length > 0 ? (
             <div className="available" style={{ overflowY: "scroll" }}>
               {questionData.map((value, index) => (
-                <AllQuestion key={index} currentValue={value} />
+                <AllQuestion
+                  key={index}
+                  currentValue={value}
+                  setShowAlert={setShowAlert}
+                />
               ))}
 
               <div className="semaple">
@@ -280,7 +294,9 @@ function WritePage() {
                   <div className="dot-spinner__dot"></div>
                 </div>
               </div>
+              
             </div>
+           
           ) : (
             <div className="not-available">
               <h1>No Results Found... </h1>

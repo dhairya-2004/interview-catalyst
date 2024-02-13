@@ -31,7 +31,7 @@ async function setProfile(req, res) {
         image: image,
       });
       await profile.save();
-      res.status(201).json({ message: "Profile Add Successful", profile1 });
+      res.status(201).json({ message: "Profile Add Successful", profile });
     }
   } catch (e) {
     res.status(500).json({ message: "Internal Server Error" });

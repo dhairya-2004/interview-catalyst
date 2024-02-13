@@ -7,7 +7,7 @@ async function cheackConfirm(req, res) {
     const { userId, token } = req.params;
     const { password, confirm_password } = req.body;
 
-    console.log(req.body)
+    // console.log(req.body)
     try {
 
         if (password !== confirm_password) {

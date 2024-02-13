@@ -1,71 +1,26 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 import './home.css';
-import Footer from '../Footer/JSX/Footer'
-import CustomModal from '../Write/Input';
-import '../Write/Write.css';
-import {  useState } from 'react';
+import  NavBar from '../Navbar/NavBar';
+import  Footer from '../Footer/JSX/Footer'
+
 
 const Home = () => {
-  const navigate = useNavigate();
+     return (
+       <>
+        
 
-  // -------------------------------------------
+        <NavBar/>
+        <div className='container'>
+          <div className='wrapper'><h1>Ask , Chat ,<br/>Answer , Repeat.</h1></div>
+          <div className='wrapper1'><h4> Ask questions and get real answers from real people.</h4></div>
+          <button className='btn'>Get Started</button>
+        <Footer/>
+        </div>
 
-  const [model, setmodel] = useState(false);
-
-  const changeModal = () => setmodel(false);
-
-
-
-  // -------------------------------------------------
-
-
-  return (
-    <>
-      <header>
-        {/* <img  src={} alt=""></img> */}
-        <h3 id='catalyst'>Interview Catalyst</h3>
-        <nav >
-          <div className='navigation'>
-            {/* <a href='/demo/'>Demo</a> */}
-          </div>
-          <div className='navigation'>
-            {/* <a href='/demo/'>Demo</a> */}
-          </div>
-
-
-
-          <div className='navigation'>
-            <Link
-              className="btn-write"
-              onClick={() => setmodel(true)}>
-              Write
-            </Link>
-            {model && <CustomModal closeModal={changeModal} />}
-          </div>
-
-
-
-
-          <div className='navigation'>
-            <Link to="/signin" className='link'>Get Started</Link>
-          </div>
-
-
-        </nav>
-      </header>
-      <div className='container-home'>
-        <div className='wrapper'>Ask,Chat,<br />Answer,Repeat.</div>
-        <div className='wrapper1'><h2> Ask questions and get real answers from real people.</h2></div>
-        <button className='btn' onClick={() => navigate('/main')}>Start Reading</button>
-
-
-        {/* <AllQuestion /> */}
-      </div>
-
-      <Footer/>
-    </>
-  );
-};
+       </>
+     );
+}; 
 
 export default Home;
+
+

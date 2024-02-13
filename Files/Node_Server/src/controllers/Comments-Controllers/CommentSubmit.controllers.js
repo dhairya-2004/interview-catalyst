@@ -3,7 +3,7 @@ const Comments = require("../../models/comment.model");
 
 async function commentsubmit(req, res) {
   try {
-    const { cusername, commentData, question_id, likeCount } = req.body;
+    const { cusername, commentData, question_id, likeCount,edited_comment } = req.body;
     console.log(req.body);
     const currentTimeInIndia = new Date().toLocaleString("en-US", {
       timeZone: "Asia/Kolkata",
@@ -14,7 +14,7 @@ async function commentsubmit(req, res) {
         comment: commentData,
         question_id: question_id,
         timestamp: currentTimeInIndia,
-        // likeCount: like,
+        edited_comment:edited_comment,
       });
 
       await comments.save();

@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import "../CSS/Admin_Main.css";
-import AdminQuestion from "../../Message/JSX/AllQuestion";
-import "../../Write/Write";
+import "../../CSS/Admin_Main.css";
+import AdminQuestion from "../../../Message/JSX/AllQuestion";
+import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
+import "../../../Write/Write.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function WritePage() {
   const [questionData, setQuestionData] = useState([]);
-
+  const navigate=useNavigate();
   // -------------------------------------------
 
   const [cusename, setCUsername] = useState("");
@@ -26,7 +28,7 @@ function WritePage() {
         });
         const newData = res.data.question;
         setCUsername(res.data.cusername);
-        console.log(newData);
+        // console.log(newData);
         setQuestionData(newData);
       } catch (error) {
         console.log(error);
@@ -82,6 +84,9 @@ function WritePage() {
           />
         </div>
         <div className="admin-name">
+          <div className="notification-main">
+            <NotificationsActiveIcon style={{ fontSize: "2rem",marginRight:'1rem',cursor:'pointer' }} onClick={()=>navigate('/admin_cheack_main  ')}/>
+          </div>
           <h1>{cusename}</h1>
         </div>
       </nav>
@@ -91,19 +96,23 @@ function WritePage() {
           {questionData.length > 0 ? (
             <div>
               {questionData.map((value, index) => (
-                <AdminQuestion key={index} currentValue={value} />
+                <AdminQuestion
+                  key={index}
+                  currentValue={value}
+                  admin={cusename}
+                />
               ))}
 
               <div className="semaple">
-                <div class="dot-spinner">
-                  <div class="dot-spinner__dot"></div>
-                  <div class="dot-spinner__dot"></div>
-                  <div class="dot-spinner__dot"></div>
-                  <div class="dot-spinner__dot"></div>
-                  <div class="dot-spinner__dot"></div>
-                  <div class="dot-spinner__dot"></div>
-                  <div class="dot-spinner__dot"></div>
-                  <div class="dot-spinner__dot"></div>
+                <div className="dot-spinner">
+                  <div className="dot-spinner__dot"></div>
+                  <div className="dot-spinner__dot"></div>
+                  <div className="dot-spinner__dot"></div>
+                  <div className="dot-spinner__dot"></div>
+                  <div className="dot-spinner__dot"></div>
+                  <div className="dot-spinner__dot"></div>
+                  <div className="dot-spinner__dot"></div>
+                  <div className="dot-spinner__dot"></div>
                 </div>
               </div>
             </div>

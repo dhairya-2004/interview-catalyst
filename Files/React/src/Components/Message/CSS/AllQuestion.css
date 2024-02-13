@@ -1,19 +1,21 @@
 .top-title {
   display: flex;
   flex-direction: row;
-  /* border: #3944BC 0.1rem solid; */
   margin: 0 2rem;
   margin-top: 5rem;
   justify-content: space-between;
+  background-color: #001c30;
+  border-radius: 8px;
+  box-shadow: 0 0 0.5rem #ddd;
+  margin-bottom: 5px;
 }
 
 .left-side {
   display: flex;
-  flex-direction: row;
-  margin: 0 1rem;
+  flex-direction: column;
+  margin: 1rem 1rem;
+  width: 100%;
   gap: 6px;
-  align-items: center;
-  height: 4rem;
 }
 
 .name {
@@ -42,7 +44,6 @@
   justify-content: center;
   align-items: center;
   font-size: 13px;
-  /* margin-left: 0.5rem; */
   margin-top: 2px;
 }
 .name-title-question {
@@ -54,7 +55,9 @@
   flex-direction: row;
   gap: 1rem;
   align-items: center;
+  height: 5rem;
   margin-right: 2rem;
+  margin-top: 1.5rem;
 }
 
 .answer-count {
@@ -110,15 +113,24 @@
   margin-bottom: 0rem;
   gap: 1rem;
   color: rgb(65, 138, 255);
-  /* color: ; */
 }
 
 .question {
   font-family: "Manrope", sans-serif;
   font-size: 22px;
-  font-weight: 600;
-  margin: 1rem 2rem;
   color: white;
+  padding: 1rem;
+  margin-left: 3rem;
+}
+
+.question-que {
+  font-family: "Manrope", sans-serif;
+  font-size: 22px;
+  padding-left:  1rem;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .question-hr {
@@ -137,7 +149,7 @@
   flex-direction: row;
   justify-content: space-between;
   padding: 0 0.5rem;
-  margin: 1rem;
+  margin: 1.5rem;
   gap: 15px;
 }
 
@@ -153,7 +165,7 @@
   gap: 1rem;
 }
 
-.likecount{
+.likecount {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -244,10 +256,12 @@
 .comment-comment-2 {
   padding: 0.5rem 1rem;
   padding-left: 0rem;
+  width: 100%;
 }
 
 .comment-comment-top {
   display: flex;
+  margin: 1rem 0 0 1rem;
 }
 .comment-username {
   /* margin-bottom: 0.5rem; */
@@ -280,4 +294,14 @@
   margin: 1rem;
   justify-content: center;
   min-width: 3rem;
+}
+
+.success-message-container {
+  position: fixed;
+  top: 3.5rem;
+  right: 0.5rem;
+  /* transform: translateX(-10%); */
+  z-index: 9999;
+  width: 30rem;
+  /* padding: 10px; */
 }

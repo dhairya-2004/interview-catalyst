@@ -12,6 +12,10 @@ const CommentsSchema = new mongoose.Schema({
     type: String,
     // require: true,
   },
+  edited_comment: {
+    type: String,
+    // require: true,
+  },
   question_id: {
     type: Schema.Types.ObjectId,
     ref: Question,

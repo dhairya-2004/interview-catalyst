@@ -3,11 +3,19 @@ import { React, useState, useEffect } from "react";
 import SendIcon from "@mui/icons-material/Send";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-
+import BorderColorIcon from "@mui/icons-material/BorderColor";
 import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
 import Like from "./Like";
+import EditAnswer from "./EditAnswer";
+import Answerdata from "./Answerdata";
 
-const Comment = ({ questionId, currentValue, img }) => {
+const Comment = ({
+  questionId,
+  currentValue,
+  img,
+  questionData,
+  setShowAlert,
+}) => {
   const [commentData, setCommentData] = useState("");
   const [nextCommentData, setNextCommentData] = useState([]);
   const [addcommentData, setAddCommentData] = useState(false);
@@ -15,6 +23,9 @@ const Comment = ({ questionId, currentValue, img }) => {
   const [getCommentusername, setGetCommentUsername] = useState([]);
   const [firstComment1, setFirstComment] = useState([]);
   const [restComment1, setRestComment] = useState([]);
+  const [isEditAnsModalOpen, setEditAnsModalOpen] = useState(false);
+  const [selectedCommentId, setSelectedCommentId] = useState(null);
+  
 
   useEffect(() => {
     const fetchComments = async () => {
@@ -60,6 +71,7 @@ const Comment = ({ questionId, currentValue, img }) => {
         cusername: cusername,
         question_id: currentValue._id,
         commentData,
+        edited_comment:'none',
       });
       console.log(res.data);
       setNextCommentData(res.data.question_comment);
@@ -128,6 +140,14 @@ const Comment = ({ questionId, currentValue, img }) => {
     return "Just now";
   };
 
+  const openEditAnsModal = (commentId) => {
+    setSelectedCommentId(commentId);
+    setEditAnsModalOpen(true);
+  };
+
+  
+
+
   return (
     <>
       <div className="comment-comment-top">
@@ -141,9 +161,8 @@ const Comment = ({ questionId, currentValue, img }) => {
           </div>
         </div>
         <div className="comment-time">
-          {/* {console.log(firstComment1)} */}
           <div className="comment-username">{firstComment1.username}</div>
-          {/* <div className="name-title-question">{currentValue.username}</div> */}
+
           <div className="time-title">
             <QueryBuilderIcon
               style={{ fontSize: "0.7rem", marginRight: "5px" }}
@@ -154,7 +173,30 @@ const Comment = ({ questionId, currentValue, img }) => {
           </div>
         </div>
       </div>
-      <div className="answer">{firstComment1.comment}</div>
+
+      <div className="question-que" style={{ marginLeft: "1rem" }}>
+        <p> Ans :</p>
+        <div
+          className="comments"
+          onClick={() => openEditAnsModal(firstComment1._id)}
+        >
+          <BorderColorIcon style={{ marginRight: "3rem", cursor: "pointer" }} />
+        </div>
+      </div>
+      {isEditAnsModalOpen && (
+        <EditAnswer
+          closeModal={() => {
+            setSelectedCommentId(null);
+            setEditAnsModalOpen(false);
+          }}
+          questionData={questionData}
+          cid={selectedCommentId}
+          setShowAlert={setShowAlert}
+        />
+      )}
+
+      <Answerdata comment={firstComment1}/>
+
       <div className="responses">
         <div className="icon-left">
           <Like
@@ -164,7 +206,7 @@ const Comment = ({ questionId, currentValue, img }) => {
             countLikeTotal={firstComment1.likeCount}
           />
           <div className="comments" onClick={addComment}>
-            <KeyboardArrowDownIcon />
+            <KeyboardArrowDownIcon style={{ cursor: "pointer" }} />
           </div>
         </div>
       </div>
@@ -200,9 +242,37 @@ const Comment = ({ questionId, currentValue, img }) => {
                         </div>
                       </div>
                     </div>
-                    <div className="answer">{comment.comment}</div>
+                    <div
+                      className="question-que"
+                      style={{ marginLeft: "1rem" }}
+                    >
+                      <p> Ans :</p>
+                      <div
+                        className="comments"
+                        onClick={() => openEditAnsModal(comment._id)}
+                      >
+                        <BorderColorIcon
+                          style={{ marginRight: "3rem", cursor: "pointer" }}
+                        />
+                      </div>
+                    </div>
+
+                    {/* <div className="answer">{comment.comment}</div> */}
+                    <Answerdata comment={comment}/>
+                    {isEditAnsModalOpen && (
+                      <EditAnswer
+                        closeModal={() => {
+                          setSelectedCommentId(null);
+                          setEditAnsModalOpen(false);
+                        }}
+                        questionData={questionData}
+                        cid={selectedCommentId}
+                        setShowAlert={setShowAlert}
+                      />
+                    )}
                   </div>
                 </div>
+
                 <div className="responses">
                   <div className="icon-left">
                     <Like

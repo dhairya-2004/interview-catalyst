@@ -97,9 +97,9 @@ const Like = ({ currentValue, cid, countLikeTotal }) => {
     <>
       <div className="likes" onClick={change}>
         {isValueLiked ? (
-          <FavoriteIcon style={{ color: "red" }} />
+          <FavoriteIcon style={{ color: "red" ,cursor:'pointer'}} />
         ) : (
-          <FavoriteBorderIcon />
+          <FavoriteBorderIcon style={{ cursor:'pointer'}}/>
         )}
         <div className="likecount">{countLikeTotal}</div>
       </div>

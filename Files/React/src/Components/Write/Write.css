@@ -52,6 +52,7 @@
   font-weight: 700;
   resize: none;
   border-bottom: white solid 0.1rem;
+  overflow-Y: scroll;
   padding-left: 1rem;
   padding-top: 1rem;
   color: #fff;
@@ -62,10 +63,9 @@
   height: 100%;
   justify-content: center;
   margin: 0.5rem;
-  /* border-color: #fff; */
   font-size: 1.2rem;
   resize: none;
-  /* border-bottom: black solid .1rem; */
+  overflow-Y: scroll;
   padding-left: 1rem;
   padding-top: 1rem;
   background-color: #001524;
