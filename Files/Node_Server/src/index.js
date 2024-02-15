@@ -15,7 +15,7 @@ const configcors = {
 };
 
 const app = express();
-const port = 5000;
+const port = 2000;
 
 app.options("", cors(configcors));
 app.use(cors(configcors));
