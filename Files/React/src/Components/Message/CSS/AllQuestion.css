@@ -139,7 +139,7 @@
 
 .answer {
   font-family: "Arimo", sans-serif;
-  font-size: 16px;
+  font-size: 1.4rem;
   margin: 1rem 3rem;
   color: #cfc0c0;
 }
@@ -304,4 +304,11 @@
   z-index: 9999;
   width: 30rem;
   /* padding: 10px; */
+}
+
+.edited-by{
+  display: flex;
+  flex-direction: row-reverse;
+  margin-right:3rem ;
+  font-size: 1.2rem;
 }

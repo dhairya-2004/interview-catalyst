@@ -13,7 +13,7 @@ const Like = ({ currentValue, cid, countLikeTotal }) => {
     const fetchLikes = async () => {
       const count = () => {
         const likesForQuestion = calculateLike.filter(
-          (like) => like.question_id === cid && like.like === true
+          (like) => like.question_id === cid  && like.like === true
         );
         const numberOfLikes = likesForQuestion.length;
         return numberOfLikes;
@@ -44,9 +44,11 @@ const Like = ({ currentValue, cid, countLikeTotal }) => {
     fetchLikes();
   }, [currentValue._id, cusername, cid, calculateLike]);
 
+  // ---------------------------------------------------------------------------------------------------
   const change = async (e) => {
     e.preventDefault();
     try {
+      console.log("132456")
       await axios.post("http://localhost:5000/user/likes", {
         question_id: cid === undefined ? currentValue._id : cid,
         like: !isValueLiked,

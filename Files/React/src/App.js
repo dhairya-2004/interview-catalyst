@@ -3,7 +3,6 @@ import React from 'react';
 import Forgot from './Components/Forgot/Forgot';
 import Signin from './Components/Signin/JSX/Signin';
 import Home from './Components/Home/Home';
-import Msg from './Components/Message/JSX/Msg';
 import AllQuestion from './Components/Message/JSX/AllQuestion';
 import Write from './Components/Write/Write';
 import Input from './Components/Write/Input';
@@ -30,8 +29,6 @@ function App() {
           <Route path="/signin" element={<Signin />} />
           <Route path="/forgot-password" element={<Forgot />} />
           <Route path="/confirm/:id/:token" element={<Confirm />} />
-
-          <Route path="/message" element={<Msg />} />
           <Route path="/allquestion" element={<AllQuestion />} />
           <Route path="/write" element={<Write />} />
           <Route path="/input" element={<Input />} />

@@ -9,13 +9,11 @@ const Answer = ({ comment }) => {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        // console.log(comment.comment)
         const res = await axios.get(
           `http://localhost:5000/admin/geteditedanswerbyid?comment_id=${comment._id}`
         );
 
-        const data1 = res.data.editcomment_data;
-        console.log(data1.edit_answer);
+        const data1 = res.data.editcomment_data;;
         setCheckGrant(data1.grant);
         setUsername(data1.cusername);
 
@@ -59,7 +57,17 @@ const Answer = ({ comment }) => {
       <div className="answer">
         {checkGrant === "true" ? highlightedText : comment.comment}
       </div>
-      <div>{username}</div>
+      {username ? (
+        <div className="edited-by">
+          <span style={{ color: "green", marginLeft: "0.5rem" }}>
+            {" "}
+            {username}
+          </span>
+          <span>Edited by</span>
+        </div>
+      ) : (
+        ""
+      )}
     </>
   );
 };
