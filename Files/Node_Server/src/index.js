@@ -8,16 +8,16 @@ const likeRouter = require("./routes/like.route");
 const cheackEditRoute = require("./routes/cheackEditAnswer.route");
 
 const cors = require("cors");
-const configcors = {
-  origin: "*",
-  credential: true,
-  method: ["GET", "POST", "PUT", "DELETE"],
-};
+// const configcors = {
+//   origin: "*",
+//   credential: true,
+//   method: ["GET", "POST", "PUT", "DELETE"],
+// };
 
 const app = express();
 const port = 2000;
 
-app.options("", cors(configcors));
+// app.options("", cors(configcors));
 app.use(cors(configcors));
 
 app.use(express.json({ limit: "50mb" }));
