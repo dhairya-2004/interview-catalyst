@@ -103,9 +103,9 @@ const Like = ({ currentValue, cid, countLikeTotal, updateCommentData }) => {
     <>
       <div className="likes" onClick={change}>
         {isValueLiked ? (
-          <ThumbUpAltIcon style={{ color: "#40A2E3", cursor: "pointer" }} />
-        ) : (
           <ThumbUpOffAltIcon style={{ cursor: "pointer" }} />
+          ) : (
+          <ThumbUpAltIcon style={{ color: "#40A2E3", cursor: "pointer" }} />
         )}
         <div className="likecount">{countLikeTotal}</div>
       </div>
