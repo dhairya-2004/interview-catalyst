@@ -62,7 +62,7 @@ const Answer = ({ comment }) => {
       </div>
       {username ? (
         <div className="edited-by">
-          <span style={{ color: "green", marginLeft: "0.5rem" }}>
+          <span style={{ color: "#FFED00", marginLeft: "0.5rem" }}>
             {" "}
             {username}
           </span>
