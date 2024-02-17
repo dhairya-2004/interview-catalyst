@@ -10,10 +10,10 @@
     flex-direction: column;
   } */
 
-/* body { */
-  /* overflow-y: scroll; */
+body {
+  overflow-y:hidden;
   /* background-color: #333333!important; */
-/* } */
+}
 
 header {
   background-color: #00264d;
