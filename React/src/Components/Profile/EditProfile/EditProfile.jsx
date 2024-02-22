@@ -131,7 +131,7 @@ const EditProfile = ({ closeModal, cusername, profile }) => {
                   <h5 className="edit-color-text">
                     Appears on your Profile Page.
                   </h5>
-                  <div className="input-char-name">{name.length}/50</div>
+                  {/* <div className="input-char-name">{name.length}/50</div> */}
                 </div>
               </div>
               <div className="edit-name">
@@ -150,7 +150,7 @@ const EditProfile = ({ closeModal, cusername, profile }) => {
                   <h5 className="edit-color-text">
                     Appears on your Profile Page.
                   </h5>
-                  <div className="input-char-name">{collegename.length}/50</div>
+                  {/* <div className="input-char-name">{collegename.length}/50</div> */}
                 </div>
               </div>
             </div>
@@ -172,7 +172,7 @@ const EditProfile = ({ closeModal, cusername, profile }) => {
                 <h5 className="edit-color-text">
                   Appears on your Profile Page and next to your stories.
                 </h5>
-                <div className="input-char-bio">{bio.length}/100</div>
+                {/* <div className="input-char-bio">{bio.length}/100</div> */}
               </div>
             </div>
           </div>

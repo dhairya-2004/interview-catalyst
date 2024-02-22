@@ -103,36 +103,30 @@ const Profile = () => {
               {/* <img className="profileCoverImg" src={backimg} alt="back" /> */}
               <div className="profileCoverImg">
                 <div className="profileInfo">
-                  <h4 className="profileInfoName">
-                    {/* {profile.name} */}
-                    Dhairya Bhatt
-                  </h4>
+                  <h4 className="profileInfoName">{profile.name}</h4>
 
                   <div className="profInfoDesc">
-                  <span className="profileInfoDesc">
-                    {profile.college_name !== "" ? (
-                      <div>
-                        <SchoolIcon className="profile-icon" />
-                        {/* {profile.college_name} */}
-                        DDU
-                      </div>
-                    ) : (
-                      ""
-                    )}
-                  </span>
-                  <span className="profileInfoDesc">
-                    {profile.bio !== "" ? (
-                      <div>
-                        <AssessmentIcon className="profile-icon" />
-                        {/* {profile.bio} */}
-                        Web Developer
-                      </div>
-                    ) : (
-                      ""
-                    )}
-                  </span>
+                    <span className="profileInfoDesc">
+                      {profile.college_name !== "" ? (
+                        <div>
+                          <SchoolIcon className="profile-icon" />
+                          {profile.college_name}
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                    </span>
+                    <span className="profileInfoDesc">
+                      {profile.bio !== "" ? (
+                        <div>
+                          <AssessmentIcon className="profile-icon" />
+                          {profile.bio}
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                    </span>
                   </div>
-                 
                 </div>
               </div>
 
