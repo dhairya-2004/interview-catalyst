@@ -3,7 +3,7 @@ const EditAnswers = require("../../models/editAnswer.model");
 
 async function insertAnswerQuestion(req, res) {
   try {
-    const { editAnswers, cusername, question_id, comment_id, grant } = req.body;
+    const { editAnswers, cusername, question_id, comment_id, grant,outputData } = req.body;
 
     const currentTimeInIndia = new Date().toLocaleString("en-US", {
       timeZone: "Asia/Kolkata",
@@ -17,6 +17,7 @@ async function insertAnswerQuestion(req, res) {
           comment_id: comment_id,
           timestamp: currentTimeInIndia,
           grant: grant,
+          outputData:outputData
         });
         await editanswer.save();
 
