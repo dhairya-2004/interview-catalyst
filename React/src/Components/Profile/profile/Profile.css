@@ -1,5 +1,6 @@
 .profile-all {
   height: 100vh;
+  overflow-y: scroll;
   padding-bottom: 10rem;
   width: 100%;
 }
@@ -22,6 +23,12 @@
 
 .search-write {
   display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  
+}
+.list-data{
+  display: flex;
   align-items: center;
   height: 2.5rem;
   width: 15rem;
@@ -29,6 +36,13 @@
   background-color: white;
   box-shadow: 0 0 0.5rem #ddd;
   border-radius: 0.5rem;
+}
+.search-show {
+  width: 15rem;
+  background-color: white;
+  box-shadow: 0 0 0.5rem #ddd;
+  border-radius: 0.5rem;
+
 }
 
 #searchprofile {
@@ -42,7 +56,15 @@
 #searchprofile:focus {
   outline: none;
 }
-
+.search-bar-container {
+  /* padding-top: 20vh; */
+  width: 40%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 200px;
+}
 .btn-profile {
   margin-right: 2rem;
 }
@@ -181,6 +203,8 @@
 .profileCover {
   height: 30rem;
   position: relative;
+  margin-bottom: 15rem;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .profileCoverImg {
@@ -190,6 +214,7 @@
   background-size: cover;
   background-image: url("./plainimage.jpg");
   height: 440px;
+  box-shadow: 0px 6px 4px rgba(255, 255, 255, 0.2);
 }
 
 .profileUserImg {

@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
 import "../profile/Profile.css";
-import SearchIcon from "@mui/icons-material/Search";
 import SchoolIcon from "@mui/icons-material/School";
 import AssessmentIcon from "@mui/icons-material/Assessment";
 import EditProfile from "../EditProfile/EditProfile";
 import axios from "axios";
 import AddQuestion from "../../Message/JSX/AllQuestion";
-import backimg from "../profile/plainimage.jpg";
-// import Back from '../profile/backimage.png'
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import Search from "../../Search/Search";
+import { SearchResultsList } from "../../Search/SearchResultList";
 
 const Profile = () => {
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [cusername, setCUsername] = useState("");
   const [profile, setProfile] = useState({});
   const [questionData, setQuestionData] = useState([]);
+  const [results, setResults] = useState([]);
 
   const openEditModal = () => {
     setEditModalOpen(true);
@@ -80,18 +80,12 @@ const Profile = () => {
     <>
       <nav className="nav-profile">
         <div className="name-profile">Interview Catalyst</div>
-
-        <div className="search-write">
-          <SearchIcon className="image-main" />
-          <input
-            type="search"
-            placeholder="Search Username"
-            id="searchprofile"
-            // onChange={onSearch}
-            required
-          />
+        <div className="search-bar-container">
+          <Search setResults={setResults} />
+          {results && results.length > 0 && (
+            <SearchResultsList results={results} />
+          )}
         </div>
-
         <div className="btn-profile" onClick={openEditModal}>
           <button className="btn-prof">Edit Profile</button>
         </div>
@@ -107,30 +101,38 @@ const Profile = () => {
 
                   <div className="profInfoDesc">
                     <span className="profileInfoDesc">
-                      {profile.college_name !== "" ? (
-                        <div>
+                      {/* {profile.college_name !== "" ? ( */}
+                      <div>
+                        {profile.college_name ? (
                           <SchoolIcon className="profile-icon" />
-                          {profile.college_name}
-                        </div>
-                      ) : (
-                        ""
-                      )}
+                        ) : (
+                          ""
+                        )}
+                        {profile.college_name}
+                      </div>
+                      {/*  ) : (
+                       ""
+                       )} */}
                     </span>
                     <span className="profileInfoDesc">
-                      {profile.bio !== "" ? (
-                        <div>
+                      {/* {profile.bio !== "" ? ( */}
+                      <div>
+                        {profile.bio ? (
                           <AssessmentIcon className="profile-icon" />
-                          {profile.bio}
-                        </div>
-                      ) : (
+                        ) : (
+                          ""
+                        )}
+                        {profile.bio}
+                      </div>
+                      {/* ) : (
                         ""
-                      )}
+                      )} */}
                     </span>
                   </div>
                 </div>
               </div>
 
-              {profile.image !== "" ? (
+              {profile.image ? (
                 <img
                   className="profileUserImg"
                   src={profile.image}

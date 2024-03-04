@@ -40,36 +40,31 @@ const Answer = ({ comment }) => {
           comment.comment,
           comment.edited_comment
         );
+
+        function compareParagraphs(paragraph1, paragraph2) {
+          const diff = diffChars(paragraph1, paragraph2);
+          return diff.map((part, index) => {
+            return (
+              <span
+                key={index}
+                className={part.added ? "highlighted-word" : ""}
+                onMouseEnter={() => setData(part.value)}
+                onMouseLeave={() => setData("")}
+              >
+                <Tooltip title={part.added ? editedName : ""} arrow>
+                  {part.value}
+                </Tooltip>
+              </span>
+            );
+          });
+        }
         setHighlightedText(highlighted);
       } catch (error) {
         console.log(error);
       }
     };
     fetchComments();
-  }, [comment._id, comment.comment, comment.edited_comment]);
-
-  function compareParagraphs(paragraph1, paragraph2) {
-    const diff = diffChars(paragraph1, paragraph2);
-    return diff.map((part, index) => {
-      const style = {
-        // backgroundColor: part.added ? "#aaffaa" : "transparent",
-        // color: part.added ? "green" : "inherit",
-      };
-      return (
-        <span
-          key={index}
-          style={style}
-          className={part.added ? "highlighted-word" : ""}
-          onMouseEnter={() => setData(part.value)}
-          onMouseLeave={() => setData("")}
-        >
-          <Tooltip title={editedName} arrow>
-            {part.value}
-          </Tooltip>
-        </span>
-      );
-    });
-  }
+  }, [comment._id, comment.comment, comment.edited_comment, data, editedName]);
 
   return (
     <>

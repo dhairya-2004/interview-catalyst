@@ -23,11 +23,11 @@ const Navbar = () => {
         <input type="search" placeholder="Search.." id="search" required />
       </div>
       <div className={`buttons-container ${isMobileMenuOpen ? "show" : ""}`}>
-        <NavLink to="/login" className="button" activeClassName="active">
+        <NavLink to="/signin" className="button" activeClassName="active">
           Signup
         </NavLink>
 
-        <NavLink to="/demo" className="button" activeClassName="active">
+        <NavLink to="/signin" className="button" activeClassName="active">
           Login
         </NavLink>
         <input type="checkbox" id="toggle" />
