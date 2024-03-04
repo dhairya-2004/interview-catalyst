@@ -1,12 +1,30 @@
-import { React, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Tooltip from "@mui/material/Tooltip";
+import { diffChars } from "diff";
 
 const Answer = ({ comment }) => {
-  const [displayedText, setDisplayedText] = useState(comment.comment);
   const [checkGrant, setCheckGrant] = useState("");
-
-  const [username, setUsername] = useState("");
+  const [data, setData] = useState("");
+  const [editedName, setEditedName] = useState("");
   const [highlightedText, setHighlightedText] = useState([]);
+
+  useEffect(() => {
+    const fetchComments = async () => {
+      console.log(data);
+      try {
+        const res = await axios.get(
+          `http://localhost:5000/admin/getname/${data}`
+        );
+
+        setEditedName(res.data.name);
+        // const data = ;
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchComments();
+  }, [data]);
 
   useEffect(() => {
     const fetchComments = async () => {
@@ -17,73 +35,54 @@ const Answer = ({ comment }) => {
 
         const data1 = res.data.editcomment_data;
         setCheckGrant(data1.grant);
-        setUsername(data1.cusername);
 
-        // console.log(comment.edited_comment);
-        // Function to split sentences properly
-        const splitSentences = (text) => {
-          return text
-            .replace(/([.?!])\s*(?=[A-Z])/g, "$1|")
-            .split("|")
-            .map((sentence) => sentence.trim());
-        };
-
-        const sentences1 = splitSentences(comment.comment);
-        const sentences2 = splitSentences(comment.edited_comment);
-
-        const highlightedSentences = sentences2.map((sentence, index) => {
-          const words1 = sentences1[index]
-            ? sentences1[index].split(/\s+/)
-            : [];
-          const words2 = sentence.split(/\s+/);
-
-          const highlightedWords = words2.map((word, index) => {
-            if (!words1.includes(word)) {
-              return (
-                <span key={index} className="highlighted-word">
-                  {word}
-                  <span>{"  "}</span>
-                </span>
-              );
-            }
-            return <span key={index}> {word} </span>;
-          });
-
-          return <span key={index}>{highlightedWords}</span>;
-        });
-
-        setHighlightedText(highlightedSentences);
+        const highlighted = compareParagraphs(
+          comment.comment,
+          comment.edited_comment
+        );
+        setHighlightedText(highlighted);
       } catch (error) {
         console.log(error);
       }
     };
-
     fetchComments();
   }, [comment._id, comment.comment, comment.edited_comment]);
 
-  const handleMouseEnter = () => {
-    setDisplayedText(true);
-  };
+  function compareParagraphs(paragraph1, paragraph2) {
+    const diff = diffChars(paragraph1, paragraph2);
+    return diff.map((part, index) => {
+      const style = {
+        // backgroundColor: part.added ? "#aaffaa" : "transparent",
+        // color: part.added ? "green" : "inherit",
+      };
+      return (
+        <span
+          key={index}
+          style={style}
+          className={part.added ? "highlighted-word" : ""}
+          onMouseEnter={() => setData(part.value)}
+          onMouseLeave={() => setData("")}
+        >
+          <Tooltip title={editedName} arrow>
+            {part.value}
+          </Tooltip>
+        </span>
+      );
+    });
+  }
 
-  const handleMouseLeave = () => {
-    setDisplayedText(false);
-  };
   return (
     <>
-      <div className="answer">
-        <p onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-          {checkGrant === "setTrue" || checkGrant === "true" ? (
-            <div>
-              {highlightedText.map((sentence, index) => (
-                <p key={index}>
-                  {sentence}
-                  <span>{"  "}</span>
-                </p>
-              ))}
-              {/* {comment.edited_comment} */}
-            </div>
+      <div className="answer" style={{ whiteSpace: "pre-line" }}>
+        <p>
+          {comment.edited_comment === "none" ? (
+            <div>{comment.comment}</div>
+          ) : checkGrant !== "true" ? (
+            <>
+              <div>{highlightedText}</div>
+            </>
           ) : (
-            <p>{comment.comment}</p>
+            ""
           )}
         </p>
       </div>

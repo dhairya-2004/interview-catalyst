@@ -5,6 +5,7 @@ const addEditcomment=require('../controllers/EditComment-Controllers/CheackEditQ
 const findEditedAnswer=require('../controllers/EditComment-Controllers/GetEditComment.controller')
 const updateGrant=require('../controllers/EditComment-Controllers/UpdateGrant.controller')
 const getEditedAnswerById=require('../controllers/EditComment-Controllers/GetEditedCommentByID.controller')
+const fetchName=require('../controllers/EditComment-Controllers/FetchName.controller')
 
 router.route("/cheackeditanswer").post(addEditcomment);
 
@@ -15,9 +16,13 @@ router
 router
     .route('/geteditedanswerbyid')
     .get(getEditedAnswerById);
+router
+    .route('/getname/:key')
+    .get(fetchName);
 
 router
     .route('/updategrant')
     .post(updateGrant);
+
 
 module.exports = router;

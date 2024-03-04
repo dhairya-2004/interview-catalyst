@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "../../CSS/Admin_cheack_Ans.css";
 import "../../../Message/CSS/AllQuestion.css";
-
+import { diffChars } from "diff";
 import axios from "axios";
+import { diffWords, diffSentences } from "diff";
 
 function Adminn_Cheack_Ans({ data, setRefereshData }) {
   const [questionValue, setQuestionValue] = useState("");
   const [commentValue, setCommentValue] = useState("");
+  const [outputData, setOutputData] = useState("");
 
   useEffect(() => {
     const fetchAnswer = async () => {
@@ -42,59 +44,6 @@ function Adminn_Cheack_Ans({ data, setRefereshData }) {
 
     fetchComments();
   }, [data.comment_id]);
-  const renderHighlightedText = () => {
-    const sentences1 = commentValue.split(/\.|\?|!/);
-    const sentences2 = data.edit_answer.split(/\.|\?|!/);
-  
-    const highlightedSentences = sentences2.map((sentence, index) => {
-      const words1 = sentences1[index] ? sentences1[index].split(/\s+/) : [];
-      const words2 = sentence.split(/\s+/);
-  
-      const highlightedWords = words2.map((word, index) => {
-        if (words1.length === 0 || !words1.includes(word)) {
-          return (
-            <span
-              key={index}
-              style={{ color: "green", whiteSpace: "pre-line" }}
-            >
-              {word + " "}
-            </span>
-          );
-        }
-        return (
-          <span key={index} style={{ whiteSpace: "pre-line" }}>
-            {word + " "}
-          </span>
-        );
-      });
-      return <p key={index}>{highlightedWords}</p>;
-    });
-  
-    return highlightedSentences;
-  };
-  
-  
-
-  // const renderHighlightedText = () => {
-  //   const words1 = commentValue.split(/\s+/);
-  //   const words2 = data.edit_answer.split(/\s+/);
-
-  //   return words2.map((word, index) => {
-  //     if (!words1.includes(word)) {
-  //       return (
-  //         <span key={index} style={{ color: "green", whiteSpace: "pre-line" }}>
-  //           {word}{" "}
-  //         </span>
-  //       );
-  //     } else {
-  //       return (
-  //         <span key={index} style={{ whiteSpace: "pre-line" }}>
-  //           {word}{" "}
-  //         </span>
-  //       );
-  //     }
-  //   });
-  // };
 
   useEffect(() => {
     const fetchAnswer = async () => {
@@ -119,6 +68,7 @@ function Adminn_Cheack_Ans({ data, setRefereshData }) {
         grant: value,
         edited_answer: data.edit_answer,
         comment_id: data.comment_id,
+        outputData: outputData,
       });
       setRefereshData(true);
       // console.log("123456")
@@ -126,6 +76,60 @@ function Adminn_Cheack_Ans({ data, setRefereshData }) {
       console.log(error);
     }
   };
+
+  function compareParagraphs(paragraph1, paragraph2) {
+    const diff = diffWords(paragraph1, paragraph2);
+
+    let output = "";
+    let newOutputData = ""; // Define a variable to store the updated output data
+    diff.forEach((part) => {
+      if (part.added || part.removed) {
+        const style = {
+          backgroundColor: part.added ? "#aaffaa" : "transparent",
+          color: part.added ? "green" : "inherit",
+        };
+        if (part.added) {
+          output += `<span style="background-color: ${style.backgroundColor}; color: ${style.color};">${part.value}</span>`;
+          newOutputData += part.value; // Append the added part to the new output data
+        }
+      } else {
+        output += part.value;
+      }
+    });
+
+    // Update the state only if new output data is different from the current output data
+    if (newOutputData !== outputData) {
+      setOutputData(newOutputData);
+    }
+
+    return <div dangerouslySetInnerHTML={{ __html: output }} />;
+  }
+
+  function compareParagraphsMain(paragraph1, paragraph2) {
+    const diff = diffWords(paragraph1, paragraph2);
+    let output = "";
+
+    diff.forEach((part) => {
+      if (part.removed) {
+        const style = {
+          backgroundColor: "#ffaaaa",
+          textDecoration: "line-through",
+          color: "#ff0000",
+        };
+        output += `<span style="background-color: ${style.backgroundColor}; text-decoration: ${style.textDecoration}; color: ${style.color};">${part.value}</span>`;
+      } else if (part.added) {
+        const style = {
+          backgroundColor: "#aaffaa",
+          color: "green",
+        };
+        // output += `<span style="background-color: ${style.backgroundColor}; color: ${style.color};">${part.value}</span>`;
+      } else {
+        output += part.value; // Append remaining words from paragraph1
+      }
+    });
+
+    return <div dangerouslySetInnerHTML={{ __html: output }} />;
+  }
 
   return (
     <>
@@ -138,12 +142,19 @@ function Adminn_Cheack_Ans({ data, setRefereshData }) {
             <hr />
 
             <div className="question-que">Answer :</div>
-            <div className="question"> {commentValue}</div>
+            <div className="question">
+              {" "}
+              {/* {sentenceHighlighted} */}
+              {compareParagraphsMain(commentValue, data.edit_answer)}
+            </div>
 
             <hr />
 
             <div className="question-que">Edited Answer :</div>
-            <div className="question"> {renderHighlightedText()}</div>
+            <div className="question">
+              {" "}
+              {compareParagraphs(commentValue, data.edit_answer)}
+            </div>
 
             <hr />
             <div className="cheack-ans">

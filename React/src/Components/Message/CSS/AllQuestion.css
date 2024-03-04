@@ -356,4 +356,5 @@
 
 .highlighted-word:hover {
   color: green;
+  background-color: #aaffaa;
 }
