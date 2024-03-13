@@ -29,7 +29,8 @@ const CustomModal = ({ closeModal, username }) => {
       const response = await axios.post("http://localhost:5000/user/question", {
         question,
         username,
-        title
+        title,
+        grant:'false'
       });
 
       if (response.data.question_main._id !== "" && answers !== "") {
@@ -39,6 +40,7 @@ const CustomModal = ({ closeModal, username }) => {
             commentData: answers,
             question_id: response.data.question_main._id,
             edited_comment: "none",
+            grant:false
           });
         } catch (error) {
           console.log(error);

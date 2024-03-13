@@ -2,12 +2,18 @@ import React, { useState, useEffect } from "react";
 import "../../CSS/Admin_cheack_Ans.css";
 // import "../../../Message/CSS/AllQuestion.css";
 import axios from "axios";
-import { diffWords, diffSentences ,diffChars} from "diff";
+import { diffWords } from "diff";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
+import Default from "../../../Comments/one";
+import { FluentProvider, webLightTheme } from "@fluentui/react-components";
 
 function Adminn_Cheack_Ans({ data, setRefereshData }) {
   const [questionValue, setQuestionValue] = useState("");
   const [commentValue, setCommentValue] = useState("");
   const [outputData, setOutputData] = useState("");
+  const [getCommentusername, setGetCommentUsername] = useState([]);
+  const [firstComment, setFirstComment] = useState([]);
 
   useEffect(() => {
     const fetchAnswer = async () => {
@@ -15,7 +21,8 @@ function Adminn_Cheack_Ans({ data, setRefereshData }) {
         const res = await axios.get(
           `http://localhost:5000/user/questionbyid?question_id=${data.question_id}`
         );
-        // console.log(res.data);
+        console.log('123',res.data.question_value);
+        setFirstComment(res.data.question_value)
         setQuestionValue(res.data.question_value.question);
       } catch (error) {
         console.log(error);
@@ -31,6 +38,7 @@ function Adminn_Cheack_Ans({ data, setRefereshData }) {
           `http://localhost:5000/user/getcommentbyid?comment_id=${data.comment_id}`
         );
         const dataone = res.data.comment_data;
+        // setFirstComment(res.data)
         setCommentValue(
           dataone.edited_comment === "none"
             ? dataone.comment
@@ -129,7 +137,27 @@ function Adminn_Cheack_Ans({ data, setRefereshData }) {
 
     return <div dangerouslySetInnerHTML={{ __html: output }} />;
   }
+  const calculateTimeDifference = (timestamp) => {
+    const timeDifference = new Date() - new Date(timestamp);
+    const minutes = Math.floor(timeDifference / (1000 * 60));
+    const hours = Math.floor(timeDifference / (1000 * 60 * 60));
+    const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    const years = Math.floor(timeDifference / (1000 * 60 * 60 * 24 * 365));
 
+    if (years > 0) return `${years} years ago`;
+    if (days > 0) return `${days} days ago`;
+    if (hours > 0) return `${hours} hours ago`;
+    if (minutes > 0) return `${minutes} min ago`;
+    return "Just now";
+  };
+
+  const avatarGroupStyle = {
+    display: "flex",
+    marginRight: "6rem",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "transparent",
+  };
   return (
     <>
       <section style={{ margin: "0 2rem" }}>
@@ -137,42 +165,73 @@ function Adminn_Cheack_Ans({ data, setRefereshData }) {
           <div className="left-side">
             <div className="question-que">Que :</div>
             <div className="question"> {questionValue}</div>
+          </div>
+        </div>
 
-            <hr />
-
-            <div className="question-que">Answer :</div>
-            <div className="question">
-              {" "}
-              {/* {sentenceHighlighted} */}
-              {compareParagraphsMain(commentValue, data.edit_answer)}
-            </div>
-
-            <hr />
-
-            <div className="question-que">Edited Answer :</div>
-            <div className="question">
-              {" "}
-              {compareParagraphs(commentValue, data.edit_answer)}
-            </div>
-
-            <hr />
-            <div className="cheack-ans">
-              <div className="cheack-ans-button">
-                <button
-                  className="cheack-ans-button-press cancelbtn"
-                  onClick={() => cheackGrant("false", data._id)}
-                >
-                  Cancel
-                </button>
+        <div className="main-addQuestion" style={{ padding: "1.5rem" }}>
+          <div className="contro-distance">
+            <div className="contro-distance2">
+              <div className="comment-userimage">
+                <div className="avatar">
+                  {getCommentusername[0] &&
+                  getCommentusername[0].image !== null ? (
+                    <img src={getCommentusername[0].image} alt="profile" />
+                  ) : (
+                    <AccountCircleIcon style={{ fontSize: "3rem" }} />
+                  )}
+                </div>
               </div>
-              <div className="cheack-ans-button ">
-                <button
-                  className="cheack-ans-button-press"
-                  onClick={() => cheackGrant("true", data._id)}
-                >
-                  Done
-                </button>
+              <div className="comment-time">
+                <div className="comment-username">{firstComment.username}</div>
+
+                <div className="time-title">
+                  <QueryBuilderIcon
+                    style={{ fontSize: "0.7rem", marginRight: "5px" }}
+                  />
+                  <div className="comment-username-time">
+                    {calculateTimeDifference(firstComment.timestamp)}
+                  </div>
+                </div>
               </div>
+            </div>
+            <div className="contro-name">
+              <FluentProvider theme={webLightTheme} style={avatarGroupStyle}>
+                <Default cid={firstComment._id} />
+              </FluentProvider>
+            </div>
+          </div>
+          <div className="question-que">Answer :</div>
+          <div className="question">
+            {" "}
+            {/* {sentenceHighlighted} */}
+            {compareParagraphsMain(commentValue, data.edit_answer)}
+          </div>
+
+          <hr />
+
+          <div className="question-que">Edited Answer :</div>
+          <div className="question">
+            {" "}
+            {compareParagraphs(commentValue, data.edit_answer)}
+          </div>
+
+          <hr />
+          <div className="cheack-ans">
+            <div className="cheack-ans-button">
+              <button
+                className="cheack-ans-button-press cancelbtn"
+                onClick={() => cheackGrant("false", data._id)}
+              >
+                Cancel
+              </button>
+            </div>
+            <div className="cheack-ans-button ">
+              <button
+                className="cheack-ans-button-press"
+                onClick={() => cheackGrant("true", data._id)}
+              >
+                Done
+              </button>
             </div>
           </div>
         </div>

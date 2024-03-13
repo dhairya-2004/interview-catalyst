@@ -104,11 +104,11 @@ const Comment = ({
     fetchData();
   }, []);
 
-    function resizeTextarea() {
-      const textarea = document.getElementById("input-comment");
-      textarea.style.height = "1rem";
-      textarea.style.height = textarea.scrollHeight + "px";
-    }
+  function resizeTextarea() {
+    const textarea = document.getElementById("input-comment");
+    textarea.style.height = "1rem";
+    textarea.style.height = textarea.scrollHeight + "px";
+  }
 
   // const setProfileImage = async (usernames) => {
   //   try {
@@ -221,7 +221,7 @@ const Comment = ({
                 />
               )}
 
-              <Answerdata comment={firstComment1} />
+              <Answerdata comment={firstComment1} setShowAlert={setShowAlert} />
             </div>
             <div className="responses">
               <div className="icon-left">

@@ -4,7 +4,7 @@ const Admin = require("../../models/admin.model");
 
 async function insertQuestion(req, res) {
   try {
-    const { question, username, title } = req.body;
+    const { question, username, title,grant } = req.body;
     const currentTimeInIndia = new Date().toLocaleString("en-US", {
       timeZone: "Asia/Kolkata",
     });
@@ -34,6 +34,7 @@ async function insertQuestion(req, res) {
           title: title,
           timestamp: currentTimeInIndia,
           admin: currentAdmin._id,
+          grant:grant
         });
 
         if (currentAdmin.adminId === 3) {
@@ -74,6 +75,7 @@ async function insertQuestion(req, res) {
           title: title,
           timestamp: currentTimeInIndia,
           admin: newAdmin._id,
+          grant:grant
         });
 
         await question_main.save();

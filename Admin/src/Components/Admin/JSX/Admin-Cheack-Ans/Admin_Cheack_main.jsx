@@ -3,11 +3,13 @@ import "../../CSS/Admin_Main.css";
 import AdminCheackAns from "../Admin-Cheack-Ans/Admin_Cheack_Ans";
 import "../../../CSS/Write.css";
 import axios from "axios";
+import HomeIcon from "@mui/icons-material/Home";
+import { useNavigate } from "react-router-dom";
 
 function AdminCheackMain() {
   const [findEditedAnswerData, setFindEditedAnswerData] = useState([]);
   const [refereshData, setRefereshData] = useState(true);
-  
+  const nav = useNavigate();
   useEffect(() => {
     const fetchAnswer = async () => {
       try {
@@ -21,7 +23,7 @@ function AdminCheackMain() {
       }
     };
     fetchAnswer();
-  }, [refereshData,findEditedAnswerData]);
+  }, [refereshData, findEditedAnswerData]);
 
   return (
     <div className="main-main-admin">
@@ -31,7 +33,10 @@ function AdminCheackMain() {
         </div>
 
         <div className="admin-name">
-          <h1>{"cusename"}</h1>
+          <div onClick={()=>nav('/admin')}>
+            Home
+          </div>
+          <h1 style={{ marginLeft: "1rem" }}>{"ADMIN"}</h1>
         </div>
       </nav>
 
@@ -41,7 +46,11 @@ function AdminCheackMain() {
             <div>
               {findEditedAnswerData.map((value, index) =>
                 value.grant === "none" ? (
-                  <AdminCheackAns key={index} data={value} setRefereshData={setRefereshData} />
+                  <AdminCheackAns
+                    key={index}
+                    data={value}
+                    setRefereshData={setRefereshData}
+                  />
                 ) : (
                   " "
                 )

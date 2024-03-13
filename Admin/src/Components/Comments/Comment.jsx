@@ -1,15 +1,10 @@
 import axios from "axios";
 import { React, useState, useEffect } from "react";
-import SendIcon from "@mui/icons-material/Send";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
 import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
-import Like from "./Like";
-import Answerdata from "./Answerdata";
-// import Dropdown from "./Dropdown";
 import Default from "./one";
-// import SideAvtar from "../SideAvtar/SideAvtar";
+import Answerdata from "./Answerdata";
+import "../Admin/CSS/Admin_cheack_Ans.css";
 import { FluentProvider, webLightTheme } from "@fluentui/react-components";
 
 const Comment = ({
@@ -17,7 +12,9 @@ const Comment = ({
   currentValue,
   img,
   questionData,
+  setRefereshData,
   setShowAlert,
+  setGrant
 }) => {
   const [commentData, setCommentData] = useState("");
   const [nextCommentData, setNextCommentData] = useState([]);
@@ -25,11 +22,7 @@ const Comment = ({
   const [cusername, setCUsername] = useState(false);
   const [getCommentusername, setGetCommentUsername] = useState([]);
   const [firstComment1, setFirstComment] = useState([]);
-  const [restComment1, setRestComment] = useState([]);
-  const [isEditAnsModalOpen, setEditAnsModalOpen] = useState(false);
-  const [selectedCommentId, setSelectedCommentId] = useState(null);
 
-  // useEffect(() => {
   const fetchComments = async () => {
     try {
       const res = await axios.get(
@@ -40,7 +33,6 @@ const Comment = ({
       const sortedComments = sortData.sort((a, b) => b.likeCount - a.likeCount);
       // console.log(sortedComments);
       setFirstComment(sortedComments.length > 0 ? sortedComments[0] : null);
-      setRestComment(sortedComments.slice(1));
 
       const usernames = res.data.question_comment.map(
         (comment) => comment.username
@@ -54,16 +46,6 @@ const Comment = ({
   useEffect(() => {
     fetchComments();
   }, []);
-
-  const addComment = () => {
-    setAddCommentData(!addcommentData);
-  };
-
-  const handleCommentData = (e) => {
-    e.preventDefault();
-    setCommentData(e.target.value);
-    resizeTextarea();
-  };
 
   const change = async () => {
     try {
@@ -81,14 +63,8 @@ const Comment = ({
     }
   };
 
-  const handleSubmitComment = async (e) => {
-    change();
-  };
-
   useEffect(() => {
     const fetchData = async () => {
-      // console.log("Fetching login...");
-
       try {
         const res = await axios.get("http://localhost:5000/admin/adminlogin", {
           headers: {
@@ -103,11 +79,24 @@ const Comment = ({
     fetchData();
   }, []);
 
-  function resizeTextarea() {
-    const textarea = document.getElementById("input-comment");
-    textarea.style.height = "1rem";
-    textarea.style.height = textarea.scrollHeight + "px";
-  }
+  const cheackGrant = async (value, id) => {
+    try {
+      const res = await axios.post(
+        `http://localhost:5000/user/updategrantmain`,
+        {
+          commentid:firstComment1._id,
+          _id: id,
+          grant: value,
+        }
+      );
+      console.log(res.data);
+      setGrant(res.data.grant);
+      setRefereshData(true);
+      // console.log("123456")
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // const setProfileImage = async (usernames) => {
   //   try {
@@ -138,13 +127,6 @@ const Comment = ({
     if (hours > 0) return `${hours} hours ago`;
     if (minutes > 0) return `${minutes} min ago`;
     return "Just now";
-  };
-
-  const openEditAnsModal = (commentId) => {
-    // console.log("BorderColorIcon. :", commentId);
-    // console.log("First comment:", firstComment1._id);
-    setSelectedCommentId(commentId);
-    setEditAnsModalOpen(true);
   };
 
   const avatarGroupStyle = {
@@ -198,155 +180,35 @@ const Comment = ({
               </div>
 
               <div className="question-que" style={{ marginLeft: "1rem" }}>
-                <p> Ans :</p>
-                <div
-                  className="comments"
-                  onClick={() => openEditAnsModal(firstComment1._id)}
-                >
-                  <BorderColorIcon
-                    style={{ marginRight: "0rem", cursor: "pointer" }}
-                  />
-                </div>
+                <p> Answer :</p>
               </div>
 
               <Answerdata comment={firstComment1} />
             </div>
-            <div className="responses">
-              <div className="icon-left">
-                <Like
-                  currentValue={currentValue}
-                  nextCommentData={nextCommentData}
-                  cid={firstComment1._id}
-                  countLikeTotal={firstComment1.likeCount}
-                  updateCommentData={() => {
-                    fetchComments();
-                  }}
-                />
-                <div className="comments" onClick={addComment}>
-                  <KeyboardArrowDownIcon style={{ cursor: "pointer" }} />
-                </div>
+            <hr />
+            <div className="cheack-ans">
+              <div className="cheack-ans-button">
+                <button
+                  className="cheack-ans-button-press cancelbtn"
+                  onClick={() =>
+                    cheackGrant("false", firstComment1.question_id)
+                  }
+                >
+                  Cancel
+                </button>
+              </div>
+              <div className="cheack-ans-button ">
+                <button
+                  className="cheack-ans-button-press"
+                  onClick={() => cheackGrant("true", firstComment1.question_id)}
+                >
+                  Done
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      {addcommentData ? (
-        <div className="main-comment">
-          <div className="comment-botttom-list">
-            {restComment1.map((comment, index) => (
-              <div key={index}>
-                <hr style={{ height: "1px", margin: "0 1rem" }} />
-                <div className="comment-3">
-                  <div className="comment-comment-2">
-                    <div className="comment-comment-top">
-                      <div className="contro-distance">
-                        <div className="contro-distance2">
-                          <div className="comment-userimage">
-                            <div className="avatar">
-                              {getCommentusername[index + 1] &&
-                              getCommentusername[index + 1].image !== null ? (
-                                <img
-                                  src={getCommentusername[index + 1].image}
-                                  alt="profile"
-                                />
-                              ) : (
-                                <AccountCircleIcon
-                                  style={{ fontSize: "3rem" }}
-                                />
-                              )}
-                            </div>
-                          </div>
-                          <div className="comment-time">
-                            <div className="comment-username">
-                              {comment.username}
-                            </div>
-                            <div className="time-title">
-                              <QueryBuilderIcon
-                                style={{
-                                  fontSize: "0.7rem",
-                                  marginRight: "5px",
-                                }}
-                              />
-                              <div className="comment-username-time">
-                                {calculateTimeDifference(
-                                  firstComment1.timestamp
-                                )}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="contro-name">
-                          <FluentProvider
-                            theme={webLightTheme}
-                            style={avatarGroupStyle}
-                          >
-                            <Default firstComment1={comment._id} />
-                          </FluentProvider>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div
-                      className="question-que"
-                      style={{ marginLeft: "1rem" }}
-                    >
-                      <p> Ans :</p>
-                      <div
-                        className="comments"
-                        onClick={() => openEditAnsModal(comment._id)}
-                      >
-                        <BorderColorIcon
-                          style={{ marginRight: "0rem", cursor: "pointer" }}
-                        />
-                      </div>
-                    </div>
-
-                    <Answerdata comment={comment} />
-
-                    <div className="responses">
-                      <div className="icon-left">
-                        <Like
-                          currentValue={currentValue}
-                          nextCommentData={nextCommentData}
-                          cid={comment._id}
-                          countLikeTotal={comment.likeCount}
-                          updateCommentData={() => {
-                            fetchComments();
-                          }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          <hr style={{ height: "1px", margin: "0 1rem" }} />
-          <label className="comment-title">Add Yours</label>
-          <div className="main-comment-in">
-            <div className="comments-send">
-              <textarea
-                className="input-comment"
-                id="input-comment"
-                type="text"
-                value={commentData}
-                onChange={handleCommentData}
-                placeholder="Add here.."
-                wrap="soft"
-              />
-              <div className="button-comment-div">
-                <div className="button-comment" onClick={handleSubmitComment}>
-                  <SendIcon />
-                </div>
-              </div>
-            </div>
-            <hr />
-          </div>
-        </div>
-      ) : (
-        ""
-      )}
     </>
   );
 };

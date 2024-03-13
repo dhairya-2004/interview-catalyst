@@ -10,14 +10,14 @@ async function getAdminData(req, res) {
     // console.log(email,password)
     // console.log(req.body)
     const admin = await Admin.findOne({
-      $or: [{ name: email }, { password: password }],
+      $or: [{ name: email }],
     });
 
     if (!admin) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
-    if (admin) {
+    if (admin && admin.password===password) {
       const token = jwt.sign(
         { id: admin._id, name: admin.name },
         process.env.TOKEN1,

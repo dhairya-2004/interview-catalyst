@@ -9,8 +9,9 @@ import CustomModal from "../../Write/Input";
 import "../../Write/Write.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import Alert from "@mui/material/Alert";
-import CheckIcon from "@mui/icons-material/Check";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { DATA_ADD, STYLEDATA, DATA_DELETE } from "../../../Toast/Tost.js";
 
 function WritePage() {
   const [questionData, setQuestionData] = useState([]);
@@ -66,6 +67,13 @@ function WritePage() {
   useEffect(() => {
     fetchQuestion();
   }, [model]);
+
+  useEffect(() => {
+    if (showAlert) {
+      toast.success(DATA_ADD, STYLEDATA);
+      // toast.warning(DATA_DELETE, STYLEDATA);
+    }
+  }, [showAlert]);
 
   const onSearch = async (e) => {
     const searchData = e.target.value;
@@ -135,18 +143,7 @@ function WritePage() {
           </div>
         </div>
       </nav>
-      {showAlert && (
-        <div>
-          <Alert
-            icon={<CheckIcon fontSize="inherit" />}
-            severity="success"
-            onClose={() => setShowAlert(false)}
-            className="success-message-container"
-          >
-            Edit Request Successful
-          </Alert>
-        </div>
-      )}
+      <ToastContainer style={{ marginTop: "4.2rem" }} />
       <div className="container-question">
         <div className="sidebar">
           <div className="sidebar-item" onClick={() => toggleDropdown("item1")}>

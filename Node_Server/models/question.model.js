@@ -1,10 +1,10 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const QuestionsSchema = new mongoose.Schema({
   question: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   title: {
     type: String,
@@ -17,19 +17,22 @@ const QuestionsSchema = new mongoose.Schema({
   },
   username: {
     type: String,
-    required: true
+    required: true,
   },
-  timestamp:{
-    type:String,
-    required: true
+  grant: {
+    type: String,
+  },
+  timestamp: {
+    type: String,
+    required: true,
   },
   admin: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Admin',
-    required: true
-  }
+    ref: "Admin",
+    required: true,
+  },
 });
 
-const Questions = mongoose.model('Questions', QuestionsSchema);
+const Questions = mongoose.model("Questions", QuestionsSchema);
 
 module.exports = Questions;

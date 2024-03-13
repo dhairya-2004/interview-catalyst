@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import "../../CSS/Admin_Main.css";
-import AdminQuestion from "../../../Message/JSX/AllQuestion";
+import AdminQuestion from "../../../Message/JSX/AdminQuestion";
 import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 // import "../../../Write/Write.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import {DATA_ADD,STYLEDATA,DATA_DELETE} from '../../../../Toast/Tost.js'
 
 function WritePage() {
   const [questionData, setQuestionData] = useState([]);
@@ -15,6 +18,14 @@ function WritePage() {
   const [cusename, setCUsername] = useState("");
 
   // -------------------------------------------------
+
+  useEffect(() => {
+    // if(grant==='true'){
+      toast.success(DATA_ADD,STYLEDATA);
+      toast.warning(DATA_DELETE,STYLEDATA);
+    // }
+  }, []);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -92,6 +103,7 @@ function WritePage() {
       </nav>
 
       <div className="main-part-admin">
+      <ToastContainer style={{marginTop:'4.2rem'}} />
         <div style={{ whiteSpace: "pre-line" }}>
           {questionData.length > 0 ? (
             <div>
