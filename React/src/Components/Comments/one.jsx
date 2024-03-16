@@ -44,6 +44,7 @@ const Default = ({ cid }) => {
       "#C933FF",
       "#FF5733",
     ]; // Define your list of colors here
+
     return colors[index % colors.length];
   };
 

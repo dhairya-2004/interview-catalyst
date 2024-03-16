@@ -16,7 +16,7 @@ async function commentsubmit(req, res) {
         timestamp: currentTimeInIndia,
         edited_comment:edited_comment,
         grant:grant
-      });
+      }); 
 
       await comments.save();
     }

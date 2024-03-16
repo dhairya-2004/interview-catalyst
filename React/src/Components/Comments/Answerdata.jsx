@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Tooltip from "@mui/material/Tooltip";
-import { diffChars } from "diff";
+import { diffChars, diffWords } from "diff";
 
 const Answer = ({ comment }) => {
   const [checkGrant, setCheckGrant] = useState("");
   const [data, setData] = useState("");
   const [editedName, setEditedName] = useState("");
+  const [paragraph1, setParagraph1] = useState("");
+  const [paragraph2, setParagraph2] = useState("");
   const [highlightedText, setHighlightedText] = useState([]);
 
   useEffect(() => {
@@ -35,29 +37,13 @@ const Answer = ({ comment }) => {
 
         const data1 = res.data.editcomment_data;
         setCheckGrant(data1.grant);
-
+        setParagraph1(comment.comment);
+        setParagraph2(comment.edited_comment);
         const highlighted = compareParagraphs(
           comment.comment,
           comment.edited_comment
         );
 
-        function compareParagraphs(paragraph1, paragraph2) {
-          const diff = diffChars(paragraph1, paragraph2);
-          return diff.map((part, index) => {
-            return (
-              <span
-                key={index}
-                className={part.added ? "highlighted-word" : ""}
-                onMouseEnter={() => setData(part.value)}
-                onMouseLeave={() => setData("")}
-              >
-                <Tooltip title={part.added ? editedName : ""} arrow>
-                  {part.value}
-                </Tooltip>
-              </span>
-            );
-          });
-        }
         setHighlightedText(highlighted);
       } catch (error) {
         console.log(error);
@@ -66,6 +52,25 @@ const Answer = ({ comment }) => {
     fetchComments();
   }, [comment._id, comment.comment, comment.edited_comment, data, editedName]);
 
+  function compareParagraphs(paragraph1, paragraph2) {
+    const diff = diffWords(paragraph1, paragraph2);
+    return diff.map((part, index) => {
+      return (
+        <span
+          key={index}
+          className={part.added ? "highlighted-word" : ""}
+          onMouseEnter={() => setData(part.value)}
+          onMouseLeave={() => setData("")}
+        >
+          <Tooltip title={part.added ? editedName : ""} arrow>
+            {part.value}
+          </Tooltip>
+        </span>
+      );
+    });
+  }
+
+  
   return (
     <>
       <div className="answer" style={{ whiteSpace: "pre-line" }}>
