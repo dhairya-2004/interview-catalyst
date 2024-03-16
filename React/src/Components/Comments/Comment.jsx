@@ -106,7 +106,7 @@ const Comment = ({
 
   function resizeTextarea() {
     const textarea = document.getElementById("input-comment");
-    textarea.style.height = "auto";
+    textarea.style.height = "1rem";
     textarea.style.height = textarea.scrollHeight + "px";
   }
 
@@ -193,9 +193,7 @@ const Comment = ({
                     theme={webLightTheme}
                     style={avatarGroupStyle}
                   >
-                    <Default
-                    cid={firstComment1._id}
-                    />
+                    <Default cid={firstComment1._id} />
                   </FluentProvider>
                 </div>
               </div>
@@ -223,7 +221,7 @@ const Comment = ({
                 />
               )}
 
-              <Answerdata comment={firstComment1} />
+              <Answerdata comment={firstComment1} setShowAlert={setShowAlert} />
             </div>
             <div className="responses">
               <div className="icon-left">
@@ -361,12 +359,9 @@ const Comment = ({
                 wrap="soft"
               />
               <div className="button-comment-div">
-                <button
-                  className="button-comment"
-                  onClick={handleSubmitComment}
-                >
+                <div className="button-comment" onClick={handleSubmitComment}>
                   <SendIcon />
-                </button>
+                </div>
               </div>
             </div>
             <hr />

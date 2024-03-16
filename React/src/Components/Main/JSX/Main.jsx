@@ -9,12 +9,21 @@ import CustomModal from "../../Write/Input";
 import "../../Write/Write.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import Alert from "@mui/material/Alert";
-import CheckIcon from "@mui/icons-material/Check";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import {
+  CATEGORY,
+  DATA_ADD,
+  STYLEDATA,
+  DATA_EDIT,
+  STYLEDATACATEGORY,
+} from "../../../Toast/Tost.js";
 
 function WritePage() {
   const [questionData, setQuestionData] = useState([]);
   const [showAlert, setShowAlert] = useState(false);
+  const [showAlert1, setShowAlert1] = useState(false);
+  const [showAlertCategory, setShowAlertCategory] = useState(false);
 
   const [dropdownStates, setDropdownStates] = useState({
     item1: false,
@@ -66,6 +75,18 @@ function WritePage() {
   useEffect(() => {
     fetchQuestion();
   }, [model]);
+
+  useEffect(() => {
+    if (showAlert) {
+      toast.success(DATA_EDIT, STYLEDATA);
+    }
+    if (showAlert1) {
+      toast.success(DATA_ADD, STYLEDATA);
+    }
+    if (showAlertCategory) {
+      toast.error(CATEGORY, STYLEDATACATEGORY);
+    }
+  }, [showAlert, showAlert1, showAlertCategory]);
 
   const onSearch = async (e) => {
     const searchData = e.target.value;
@@ -121,7 +142,12 @@ function WritePage() {
               <EditNoteIcon style={{ fontSize: "2.2rem" }} />
             </Link>
             {model && (
-              <CustomModal closeModal={changeModal} username={cusename} />
+              <CustomModal
+                closeModal={changeModal}
+                username={cusename}
+                setShowAlert1={setShowAlert1}
+                setShowAlertCategory={setShowAlertCategory}
+              />
             )}
           </div>
 
@@ -135,18 +161,9 @@ function WritePage() {
           </div>
         </div>
       </nav>
-      {showAlert && (
-        <div>
-          <Alert
-            icon={<CheckIcon fontSize="inherit" />}
-            severity="success"
-            onClose={() => setShowAlert(false)}
-            className="success-message-container"
-          >
-            Edit Request Successful
-          </Alert>
-        </div>
-      )}
+      <ToastContainer
+        style={{ marginTop: showAlertCategory ? "" : "2.5rem" }}
+      />
       <div className="container-question">
         <div className="sidebar">
           <div className="sidebar-item" onClick={() => toggleDropdown("item1")}>

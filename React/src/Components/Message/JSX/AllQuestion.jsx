@@ -1,19 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "../../Message/CSS/AllQuestion.css";
-// import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-// import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-// import VerifiedIcon from "@mui/icons-material/Verified";
 import Comment from "../../Comments/Comment";
 import axios from "axios";
 
-function AddQuestion({ currentValue,setShowAlert }) {
+function AddQuestion({ currentValue, setShowAlert }) {
   const [profileImage, setProfileImage] = useState("");
 
-  // const [min, setMin] = useState("");
-  // const [hours, setHours] = useState("");
-  // const [days, setDays] = useState("");
-  // const [years, setYears] = useState("");
   const [, setCurrentTime] = useState(
     new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
   );
@@ -60,15 +53,15 @@ function AddQuestion({ currentValue,setShowAlert }) {
   // const calculateTimeDifference = (timestamp) => {
   //   const timeDifference = new Date() - new Date(timestamp);
 
-    // const minutes = Math.floor(timeDifference / (1000 * 60));
-    // const hours = Math.floor(timeDifference / (1000 * 60 * 60));
-    // const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-    // const years = Math.floor(timeDifference / (1000 * 60 * 60 * 24 * 365));
+  // const minutes = Math.floor(timeDifference / (1000 * 60));
+  // const hours = Math.floor(timeDifference / (1000 * 60 * 60));
+  // const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+  // const years = Math.floor(timeDifference / (1000 * 60 * 60 * 24 * 365));
 
-    // setMin(minutes);
-    // setHours(hours);
-    // setDays(days);
-    // setYears(years);
+  // setMin(minutes);
+  // setHours(hours);
+  // setDays(days);
+  // setYears(years);
   // };
 
   // useEffect(() => {
@@ -77,37 +70,41 @@ function AddQuestion({ currentValue,setShowAlert }) {
 
   return (
     <>
-      <section style={{ margin: "0 2rem" }}>
-        <div className="top-title">
-          <div className="left-side">
-            <div className="question-que">Que :</div>
-           
-            <div className="question"> {currentValue.question}</div>
-          </div>
+      {currentValue.grant === 'true' ? (
+        <section style={{ margin: "0 2rem" }}>
+          <div className="top-title">
+            <div className="left-side">
+              <div className="question-que">Que :</div>
 
-          <div className="right-side">
-            <div
-              className="favourite-count"
-              // onClick=''
-            >
-              <MoreVertIcon style={{ fontSize: "2rem" }} />
+              <div className="question"> {currentValue.question}</div>
+            </div>
+
+            <div className="right-side">
+              <div
+                className="favourite-count"
+                // onClick=''
+              >
+                <MoreVertIcon style={{ fontSize: "2rem" }} />
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="main-addQuestion">
-          {/* <hr className="question-hr" /> */}
-          {/* <div className="answer">{currentValue.answer}</div> */}
+          <div className="main-addQuestion">
+            {/* <hr className="question-hr" /> */}
+            {/* <div className="answer">{currentValue.answer}</div> */}
 
-          <Comment
-            questionId={currentValue._id}
-            currentValue={currentValue}
-            img={profileImage}
-            questionData={currentValue.question}
-            setShowAlert={setShowAlert}
-          />
-        </div>
-      </section>
+            <Comment
+              questionId={currentValue._id}
+              currentValue={currentValue}
+              img={profileImage}
+              questionData={currentValue.question}
+              setShowAlert={setShowAlert}
+            />
+          </div>
+        </section>
+      ) : (
+        ""
+      )}
     </>
   );
 }
