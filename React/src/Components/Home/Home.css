@@ -12,6 +12,7 @@
 
 body {
   overflow-y:hidden;
+  overflow-y: auto;
   /* background-color: #333333!important; */
 }
 
@@ -45,6 +46,7 @@ nav {
 .container {
   /* background-color: #00264d; */
   background-color: black;
+  background-color: #4682B4;
   padding-left: 40px;
   display: flex;
   flex-direction: column;
