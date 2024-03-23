@@ -14,11 +14,6 @@ import Confirm from "./Components/Forgot/Confirm";
 import Profile from "./Components/Profile/profile/Profile";
 import EditProfile from "./Components/Profile/EditProfile/EditProfile";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import CustomModal from "./Components/Write/CustomModal";
-import InputData from "./Components/Main/JSX/Main";
-
-// import Log1 from './Components/Demo/Demo1'
-// import Home1 from './Components/Demo/Demo2';
 
 function App() {
   return (

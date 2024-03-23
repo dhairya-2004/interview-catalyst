@@ -33,13 +33,9 @@ const embeddings = new GoogleGenerativeAIEmbeddings({
 
 async function insertQuestion(req, res) {
   await help().then(async () => {
-    console.log(
-      "***************************************************************************"
-    );
-    console.log(questionsCollection);
-    console.log(
-      "***************************************************************************"
-    );
+    // console.log("**********************************************");
+    console.log("questionsCollection", questionsCollection);
+    // console.log("*******************************************");
 
     try {
       const { question, username, title, grant } = req.body;
@@ -49,17 +45,13 @@ async function insertQuestion(req, res) {
 
       if (username != "") {
         const category = title.toLowerCase();
-
         const adminCategoryCount = await Admin.countDocuments({ category });
         const numAdmins = adminCategoryCount > 0 ? adminCategoryCount : 3;
-
         const admins = await Admin.find({ category })
           .sort({ adminId: 1 })
           .limit(numAdmins);
-        console.log(admins);
         const currentAdminIndex =
           admins.findIndex((admin) => admin.status === "available") % numAdmins;
-        // console.log(currentAdminIndex);
         const currentAdmin = admins[currentAdminIndex];
 
         if (currentAdmin) {
@@ -67,7 +59,7 @@ async function insertQuestion(req, res) {
           await currentAdmin.save();
 
           const res_embed = await embeddings.embedQuery(question);
-          // console.log(res)
+
           const sim_que = await questionsCollection
             .aggregate([
               {
@@ -82,13 +74,9 @@ async function insertQuestion(req, res) {
             ])
             .toArray();
 
-          console.log(
-            "***************************************************************************"
-          );
-          console.log(sim_que);
-          console.log(
-            "***************************************************************************"
-          );
+          // console.log("***************************************************");
+          console.log("sim_que", sim_que);
+          // console.log("***********************************************");
           const question_main = new Question({
             username: username,
             question: question,
@@ -96,7 +84,7 @@ async function insertQuestion(req, res) {
             timestamp: currentTimeInIndia,
             admin: currentAdmin._id,
             grant: grant,
-            embedding: res,
+            embedding: res_embed,
             similar_questions: sim_que,
           });
 
@@ -105,9 +93,7 @@ async function insertQuestion(req, res) {
               { category },
               { $set: { status: "available" } }
             );
-            // admins = await Admin.find({ category })
-            //   .sort({ adminId: 1 })
-            //   .limit(numAdmins);
+            console.log("check----------------------------------------");
           }
           await question_main.save();
           res

@@ -1,53 +1,58 @@
-import React, { useEffect, useState } from "react";
-import { Button, message, theme } from "antd";
-import CustomModal from "./CustomModal";
+import React, { useState } from "react";
+import axios from "axios";
+import { Button } from "antd";
+import CustomModalQuestion from "./CustomModalQuestion";
 import Dropdown from "../Dropdown/Dropdown";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import CustomModalAnswer from "./CustomModelAnswer";
+import { useDispatch, useSelector } from "react-redux";
+import { sendQuestion } from "../../Store/DataQuestion/action";
+import { useNavigate } from "react-router";
 
 const StepsDesign = ({
   closeModal,
   username,
   setShowAlert1,
   setShowAlertCategory,
+  onCancel
 }) => {
   const [current, setCurrent] = useState(0);
   const [value, setValue] = useState(false);
   const [addValue, setAddValue] = useState(false);
   const [text, setText] = useState("");
-  const [title, setTitle] = useState("");
-  const [done, setDone] = useState("");
+  const [question, setQuestion] = useState("");
+  const [answer, setAnswer] = useState("");
+  const [title, setTitle] = useState("C++");
+  const dispatch = useDispatch();
+  const nav = useNavigate();
+  const dataQuestion = useSelector((state) => state.dataQuestion);
 
   const steps = [
     {
       title: "Question",
       content: (
-        <CustomModal
+        <CustomModalQuestion
           closeModal={closeModal}
           username={username}
           setShowAlert1={setShowAlert1}
           setShowAlertCategory={setShowAlertCategory}
-          current={current}
+          setQuestion={setQuestion}
         />
       ),
     },
     {
       title: "Answer",
       content: (
-        <CustomModal
+        <CustomModalAnswer
           closeModal={closeModal}
           username={username}
           setShowAlert1={setShowAlert1}
           setShowAlertCategory={setShowAlertCategory}
-          current={current}
-          done={done}
+          setAnswer={setAnswer}
         />
       ),
     },
   ];
-
-  useEffect(() => {
-    <CustomModal done={done} />;
-  }, [done]);
 
   const next = () => {
     setCurrent(current + 1);
@@ -55,15 +60,54 @@ const StepsDesign = ({
   const prev = () => {
     setCurrent(current - 1);
   };
-  const items = steps.map((item) => ({
-    key: item.title,
-    title: item.title,
-  }));
+
+  const callCloseModal = async (e) => {
+    console.log("Question", dataQuestion[0].question);
+    console.log("Answers", answer);
+    try {
+      console.log("title", title);
+      if (!title) {
+        setShowAlertCategory(true);
+      }
+      if (title) {
+        const response = await axios.post(
+          "http://localhost:5000/user/question",
+          {
+            question: dataQuestion[0].question,
+            username,
+            title: "C++",
+            grant: "false",
+          }
+        );
+
+        if (response.data.question_main._id !== "" && answer !== "") {
+          try {
+            await axios.post("http://localhost:5000/user/commentsubmit", {
+              cusername: username,
+              commentData: answer,
+              question_id: response.data.question_main._id,
+              edited_comment: "none",
+              grant: false,
+            });
+            setShowAlert1(true);
+            // fetchData();
+            onCancel();
+          } catch (error) {
+            console.log(error);
+          }
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const contentStyle = {
     textAlign: "center",
     marginTop: 16,
     marginBottom: "5rem",
   };
+
   return (
     <>
       <div className="question-title">
@@ -101,7 +145,13 @@ const StepsDesign = ({
                 )}
               </div>
               <div>
-                <Button type="primary" onClick={() => next()}>
+                <Button
+                  type="primary"
+                  onClick={() => {
+                    next();
+                    dispatch(sendQuestion(question));
+                  }}
+                >
                   Next
                 </Button>
                 <Button
@@ -122,7 +172,7 @@ const StepsDesign = ({
               type="primary"
               onClick={() => {
                 // message.success("Processing complete!");
-                setDone("done");
+                callCloseModal();
               }}
             >
               Done

@@ -1,9 +1,9 @@
 import React from "react";
-import { Dropdown } from "antd";
+import { Dropdown, Tooltip } from "antd";
 import { Link } from "react-router-dom";
 import Person2Icon from "@mui/icons-material/Person2";
 import ProfileAvtar from "./ProfileAvtar";
-import './ITEM1.css'
+import "./ITEM1.css";
 
 const ProfileDropDown = ({ cusename }) => {
   const items = [
@@ -12,8 +12,8 @@ const ProfileDropDown = ({ cusename }) => {
       label: <ProfileAvtar cusename={cusename} />,
     },
     {
-        type: 'divider',
-      },
+      type: "divider",
+    },
     {
       key: "2",
       label: (
@@ -26,8 +26,8 @@ const ProfileDropDown = ({ cusename }) => {
       ),
     },
     {
-        type: 'divider',
-      },
+      type: "divider",
+    },
     {
       key: "3",
       label: (
@@ -49,7 +49,7 @@ const ProfileDropDown = ({ cusename }) => {
         arrow={{
           pointAtCenter: true,
         }}
-        trigger={['click']}
+        trigger={["click"]}
       >
         <Person2Icon style={{ fontSize: "2rem" }} />
       </Dropdown>
