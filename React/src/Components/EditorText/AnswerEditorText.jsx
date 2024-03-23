@@ -3,12 +3,12 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "./editorstyles.css";
 
-const AnswerEditorText = ({ placeholder, setValueState }) => {
+const AnswerEditorText = ({ placeholder, setAnswer }) => {
   const [value, setValue] = useState("");
 
   const handleTextChange = (content) => {
-    setValueState(content);
     setValue(content);
+    setAnswer(content);
   };
 
   const toolbarOptions = [
@@ -34,8 +34,6 @@ const AnswerEditorText = ({ placeholder, setValueState }) => {
   const module = {
     toolbar: toolbarOptions,
   };
-
-  
 
   return (
     <ReactQuill

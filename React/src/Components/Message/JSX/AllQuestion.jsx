@@ -4,7 +4,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Comment from "../../Comments/Comment";
 import axios from "axios";
 
-function AddQuestion({ currentValue, setShowAlert }) {
+function AddQuestion({ currentValue, setShowAlert,cusename }) {
   const [profileImage, setProfileImage] = useState("");
 
   const [, setCurrentTime] = useState(
@@ -34,40 +34,6 @@ function AddQuestion({ currentValue, setShowAlert }) {
     return () => clearInterval(intervalId);
   }, []);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const res = await axios.get(
-  //         `http://localhost:5000/user/getprofile?cusername=${currentValue.username}`
-  //       );
-  //       const newData = res.data.profile;
-  //       setProfileImage(newData.image);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, [currentValue.username]);
-
-  // const calculateTimeDifference = (timestamp) => {
-  //   const timeDifference = new Date() - new Date(timestamp);
-
-  // const minutes = Math.floor(timeDifference / (1000 * 60));
-  // const hours = Math.floor(timeDifference / (1000 * 60 * 60));
-  // const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-  // const years = Math.floor(timeDifference / (1000 * 60 * 60 * 24 * 365));
-
-  // setMin(minutes);
-  // setHours(hours);
-  // setDays(days);
-  // setYears(years);
-  // };
-
-  // useEffect(() => {
-  //   calculateTimeDifference(currentValue.timestamp);
-  // }, [currentValue.timestamp]);
-
   return (
     <>
       {currentValue.grant === "true" ? (
@@ -84,12 +50,16 @@ function AddQuestion({ currentValue, setShowAlert }) {
             </div>
 
             <div className="right-side">
-              <div
-                className="favourite-count"
-                // onClick=''
-              >
-                <MoreVertIcon style={{ fontSize: "2rem" }} />
-              </div>
+              {currentValue.username === cusename ? (
+                <div
+                  className="favourite-count"
+                  // onClick=''
+                >
+                  <MoreVertIcon style={{ fontSize: "2rem" }} />
+                </div>
+              ) : (
+                ""
+              )}
             </div>
           </div>
 

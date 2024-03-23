@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "./editorstyles.css";
+import { useSelector } from "react-redux";
 
-const QuestionEditorText = ({ placeholder, setValueState }) => {
-  const [value, setValue] = useState("");
+const QuestionEditorText = ({ placeholder, setQuestion }) => {
+  const dataQuestion = useSelector((state) => state.dataQuestion);
+  const [value, setValue] = useState('');
+  // const [value, setValue] = useState(dataQuestion[0].question);
 
   const handleTextChange = (content) => {
-    setValueState(content);
     setValue(content);
+    setQuestion(content);
   };
 
   const toolbarOptions = [

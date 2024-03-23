@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const QuestionsSchema = new mongoose.Schema({
   question: {
     type: String,
-    required: true,
-    unique: true,
+    // required: true,
+    // unique: true,
   },
   title: {
     type: String,
@@ -17,7 +17,7 @@ const QuestionsSchema = new mongoose.Schema({
   },
   username: {
     type: String,
-    required: true,
+    // required: true,
   },
   grant: {
     type: String,
@@ -29,7 +29,7 @@ const QuestionsSchema = new mongoose.Schema({
   admin: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Admin",
-    required: true,
+    // required: true,
   },
   embedding: [{
     type:Number

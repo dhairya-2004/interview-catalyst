@@ -39,6 +39,7 @@ const Input = ({
             username={username}
             setShowAlert1={setShowAlert1}
             setShowAlertCategory={setShowAlertCategory}
+            onCancel={handleCancel}
           />
         </div>
       </Modal>

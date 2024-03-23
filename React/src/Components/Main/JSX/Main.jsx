@@ -145,10 +145,8 @@ function Main() {
             </Link>
           </div>
 
-          <div className="account-main">
-            {/* <Link to="/profile">
-            </Link> */}
-            <ProfileDropDown cusename={cusename}/>
+          <div className="account-main" style={{ cursor: "pointer" }}>
+            <ProfileDropDown cusename={cusename} />
           </div>
         </div>
       </nav>
@@ -287,6 +285,7 @@ function Main() {
                   key={index}
                   currentValue={value}
                   setShowAlert={setShowAlert}
+                  cusename={cusename}
                 />
               ))}
 

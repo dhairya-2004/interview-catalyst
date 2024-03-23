@@ -8,8 +8,8 @@ const Dropdown = ({ setValue, text, addValue, setTitle }) => {
   const fetchData = async () => {
     try {
       const res = await axios.get(`http://localhost:5000/user/getcategory`);
-      console.log("jdfsvkjsbf");
-      console.log(res.data.category);
+      // console.log("jdfsvkjsbf");
+      // console.log(res.data.category);
       // SetCategory(res.data.categoryname);
     } catch (error) {
       console.log(error);
