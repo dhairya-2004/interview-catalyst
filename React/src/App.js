@@ -36,8 +36,8 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/editprofile" element={<EditProfile />} />
           <Route path="/admin" element={<AdminMain />} />
-          <Route path="/admin_cheack_ans" element={<AdminCheackAns />} />
-          <Route path="/admin_cheack_main" element={<AdminCheackMain />} />
+          <Route path="/admin_check_ans" element={<AdminCheackAns />} />
+          <Route path="/admin_check_main" element={<AdminCheackMain />} />
 
           {/* <Route path="/log1" element={<Log1 />} /> 
           <Route path="/home1" element={<Home1 />} /> */}
