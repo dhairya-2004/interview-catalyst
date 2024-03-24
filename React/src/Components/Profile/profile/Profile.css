@@ -1,6 +1,6 @@
 .profile-all {
   height: 100vh;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   padding-bottom: 10rem;
   width: 100%;
 }
@@ -170,7 +170,7 @@
 
 @media screen and (max-width: 700px) {
   .name-profile {
-    font-size: 1.1rem;
+    font-size: 2.1rem;
   }
 
   .search-write {
@@ -196,8 +196,8 @@
   }
 }
 
-.question-bar-profile {
-  margin: 0 5rem;
+.question-bar-profile{
+  margin: 0 1.5rem !important;
 }
 
 .profileRight {
@@ -279,6 +279,16 @@
   .search-write {
     width: 8rem;
   }
+  .question-bar-profile{
+    margin: 0 3rem !important;
+  }
+  .top-title {
+    margin: 0rem !important;
+    margin-top: 5rem !important;
+  }
+  .main-addQuestion {
+    margin: 0rem !important;
+  }
 }
 
 @media screen and (min-width: 481px) and (max-width: 768px) {
@@ -287,5 +297,36 @@
   }
   .sidebar {
     display: none;
+  }
+  .top-title {
+    margin: 0rem !important;
+    margin-top: 5rem !important;
+  }
+  .main-addQuestion {
+    margin: 0rem !important;
+  }
+  section{
+    margin: 0rem !important;
+  }
+  .question-bar-profile{
+    margin: 0 3rem !important;
+  }
+  .search-bar-container{
+    display: none;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 480px) {
+  .search-bar-container{
+    display: none;
+  }
+  .name-profile{
+    font-size: 1.5rem;
+  }
+  section{
+    margin: 0rem !important;
+  }
+  .comment-username{
+    font-size: 1rem;
   }
 }
