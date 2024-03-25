@@ -58,6 +58,7 @@ async function insertQuestion(req, res) {
           currentAdmin.status = "unavailable";
           await currentAdmin.save();
 
+          
           const res_embed = await embeddings.embedQuery(question);
 
           const sim_que = await questionsCollection

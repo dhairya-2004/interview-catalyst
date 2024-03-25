@@ -26,7 +26,7 @@ const StepsDesign = ({
   const [text, setText] = useState("");
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
-  const [title, setTitle] = useState("C++");
+  const [title, setTitle] = useState(null);
 
   const dispatch = useDispatch();
   const nav = useNavigate();
@@ -40,8 +40,6 @@ const StepsDesign = ({
   };
 
   useEffect(() => {
-    
-
     const callCloseQuestionModal = async () => {
       console.log("Question", dataQuestion.question);
       console.log("Answers", answer);
@@ -50,13 +48,13 @@ const StepsDesign = ({
         if (!title) {
           // setShowAlertCategory(true);
         }
-        if (title) {
+        if (title && dataQuestion.question ) {
           const response = await axios.post(
             "http://localhost:5000/user/question",
             {
               question: dataQuestion.question,
               username,
-              title: "C++",
+              title: title,
               grant: "false",
             }
           );
@@ -71,6 +69,10 @@ const StepsDesign = ({
                 grant: false,
               });
               // setShowAlert1(true);
+              dispatch(sendQuestion(""));
+              dispatch(sendAnswer(""));
+              setCurrent(0)
+              message.success("Add Request Sent Successfuly!!");
               nav("/main");
               // fetchData();
               onCancel();
@@ -96,6 +98,9 @@ const StepsDesign = ({
           }
         );
         console.log(res.data);
+        message.success("Comment Add Request Sent Successfuly!!");
+        onCancel();
+
         // setNextCommentData(res.data.question_comment);
         // setCommentData("");
       } catch (error) {
@@ -106,7 +111,6 @@ const StepsDesign = ({
     if (editAns === undefined) {
       callCloseQuestionModal();
     }
-   
 
     if (comment) {
       change();
