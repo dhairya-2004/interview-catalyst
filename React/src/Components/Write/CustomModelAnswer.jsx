@@ -4,7 +4,6 @@ import AnswerEditorText from "../EditorText/AnswerEditorText";
 import getUsernameColor from "../Functions/Avtar";
 
 const CustomModalAnswer = ({
-  closeModal,
   username,
   setShowAlert1,
   setShowAlertCategory,
@@ -50,6 +49,7 @@ const CustomModalAnswer = ({
             placeholder={"Write your answer..."}
             setAnswer={setAnswer}
             editAnswers={editAnswers}
+            editAns={editAns}
           />
         </div>
       </div>

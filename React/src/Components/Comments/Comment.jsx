@@ -6,11 +6,11 @@ import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 
 import Like from "./Like";
-import EditAnswer from "./EditAnswer";
 import Answerdata from "./Answerdata";
-import Default from "./one";
+import Default from "./Contribution";
 import { FluentProvider, webLightTheme } from "@fluentui/react-components";
 import Input from "../Write/Input";
+import InputEdit from "../Write/InputEdit";
 
 const Comment = ({
   questionId,
@@ -29,6 +29,9 @@ const Comment = ({
   const [restComment1, setRestComment] = useState([]);
   const [isEditAnsModalOpen, setEditAnsModalOpen] = useState(false);
   const [selectedCommentId, setSelectedCommentId] = useState(null);
+  const [open, setOpen] = useState(false);
+
+  // const dispatch = useDispatch();
 
   // useEffect(() => {
   const fetchComments = async () => {
@@ -65,21 +68,21 @@ const Comment = ({
   //   setCommentData(e.target.value);
   // };
 
-  const change = async () => {
-    try {
-      const res = await axios.post("http://localhost:5000/user/commentsubmit", {
-        cusername: cusername,
-        question_id: currentValue._id,
-        commentData,
-        edited_comment: "none",
-      });
-      console.log(res.data);
-      setNextCommentData(res.data.question_comment);
-      setCommentData("");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const change = async () => {
+  //   try {
+  //     const res = await axios.post("http://localhost:5000/user/commentsubmit", {
+  //       cusername: cusername,
+  //       question_id: currentValue._id,
+  //       commentData,
+  //       edited_comment: "none",
+  //     });
+  //     console.log(res.data);
+  //     setNextCommentData(res.data.question_comment);
+  //     setCommentData("");
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const handleSubmitComment = async (e) => {
     setCommentData(true);
@@ -87,8 +90,6 @@ const Comment = ({
 
   useEffect(() => {
     const fetchData = async () => {
-      // console.log("Fetching login...");
-
       try {
         const res = await axios.get("http://localhost:5000/user/login", {
           headers: {
@@ -134,11 +135,14 @@ const Comment = ({
     return "Just now";
   };
 
-  const openEditAnsModal = (commentId) => {
-    // console.log("BorderColorIcon. :", commentId);
-    // console.log("First comment:", firstComment1._id);
-    setSelectedCommentId(commentId);
-    setEditAnsModalOpen(true);
+  const showModal = (comment) => {
+    setSelectedCommentId(comment);
+    setOpen(true);
+  };
+
+  const handleCancel = () => {
+    setSelectedCommentId(null);
+    setOpen(false);
   };
 
   const avatarGroupStyle = {
@@ -193,19 +197,29 @@ const Comment = ({
 
               <div className="question-que" style={{ marginLeft: "1rem" }}>
                 <p> Ans :</p>
-                <div className="comments" onClick={() => setEditAns(true)}>
-                  <Input
-                    // closeModal={() => {
-                    //   // setSelectedCommentId(null);
-                    //   console.log(selectedCommentId)
-                    //   // setEditAnsModalOpen(false);
-                    // }}
-                    username={currentValue.username}
-                    questionData={questionData}
-                    cid={firstComment1._id}
-                    // setShowAlert={setShowAlert}
-                    editAns={editAns}
-                  />
+                <div
+                  className="comments"
+                  onClick={() => {
+                    setEditAns(true);
+                    // openEditAnsModal(firstComment1._id);
+                  }}
+                >
+                  <span onClick={() => showModal(firstComment1._id)}>
+                    <BorderColorIcon
+                      style={{ marginRight: "0rem", cursor: "pointer" }}
+                    />
+                  </span>
+                  {open && (
+                    <InputEdit
+                      open={true}
+                      handleCancel={() => setOpen(false)}
+                      username={cusername}
+                      questionData={questionData}
+                      cid={firstComment1._id}
+                      editAns={editAns}
+                      questionId={questionId}
+                    />
+                  )}
                 </div>
               </div>
 
@@ -294,16 +308,32 @@ const Comment = ({
                       <p> Ans :</p>
                       <div
                         className="comments"
-                        onClick={() => openEditAnsModal(comment._id)}
+                        onClick={() => {
+                          setEditAns(true);
+                          // openEditAnsModal(firstComment1._id);
+                        }}
                       >
-                        <BorderColorIcon
-                          style={{ marginRight: "0rem", cursor: "pointer" }}
-                        />
+                        <span onClick={() => showModal(firstComment1._id)}>
+                          <BorderColorIcon
+                            style={{ marginRight: "0rem", cursor: "pointer" }}
+                          />
+                        </span>
+                        {open && (
+                          <InputEdit
+                            open={true}
+                            handleCancel={() => setOpen(false)}
+                            username={cusername}
+                            questionData={questionData}
+                            cid={firstComment1._id}
+                            editAns={editAns}
+                            questionId={questionId}
+                          />
+                        )}
                       </div>
                     </div>
 
                     <Answerdata comment={comment} />
-                    {isEditAnsModalOpen && (
+                    {/* {isEditAnsModalOpen && (
                       <EditAnswer
                         closeModal={() => {
                           setSelectedCommentId(null);
@@ -313,7 +343,7 @@ const Comment = ({
                         cid={selectedCommentId}
                         setShowAlert={setShowAlert}
                       />
-                    )}
+                    )} */}
 
                     <div className="responses">
                       <div className="icon-left">
@@ -343,7 +373,7 @@ const Comment = ({
               <div className="button-comment-div">
                 <div className="button-comment" onClick={handleSubmitComment}>
                   <Input
-                    username={currentValue.username}
+                    username={cusername}
                     comment={commentData}
                     questionId={questionId}
                     questionData={questionData}

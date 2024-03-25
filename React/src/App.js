@@ -35,12 +35,8 @@ function App() {
           <Route path="/admin_check_ans" element={<AdminCheackAns />} />
           <Route path="/admin_check_main" element={<AdminCheackMain />} />
           <Route path="/abc" element={<ABC />} />
-
-          {/* <Route path="/log1" element={<Log1 />} /> 
-          <Route path="/home1" element={<Home1 />} /> */}
         </Routes>
       </Router>
-
     </>
   );
 }

@@ -11,15 +11,15 @@ import { SearchResultsList } from "../../Search/SearchResultList";
 
 const Profile = () => {
   const [isEditModalOpen, setEditModalOpen] = useState(false);
-  const [cusername, setCUsername] = useState("");
   const [profile, setProfile] = useState({});
   const [questionData, setQuestionData] = useState([]);
   const [results, setResults] = useState([]);
-
+  
   const openEditModal = () => {
     setEditModalOpen(true);
   };
-
+  
+  const [cusername, setCUsername] = useState("");
   useEffect(() => {
     const fetchData = async () => {
       console.log("Fetching login...");

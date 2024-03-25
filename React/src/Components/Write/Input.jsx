@@ -1,37 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal } from "antd";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import SendIcon from "@mui/icons-material/Send";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import Step from "./Step";
 import { useDispatch } from "react-redux";
-import { sendAnswer } from "../../Store/DataAnswer/action";
+import { sendCID } from "../../Store/CID/action";
 
 const Input = ({
   username,
-  setShowAlert1,
-  setShowAlertCategory,
   comment,
   questionData,
+  questionId,
   editAns,
   cid,
-  questionId,
-  closeModal
 }) => {
   const [open, setOpen] = useState(false);
-  const dispatch=useDispatch()
-
+  const [selectCID, setSelectCID] = useState(null);
+  const dispatch = useDispatch();
 
   const showModal = () => {
-    console.log('cid',cid)
+    setSelectCID(cid);
     setOpen(true);
   };
 
   const handleCancel = () => {
-    // dispatch(sendAnswer(''))
-    // closeModal()
+    setSelectCID(null);
     setOpen(false);
   };
+
+  useEffect(() => {
+    dispatch(sendCID(cid));
+  }, [cid,dispatch]);
 
   return (
     <>
@@ -41,7 +41,7 @@ const Input = ({
         ) : editAns ? (
           <BorderColorIcon style={{ marginRight: "0rem", cursor: "pointer" }} />
         ) : (
-          <EditNoteIcon style={{ fontSize: "2.2rem" }} />
+          <EditNoteIcon style={{ fontSize: "2.2rem", cursor: "pointer" }} />
         )}
       </span>
       <Modal
@@ -54,13 +54,11 @@ const Input = ({
         <div className="editer-fix">
           <Step
             username={username}
-            setShowAlert1={setShowAlert1}
-            setShowAlertCategory={setShowAlertCategory}
             onCancel={handleCancel}
             comment={comment}
             editAns={editAns}
             questionData={questionData}
-            cid={cid}
+            cid={selectCID}
             questionId={questionId}
           />
         </div>

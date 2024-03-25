@@ -5,17 +5,14 @@ import CustomModalQuestion from "./CustomModalQuestion";
 import Dropdown from "../Dropdown/Dropdown";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import CustomModalAnswer from "./CustomModelAnswer";
-import { useDispatch, useSelector } from "react-redux";
 import { sendQuestion } from "../../Store/DataQuestion/action";
 import { sendAnswer } from "../../Store/DataAnswer/action";
 import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
 
 const StepsDesign = ({
   username,
-  setShowAlert1,
-  setShowAlert,
   questionId,
-  setShowAlertCategory,
   onCancel,
   questionData,
   comment,
@@ -30,8 +27,6 @@ const StepsDesign = ({
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [title, setTitle] = useState("C++");
-  const [commentOBJ, setCommentOBJ] = useState({});
-  const [editAnswers, setEditAnswers] = useState("");
 
   const dispatch = useDispatch();
   const nav = useNavigate();
@@ -40,54 +35,12 @@ const StepsDesign = ({
   const next = () => {
     setCurrent(current + 1);
   };
-  // console.log("Question", questionData);
   const prev = () => {
     setCurrent(current - 1);
   };
 
-  const fetchComments = async () => {
-    console.log(cid);
-    try {
-      const res = await axios.get(
-        `http://localhost:5000/user/getcommentbyid?comment_id=${cid}`
-      );
-
-      const data = res.data.comment_data;
-      console.log("data", data);
-      setCommentOBJ(res.data.comment_data);
-      setEditAnswers(
-        data.edited_comment === "none" ? data.comment : data.edited_comment
-      );
-      // dispatch(
-      //   sendAnswer(
-      //     data.edited_comment === "none" ? data.comment : data.edited_comment
-      //   )
-      // );
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
-    fetchComments();
-  }, [cid]);
-
-  useEffect(() => {
-    const callCloseEditModal = async () => {
-      try {
-        await axios.post(`http://localhost:5000/admin/cheackeditanswer`, {
-          cusername: username,
-          editAnswers,
-          comment_id: commentOBJ._id,
-          question_id: commentOBJ.question_id,
-          grant: "none",
-        });
-        setShowAlert(true);
-      } catch (error) {
-        console.log(error);
-      }
-      onCancel();
-    };
+    
 
     const callCloseQuestionModal = async () => {
       console.log("Question", dataQuestion.question);
@@ -95,7 +48,7 @@ const StepsDesign = ({
       try {
         console.log("title", title);
         if (!title) {
-          setShowAlertCategory(true);
+          // setShowAlertCategory(true);
         }
         if (title) {
           const response = await axios.post(
@@ -117,7 +70,7 @@ const StepsDesign = ({
                 edited_comment: "none",
                 grant: false,
               });
-              setShowAlert1(true);
+              // setShowAlert1(true);
               nav("/main");
               // fetchData();
               onCancel();
@@ -131,13 +84,6 @@ const StepsDesign = ({
       }
     };
 
-    if (editAns === undefined) {
-      callCloseQuestionModal();
-    }
-    if (done === true) {
-      console.log("Hii");
-      callCloseEditModal();
-    }
     const change = async () => {
       try {
         const res = await axios.post(
@@ -156,6 +102,12 @@ const StepsDesign = ({
         console.log(error);
       }
     };
+
+    if (editAns === undefined) {
+      callCloseQuestionModal();
+    }
+   
+
     if (comment) {
       change();
     }
@@ -166,23 +118,20 @@ const StepsDesign = ({
     marginTop: 16,
     marginBottom: "5rem",
   };
+  // console.log("edit",editAnswers );
 
-  let steps = null;
+  var steps = null;
   if (comment || editAns) {
     steps = [
       {
         title: "Answer",
         content: (
           <CustomModalAnswer
-            // closeModal={closeModal}
             username={username}
-            setShowAlert1={setShowAlert1}
-            setShowAlertCategory={setShowAlertCategory}
             setAnswer={setAnswer}
             questionData={questionData}
             comment={comment}
             editAns={editAns}
-            editAnswers={editAnswers}
           />
         ),
       },
@@ -195,8 +144,6 @@ const StepsDesign = ({
           <CustomModalQuestion
             // closeModal={closeModal}
             username={username}
-            setShowAlert1={setShowAlert1}
-            setShowAlertCategory={setShowAlertCategory}
             setQuestion={setQuestion}
           />
         ),
@@ -204,12 +151,7 @@ const StepsDesign = ({
       {
         title: "Answer",
         content: (
-          <CustomModalAnswer
-            username={username}
-            setShowAlert1={setShowAlert1}
-            setShowAlertCategory={setShowAlertCategory}
-            setAnswer={setAnswer}
-          />
+          <CustomModalAnswer username={username} setAnswer={setAnswer} />
         ),
       },
     ];

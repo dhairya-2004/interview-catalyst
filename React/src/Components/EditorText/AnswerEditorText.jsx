@@ -4,13 +4,14 @@ import "react-quill/dist/quill.snow.css";
 import "./editorstyles.css";
 import { useSelector } from "react-redux";
 
-
-const AnswerEditorText = ({ placeholder, setAnswer,editAnswers }) => {
+const AnswerEditorText = ({ placeholder, setAnswer, editAnswers, editAns }) => {
   const dataAnswer = useSelector((state) => state.dataAnswer);
 
-  // const [value, setValue] = useState('');
-  const [value, setValue] = useState(dataAnswer.answer);
-  
+  const [value, setValue] = useState('');
+
+  // console.log("edit", editAnswers);
+  // const [value, setValue] = useState(dataAnswer.answer);
+
   const handleTextChange = (content) => {
     setValue(content);
     setAnswer(content);
@@ -44,7 +45,7 @@ const AnswerEditorText = ({ placeholder, setAnswer,editAnswers }) => {
     <ReactQuill
       modules={module}
       theme="snow"
-      value={value}
+      value={value === "" ? editAnswers : value}
       onChange={handleTextChange}
       style={{ height: "18rem" }}
       placeholder={placeholder || "Type here..."}

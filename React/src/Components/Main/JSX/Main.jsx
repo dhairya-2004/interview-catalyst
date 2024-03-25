@@ -16,6 +16,7 @@ import {
 } from "../../../Toast/Tost.js";
 import Input from "../../Write/Input";
 import ProfileDropDown from "../../Dropdown/ProfileDropDown.jsx";
+import { useSelector } from "react-redux";
 
 function Main() {
   const [questionData, setQuestionData] = useState([]);
@@ -63,7 +64,6 @@ function Main() {
       });
       const newData = res.data.question;
       setCUsername(res.data.cusername);
-      // console.log("new",newData);
       setQuestionData(newData);
     } catch (error) {
       console.log(error);
@@ -136,13 +136,13 @@ function Main() {
           <div className="btn-main">
             {/* <Link className="btn-write" onClick={() => setmodel(true)}>
             </Link> */}
-              <Input
-                closeModal={changeModal}
-                username={cusename}
-                setShowAlert1={setShowAlert1}
-                setShowAlertCategory={setShowAlertCategory}
-                showModal
-              />
+            <Input
+              closeModal={changeModal}
+              username={cusename}
+              setShowAlert1={setShowAlert1}
+              setShowAlertCategory={setShowAlertCategory}
+              showModal
+            />
           </div>
 
           <div className="account-main" style={{ cursor: "pointer" }}>
