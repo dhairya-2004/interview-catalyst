@@ -88,23 +88,30 @@ function AddQuestion({ currentValue, setShowAlert }) {
         <section style={{ margin: "0 2rem" }}>
           <div className="top-title">
             <div className="left-side">
-              <div className="question-que">Que :</div>
+              <div className="question-que">Question :</div>
 
               <div
                 className="question"
                 dangerouslySetInnerHTML={{ __html: currentValue.question_html }}
               />
               <div className="question">
-                <strong style={{color:'red'}}>
-                  Similar Questions
-                  <br />
-                </strong>
-                <br />
-                <hr />
-                <br />
+                {similarQuestions.length > 0 ? (
+                  <>
+                    <strong style={{ color: "#FF1E1E" }}>
+                      Similar Questions
+                      <br />
+                    </strong>
+                    <br />
+                    <hr />
+                    <br />
+                  </>
+                ) : (
+                  ""
+                )}
+
                 {similarQuestions.map((value, index) => (
                   <div key={index}>
-                    <div style={{ display: "flex" ,color:'green'}}>
+                    <div style={{ display: "flex", color: "#38E54D" }}>
                       <span>
                         {"Q"}
                         {index + 1}
@@ -118,11 +125,11 @@ function AddQuestion({ currentValue, setShowAlert }) {
               </div>
             </div>
 
-            <div className="right-side">
+            {/* <div className="right-side">
               <div className="favourite-count">
                 <MoreVertIcon style={{ fontSize: "2rem" }} />
               </div>
-            </div>
+            </div> */}
           </div>
 
           <div className="main-addQuestion">
