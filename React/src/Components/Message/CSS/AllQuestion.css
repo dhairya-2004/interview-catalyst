@@ -157,12 +157,8 @@
 }
 
 .answer p img {
-  /* display: flex;
-  justify-content: center; */
   width: 50rem;
   height: 20rem;
-  /* max-height: 200px;
-  max-width: 200px;  */
 }
 .answer pre {
   background-color: #0C0C0C;
