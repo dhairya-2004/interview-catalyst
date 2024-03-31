@@ -19,7 +19,7 @@ const Like = ({ currentValue, cid, countLikeTotal, updateCommentData }) => {
         return numberOfLikes;
       };
       try {
-        const res = await axios.get("http://localhost:5000/user/likes");
+        const res = await axios.get("https://interview-catalyst.onrender.com/user/likes");
         const likesData = res.data.get_like;
         setCalculateLike(likesData);
 
@@ -42,13 +42,13 @@ const Like = ({ currentValue, cid, countLikeTotal, updateCommentData }) => {
     };
 
     fetchLikes();
-  }, [currentValue._id, cusername, cid, likeCount,calculateLike]);
+  }, [currentValue._id, cusername, cid, likeCount, calculateLike]);
 
   // ---------------------------------------------------------------------------------------------------
   const change = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/user/likes", {
+      await axios.post("https://interview-catalyst.onrender.com/user/likes", {
         question_id: cid === undefined ? currentValue._id : cid,
         like: !isValueLiked,
         cusername,
@@ -74,10 +74,11 @@ const Like = ({ currentValue, cid, countLikeTotal, updateCommentData }) => {
 
   const likechange = async (newLikeCount) => {
     try {
-      const res = await axios.post("http://localhost:5000/user/commentsubmit", {
+      const res = await axios.post("https://interview-catalyst.onrender.com/user/commentsubmit", {
         question_id: cid,
         likeCount: newLikeCount,
       });
+      updateCommentData();
       // console.log("12", res.data);
     } catch (error) {
       console.log(error);
@@ -87,7 +88,7 @@ const Like = ({ currentValue, cid, countLikeTotal, updateCommentData }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/user/login", {
+        const res = await axios.get("https://interview-catalyst.onrender.com/user/login", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

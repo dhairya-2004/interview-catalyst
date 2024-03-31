@@ -7,11 +7,12 @@ const Dropdown = ({ setValue, text, addValue, setTitle }) => {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/user/getcategory`);
+      const res = await axios.get(`https://interview-catalyst.onrender.com/user/getcategory`);
       const fetchedCategories = res.data.category.map(({ value }) => ({
         value,
         label: value,
       }));
+
       const allOptions = [
         { value: "Add", label: "Add", style: { color: "green" } },
         ...fetchedCategories,
@@ -39,14 +40,13 @@ const Dropdown = ({ setValue, text, addValue, setTitle }) => {
       const addCategory = async () => {
         try {
           const res = await axios.post(
-            `http://localhost:5000/user/addcategory`,
+            `https://interview-catalyst.onrender.com/user/addcategory`,
             {
               title: text.charAt(0).toUpperCase() + text.slice(1),
             }
           );
-          if(res)
-          {
-            message.success('Category is add')
+          if (res) {
+            message.success("Category is add");
           }
           fetchData();
         } catch (error) {

@@ -37,7 +37,7 @@ const EditProfile = ({ closeModal, cusername, profile }) => {
 
   const sendProfile = async () => {
     try {
-      const res = await axios.post("http://localhost:5000/user/profile", {
+      const res = await axios.post("https://interview-catalyst.onrender.com/user/profile", {
         cusername,
         name,
         collegename,
@@ -106,7 +106,9 @@ const EditProfile = ({ closeModal, cusername, profile }) => {
               )}
 
               <div className="btn-row" onClick={handleImageClick}>
-                <Button  type="primary" className="btn-up#">Change</Button>
+                <Button type="primary" className="btn-up#">
+                  Change
+                </Button>
                 <input
                   type="file"
                   ref={inputRef}
@@ -177,7 +179,14 @@ const EditProfile = ({ closeModal, cusername, profile }) => {
           </div>
 
           <div className="final-edit">
-            <Button type="primary" className="save" onClick={sendProfile}>
+            <Button
+              type="primary"
+              className="save"
+              onClick={() => {
+                sendProfile();
+                message.success("Profile Saved!!");
+              }}
+            >
               Save
             </Button>
             <Button className="cancel" onClick={closeModal}>
