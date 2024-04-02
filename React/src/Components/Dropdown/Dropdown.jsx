@@ -24,6 +24,8 @@ const Dropdown = ({ setValue, text, addValue, setTitle }) => {
   };
 
   const handleClick = (value, option) => {
+    fetchData();
+
     setTitle(value);
     setValue(false);
     if (value === "Add") {

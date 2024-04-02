@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 const AnswerEditorText = ({ placeholder, setAnswer, editAnswers, editAns }) => {
   const dataAnswer = useSelector((state) => state.dataAnswer);
 
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
 
   // console.log("edit", editAnswers);
   // const [value, setValue] = useState(dataAnswer.answer);
@@ -20,7 +20,7 @@ const AnswerEditorText = ({ placeholder, setAnswer, editAnswers, editAns }) => {
   const toolbarOptions = [
     ["bold", "italic", "underline", "strike"],
     ["blockquote", "code-block"],
-    ["link", "image", "video"],
+    ["link", "image"],
 
     [{ header: 1 }, { header: 2 }],
     [{ list: "ordered" }, { list: "bullet" }, { list: "check" }],

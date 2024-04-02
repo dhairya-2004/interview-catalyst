@@ -16,7 +16,7 @@ const QuestionEditorText = ({ placeholder, setQuestion }) => {
   const toolbarOptions = [
     ["bold", "italic", "underline", "strike"],
     ["blockquote", "code-block"],
-    ["link", "image", "video"],
+    ["link", "image"],
 
     [{ header: 1 }, { header: 2 }],
     [{ list: "ordered" }, { list: "bullet" }, { list: "check" }],
