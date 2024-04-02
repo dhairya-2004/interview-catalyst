@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import "../CSS/Signin.css";
 import axios from "axios";
 import img from "./img.jpg";
@@ -51,9 +51,8 @@ function Signin() {
       console.log(res.data.username);
       setResponse(res.data.message);
       localStorage.setItem("token", res.data.token);
-      dispatch(sendCID(res.data.username))
+      navigate(`/main/user=${res.data.username}`);
 
-      navigate("/main");
     } catch (error) {
       setResponse("Sign In failed. ");
       console.error("Sign In error", error);
