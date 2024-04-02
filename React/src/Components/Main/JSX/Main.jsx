@@ -167,7 +167,7 @@ function Main() {
         isEditModalOpen ? (
           <EditProfile
             closeModal={() => setEditModalOpen(false)}
-            cusername={user}
+            cusername={name}
             profile={profile}
           />
         ) : (
