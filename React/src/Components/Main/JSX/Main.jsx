@@ -3,11 +3,9 @@ import SearchIcon from "@mui/icons-material/Search";
 import "../CSS/Main.css";
 import AllQuestion from "../../Message/JSX/AllQuestion";
 import "../../Write/Write.css";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useSearchParams } from "react-router-dom";
 
 import {
   CATEGORY,
@@ -56,8 +54,6 @@ function Main() {
   const [cusename, setCUsername] = useState("");
   const [profile, setProfile] = useState("");
   const [user, setUser] = useState("");
-  const [username, setUsername] = useSearchParams();
-  const name=username.get("user")
 
   const changeModal = () => setmodel(false);
 
@@ -66,7 +62,7 @@ function Main() {
   const fetchQuestion = async () => {
     try {
       const res = await axios.get(
-        "https://interview-catalyst.onrender.com/user/question",
+        "http://localhost:5000/user/question",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -74,6 +70,7 @@ function Main() {
         }
       );
       const newData = res.data.question;
+      console.log(res.data.question);
       setCUsername(res.data.cusername);
       setQuestionData(newData);
     } catch (error) {
@@ -100,7 +97,8 @@ function Main() {
     const searchData = e.target.value;
     if (searchData) {
       const res = await axios.get(
-        `https://interview-catalyst.onrender.com/user/search/${searchData}`
+        ` http://localhost:5000/user/search/${searchData}
+      `
       );
       const newData = res.data;
 
@@ -110,10 +108,10 @@ function Main() {
     } else {
       try {
         const res = await axios.get(
-          "https://interview-catalyst.onrender.com/user/question",
+          "http://localhost:5000/user/question",
           {
             headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
+              Authorization: ` Bearer${localStorage.getItem("token")}`,
             },
           }
         );
@@ -130,7 +128,7 @@ function Main() {
     const fetchData = async () => {
       try {
         const res = await axios.get(
-          "https://interview-catalyst.onrender.com/user/login",
+          "http://localhost:5000/user/login",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -151,7 +149,8 @@ function Main() {
 
     try {
       const res = await axios.get(
-        `https://interview-catalyst.onrender.com/user/getprofile?cusername=${name}`
+        `http://localhost:5000/user/getprofile?cusername=${up}
+      `
       );
       const newData = res.data.profile;
       console.log(newData);
@@ -163,11 +162,11 @@ function Main() {
 
   return (
     <>
-      {!profile.name ? (
+      {/* {!profile.name ? (
         isEditModalOpen ? (
           <EditProfile
             closeModal={() => setEditModalOpen(false)}
-            cusername={name}
+            cusername={user}
             profile={profile}
           />
         ) : (
@@ -175,7 +174,7 @@ function Main() {
         )
       ) : (
         ""
-      )}
+      )} */}
       <div className="main-main">
         <nav className="top-main">
           <div className="logo-main">

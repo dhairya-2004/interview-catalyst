@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../CSS/Signin.css";
 import axios from "axios";
 import img from "./img.jpg";
@@ -12,7 +12,7 @@ function Signin() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // -------------------************************---------------------********************-------------------*****************-----------------************
+  // ----------------------------------------------------------------------------***********
 
   // const capitalizeFirstLetter = (value) => {
   //   return value.charAt(0).toUpperCase() + value.slice(1);
@@ -43,7 +43,7 @@ function Signin() {
 
     try {
       const res = await axios.post(
-        "https://interview-catalyst.onrender.com/user/login",
+        "http://localhost:5000/user/login",
         signinData
       );
       // console.log(res.data.message);
@@ -51,8 +51,9 @@ function Signin() {
       console.log(res.data.username);
       setResponse(res.data.message);
       localStorage.setItem("token", res.data.token);
-      navigate(`/main?user=${res.data.username}`);
+      // dispatch(sendCID(res.data.username))
 
+      navigate("/main");
     } catch (error) {
       setResponse("Sign In failed. ");
       console.error("Sign In error", error);
@@ -63,7 +64,7 @@ function Signin() {
     });
   };
 
-  // ******************************-----------------------------------********************************--------------------------**********************
+  // *****************************-------------------------------------------------------------*********************
 
   const [registrationData, setRegistrationData] = useState({
     username: "",
@@ -87,7 +88,7 @@ function Signin() {
 
     try {
       const res = await axios.post(
-        "https://interview-catalyst.onrender.com/user/register",
+        "http://localhost:5000/user/register",
         registrationData
       );
       console.log(res.data.message);
