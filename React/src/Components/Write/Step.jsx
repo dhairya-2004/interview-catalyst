@@ -39,57 +39,57 @@ const StepsDesign = ({
     setCurrent(current - 1);
   };
 
-  useEffect(() => {
-    const callCloseQuestionModal = async () => {
-      console.log("Question", dataQuestion.question);
-      console.log("Answers", answer);
-      try {
-        console.log("title", title);
-        if (!title) {
-          // setShowAlertCategory(true);
-        }
-        if (title && dataQuestion.question ) {
-          const response = await axios.post(
-            "http://localhost:5000/user/question",
-            {
-              question: dataQuestion.question,
-              username,
-              title: title,
-              grant: "false",
-            }
-          );
+  const callCloseQuestionModal = async () => {
+    console.log("Question", dataQuestion.question);
+    console.log("Answers", answer);
+    try {
+      console.log("title", title);
+      if (!title) {
+        // setShowAlertCategory(true);
+      }
+      if (title && dataQuestion.question) {
+        const response = await axios.post(
+          "https://interview-catalyst.onrender.com/user/question",
+          {
+            question: dataQuestion.question,
+            username,
+            title: title,
+            grant: "false",
+          }
+        );
 
-          if (response.data.question_main._id !== "" && answer !== "") {
-            try {
-              await axios.post("http://localhost:5000/user/commentsubmit", {
-                cusername: username,
-                commentData: answer,
-                question_id: response.data.question_main._id,
-                edited_comment: "none",
-                grant: false,
-              });
-              // setShowAlert1(true);
-              dispatch(sendQuestion(""));
-              dispatch(sendAnswer(""));
-              setCurrent(0)
-              message.success("Add Request Sent Successfuly!!");
-              nav("/main");
-              // fetchData();
-              onCancel();
-            } catch (error) {
-              console.log(error);
-            }
+        if (response.data.question_main._id !== "" && answer !== "") {
+          try {
+            await axios.post("https://interview-catalyst.onrender.com/user/commentsubmit", {
+              cusername: username,
+              commentData: answer,
+              question_id: response.data.question_main._id,
+              edited_comment: "none",
+              grant: false,
+            });
+            // setShowAlert1(true);
+            dispatch(sendQuestion(""));
+            dispatch(sendAnswer(""));
+            setCurrent(0);
+            message.success("Add Request Sent Successfuly!!");
+            nav("/main");
+            // fetchData();
+            onCancel();
+          } catch (error) {
+            console.log(error);
           }
         }
-      } catch (error) {
-        console.log(error);
       }
-    };
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  useEffect(() => {
     const change = async () => {
       try {
         const res = await axios.post(
-          "http://localhost:5000/user/commentsubmit",
+          "https://interview-catalyst.onrender.com/user/commentsubmit",
           {
             cusername: username,
             question_id: questionId,
@@ -232,6 +232,7 @@ const StepsDesign = ({
               onClick={(e) => {
                 // message.success("Processing complete!");
                 setDone(true);
+                callCloseQuestionModal();
               }}
             >
               Done
