@@ -2,24 +2,6 @@
 
 This repository contains the project report for "Interview Catalyst using Crowdsourcing," submitted by Jash Asmani and Dhairya Bhatt as part of their BTech-IT Sem VI curriculum at Dharmsinh Desai University.
 
-## Table of Contents
-
-- [Introduction](#introduction)
-- [Project Management](#project-management)
-- [System Requirements Study](#system-requirements-study)
-- [System Analysis](#system-analysis)
-- [System Design](#system-design)
-- [Implementation Planning](#implementation-planning)
-- [Testing](#testing)
-- [User Manual](#user-manual)
-- [Limitations and Future Enhancements](#limitations-and-future-enhancements)
-- [Conclusion and Discussion](#conclusion-and-discussion)
-- [References](#references)
-- [List of Figures](#list-of-figures)
-- [List of Tables](#list-of-tables)
-
-## Introduction
-
 ### Project Details
 The "Interview Catalyst using Crowdsourcing Method" project is a comprehensive exploration into leveraging the power of crowdsourcing for enhancing the interview process. The aim of this project was to develop a platform that harnesses the collective intelligence and diverse perspectives of a crowd to optimize the interview experience for both interviewers and candidates. It helps candidates in smoothing their interview process.
 
@@ -88,25 +70,21 @@ The objective of the "Interview Catalyst Using Crowdsourcing" project is to deve
 
 - Providing user manual for platform usage.
 
-## Limitations and Future Enhancements
-
-- Documenting limitations and suggesting future enhancements.
-
-## Conclusion and Discussion
-
-- Concluding remarks and discussions on project viability, encountered problems, and summary.
-
 ## References
 
-- Listing project references.
+This project was developed with the help of the following resources:
 
-## List of Figures
+- [Geeks for Geeks](https://www.geeksforgeeks.org)
+- [Node.js Documentation](https://nodejs.org/en/docs)
+- [OpenAI](https://openai.com)
+- [React Documentation](https://react.dev/)
+- [Stack Overflow](https://stackoverflow.com/)
+- [W3Schools](https://www.w3schools.com/)
 
-- Listing figures used in the report.
+## Usage
 
-## List of Tables
+Provide instructions on how to use or install the project.
 
-- Listing tables used in the report.
 
 ---
 
