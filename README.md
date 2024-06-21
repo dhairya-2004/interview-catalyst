@@ -1,4 +1,4 @@
-# Interview Catalyst using Crowdsourcing
+# [Interview Catalyst using Crowdsourcing](https://interview-catalyst.vercel.app/)
 
 ## Overview
 This repository contains the project "Interview Catalyst using Crowdsourcing Method," developed by Jash Asmani and Dhairya Bhatt as part of their BTech-IT Sem VI curriculum at Dharmsinh Desai University. The project aims to enhance the interview process through crowdsourcing, providing a platform that leverages collective intelligence for improved candidate assessment.
