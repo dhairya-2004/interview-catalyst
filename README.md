@@ -1,7 +1,7 @@
 # Interview Catalyst using Crowdsourcing
 
 ## Overview
-This repository contains the project "Interview Catalyst using Crowdsourcing Method," developed by Jash Asmani and Dhairya Bhatt as part of their BTech-IT Sem VI curriculum at Dharmsinh Desai University. The project aims to enhance the interview process through crowdsourcing, providing a platform that leverages collective intelligence for improved candidate assessment.
+This repository contains the project "Interview Catalyst using Crowdsourcing Method," developed by Jash Asmani as part of their BTech-IT Sem VI curriculum at Dharmsinh Desai University. The project aims to enhance the interview process through crowdsourcing, providing a platform that leverages collective intelligence for improved candidate assessment.
 
 ## Key Features
 - User-Friendly UI
@@ -16,7 +16,7 @@ The objective of this project is to create a web application that optimizes the 
 ## Technologies Used
 - Frontend: React JS
 - Backend: Node JS
-- Database: [Specify database used]
+- Database: Mongo DB
 
 ## Getting Started
 To get started with the project, follow these steps:
