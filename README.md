@@ -24,11 +24,6 @@ To get started with the project, follow these steps:
 2. Install dependencies: `npm install`
 3. Start the development server: `npm start`
 
-## Project Structure
-- `src/`: Contains frontend source code
-- `server/`: Contains backend server code
-- `docs/`: Project documentation
-
 ## Contributions
 Contributions are welcome! If you have any ideas or improvements, please open an issue or submit a pull request.
 
